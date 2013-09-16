@@ -40,6 +40,15 @@
         </div>
     <% end %>
   </div>
+  <div class="field">
+    Películas Agregadas:
+    <%Movie.all.each do |movie| %>
+        <div>
+          <%= check_box_tag  "user[movie_ids][]", movie.id, @user.movies.include?(movie) %>
+          <%= label_tag  movie.name %>
+        </div>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

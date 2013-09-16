@@ -1,4 +1,6 @@
 S0::Application.routes.draw do
+  resources :movies
+
   resources :serials
 
   resources :users

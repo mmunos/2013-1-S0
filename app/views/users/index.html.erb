@@ -9,6 +9,7 @@
       <th>Role</th>
       <th>Score</th>
       <th>Series Agregadas</th>
+      <th>Películas Agregadas</th>
       <th></th>
       <th></th>
       <th></th>
@@ -23,7 +24,8 @@
         <td><%= user.email %></td>
         <td><%= user.role %></td>
         <td><%= user.score %></td>
-        <td><%= user.serials.map{|s| s.name}.join(", ")%></td>
+        <td><%= user.serials.map{|s| link_to s.name, serial_path(s)}.join(", ").html_safe%></td>
+        <td><%= user.movies.map{|m| link_to m.name, movie_path(m)}.join(" ,").html_safe %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

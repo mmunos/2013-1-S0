@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @serial.name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @serial.date %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @serial.genre %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @serial.description %>
+</p>
+
+<%= link_to 'Edit', edit_serial_path(@serial) %> |
+<%= link_to 'Back', serials_path %>

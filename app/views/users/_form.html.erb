@@ -31,6 +31,15 @@
     <%= f.label :score %><br>
     <%= f.number_field :score %>
   </div>
+  <div class="field">
+    Series Agregadas:
+    <%Serial.all.each do |serial| %>
+        <div>
+          <%= check_box_tag  "user[serial_ids][]", serial.id, @user.serials.include?(serial) %>
+          <%= label_tag  serial.name %>
+        </div>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

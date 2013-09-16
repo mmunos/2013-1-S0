@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130915234847) do
+ActiveRecord::Schema.define(version: 20130916002828) do
 
   create_table "serials", force: true do |t|
     t.string   "name"
@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(version: 20130915234847) do
     t.datetime "updated_at"
   end
 
-  create_table "serials_users", force: true do |t|
-    t.integer "user_id"
+  create_table "serials_users", id: false, force: true do |t|
     t.integer "serial_id"
+    t.integer "user_id"
   end
+
+  add_index "serials_users", ["serial_id", "user_id"], name: "index_serials_users_on_serial_id_and_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"

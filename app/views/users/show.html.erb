@@ -25,5 +25,14 @@
   <%= @user.score %>
 </p>
 
+<p>
+  <string>Series:</string>
+  <ul>
+  <% @user.serials.each do |s|  %>
+    <li><%= link_to s.name, serial_path(s) %></li>
+  <%end%>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

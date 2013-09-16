@@ -8,6 +8,7 @@
       <th>Email</th>
       <th>Role</th>
       <th>Score</th>
+      <th>Series Agregadas</th>
       <th></th>
       <th></th>
       <th></th>
@@ -22,6 +23,7 @@
         <td><%= user.email %></td>
         <td><%= user.role %></td>
         <td><%= user.score %></td>
+        <td><%= user.serials.map{|s| s.name}.join(", ")%></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,3 +1,4 @@
 class Serial < ActiveRecord::Base
-	has_and_belongs_to_many :users
+	has_many :serials_users
+	has_many :users, through: :serials_users
 end

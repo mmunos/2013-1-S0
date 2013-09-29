@@ -6,8 +6,19 @@
 		<% if content_for? :top_user_bar %>
 			<%= yield :top_user_bar %>
 		<%else %>
-	    	<%= link_to "Sign up", sign_up_path %> or 
-	    	<%= link_to "Log in", log_in_path %>
+			<div id="top-bar-buttons">
+	    		<%= link_to "Sign up", sign_up_path %> or 
+	    		<%= link_to "Log in", log_in_path, id: "top-bar-login-button" %>
+	    	</div>
 	 	<% end %>
 	<% end %>
+
+	<div id="top-bar-auth" class="hidden">
+		<%= form_tag log_in_path do %>
+		    <%= text_field_tag :email, params[:email], placeholder: "username or email" %>
+		    <%= password_field_tag :password,  "", placeholder: "password" %>
+		  	<%= submit_tag "Log in" %>
+			<span class="close">[<a href="#" title="Close Log in">x</a>]</span>
+		<% end %>
+	</div>
 </div>

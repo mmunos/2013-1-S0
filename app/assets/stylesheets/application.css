@@ -23,6 +23,7 @@ body {
 	width: 130px;
 	border:1px solid #ddd;
 	height: 50px;
+	margin-bottom: 20px;
 }
 #logo a {
 	display: block;
@@ -115,6 +116,8 @@ body {
 	visibility: hidden;
 	position: absolute;	
 }
+
+/*= Main content */
 #main-content {
 	width: 85%;
 	margin: 0 auto;
@@ -133,6 +136,8 @@ h1 {
 	opacity: 0;
 	display: none;
 }
+
+/*= Flash bar */
 
 .flash-bar {
 	width: 100%;
@@ -162,4 +167,49 @@ h1 {
 .flash-bar .close:hover {
 	text-decoration: none;
 	background: none;
+}
+
+/*= Menu */
+
+#main-nav ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-family: "Roboto";
+
+}
+
+#main-nav a {
+	text-decoration: none;
+
+}
+
+#main-nav ul li a:hover {
+	background: #666;
+	color: #efefef;
+}
+
+#main-nav ul li{
+	display: block;
+	margin: 0 0 3px;
+}
+
+#main-nav ul li a {
+	background: #ddd;
+	padding: 5px 5px 5px 30px;
+	width: 95px;
+	display: block;
+}
+
+
+
+#main-nav ul li ul li {
+	margin: 2px 0;
+}
+
+#main-nav ul li ul li a {
+	margin-left: 40px;
+	width: 82px;
+	padding: 3px 4px;
+	font-size: 11px;
 }

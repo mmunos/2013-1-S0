@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-	console.log("load!");
+	$(".flash-bar a.close").click(function(e) {
+		e.preventDefault();
+		$(".flash-bar").fadeOut();
+	});
 
 	$("#top-bar-login-button").click(function(e) {
 		e.preventDefault();
@@ -11,5 +14,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
 	});
+
+
 
 });

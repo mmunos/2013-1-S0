@@ -14,50 +14,114 @@
 
 body {
 	padding: 0;
-	margin: 0;
-	background: #eee;
+	margin: 0 0 40px;
+	background: #efefef;
+	font-family: "Roboto";
+}
+
+#logo {
+	width: 130px;
+	border:1px solid #ddd;
+	height: 50px;
+}
+#logo a {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 #main-nav {
-	width: 200px;
-	border-right: 1px solid #666;
+	width: 130px;
+	padding: 10px 20px;
+	border-right: 1px solid #bbb;
+	box-shadow: 1px -4px 6px rgba(0,0,0,0.1);
 	float: left;
+
 }
 
 #main {
-	margin-left: 200px;
+	margin-left: 170px;
 }
 
 
 #top-bar {
 	width: 100%;
-	height: 25px;
+	height: 30px;
 	padding: 5px 0;
 	background: #ddd;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
+
+#top-bar input {
+	font-weight: lighter;
+	font-family: "Roboto";
+	font-size: 12px; 
+	padding: 3px 5px 0;
+	margin: 0;
+	height: 20px;
+}
+
+#top-bar input:focus {
+	font-style: normal;
+}
+
 
 #top-search-bar {
 	float: left;
 	margin-left: 10px;
 }
 
+#top-search-bar input {
+	font-style: italic;
+	width: 150px;
+	opacity: .4;
+	transition: all 0.2s linear;
+}
+
+
+#top-search-bar input:hover {
+	opacity: 1;
+}
+
+#top-search-bar input:focus {
+	width: 250px;
+	opacity: 1;
+}
+
+#top-search-bar input {
+	height: 20px;
+}
+
 #top-user-bar {
 	float: right;
-	margin-right: 10px;
+	margin-right: 15px;
+	font-size: 14px;
 	transition: opacity 1s linear;
 }
 
-#top-auth-bar {
+#top-bar-buttons {
+	padding: 3px;
+}
+
+#top-bar-auth {
 	float: right;
-	margin-right: 10px;
 	transition: opacity 1s linear;
 }
 
+#top-bar-auth input[type="submit"]{
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	position: absolute;	
+}
 #main-content {
 	width: 85%;
 	margin: 0 auto;
 	background-color: #fff;
-	padding: 10px 30px;
+	padding: 10px 30px 30px;
+	position: relative;
+	box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
 
 h1 {
@@ -70,10 +134,32 @@ h1 {
 	display: none;
 }
 
-.notice, .alert {
+.flash-bar {
+	width: 100%;
+	text-align: center;
+	background: #FFF4B5;
+	color: #947E00;
+	padding: 5px 0;
+	font-size: 14px;
+	border-top: 1px solid #E3D586;
+	border-bottom: 1px solid #E3D586;
+	font-weight: lighter;
+	position: relative;
+}
+
+.flash-bar .close {
 	position: absolute;
-	left: 25%;
-	padding: 20px;
-	margin-left: 200px;
-	border: 1px solid red;
+	right: 5px;
+	top: 0;
+	font-size: 15px;
+	font-family: "Roboto";
+	font-weight: lighter;
+	text-decoration: none;
+	color: #999;
+	background: none;
+
+}
+.flash-bar .close:hover {
+	text-decoration: none;
+	background: none;
 }

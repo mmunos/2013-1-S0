@@ -8,7 +8,33 @@
 </head>
 <body>
 
-<%= yield %>
+	<% if flash.notice %>
+		<div class="notice">
+			<%= flash.notice %>
+		</div>
+	<% end %>
+	<% if alert %>
+		<div class="alert">
+			<%= alert %>
+		</div>
+	<% end %>
+
+
+	<div id="main-nav">
+		<%= render "layouts/main_nav" %>
+	</div>
+
+	<div id="main">
+		<div id="top-bar">
+			<%= render "layouts/top_search" %>
+
+			<%= render "layouts/top_user_bar" %>
+		</div>
+
+		<section id="main-content">
+			<%= yield %>
+		</section>
+	</div>
 
 </body>
 </html>

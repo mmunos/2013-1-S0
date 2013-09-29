@@ -3,13 +3,22 @@ S0::Application.routes.draw do
 
   resources :serials
 
+  get "/login", to: "sessions#create", as: :log_in
+  get "/logout", to: "sessions#destroy", as: :log_out
+  get "/signup", to: "users#new", as: :sign_up
+  match "/login", to: "sessions#create", via: :post
+
   resources :users
+
+  resources :sessions, only: [:create, :new, :destroy]
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'pages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

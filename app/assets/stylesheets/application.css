@@ -278,10 +278,10 @@ h1 {
 }
 
 .watch { 
-	background:url("showsicon.png")no-repeat left 50% 99% #ddd;
+	background:url("watchicon.png")no-repeat left 50% 99% #ddd;
 }
 
 .watch a:hover{
-	background: url("showsicon_h.png")no-repeat left  50% 99%  #666;
+	background: url("watchicon_h.png")no-repeat left  50% 99%  #666;
 
 }

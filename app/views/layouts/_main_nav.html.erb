@@ -1,19 +1,19 @@
 <nav>
 	<ul>
-		<li><%= link_to "Home", root_path%></li>
-		<li><%= link_to "Movies", movies_path%></li>
-		<li><%= link_to "Series", serials_path%></li>
+		<li class="home"><%= link_to "Home", root_path%></li>
+		<li class="movies"><%= link_to "Movies", movies_path%></li>
+		<li class="series"><%= link_to "Series", serials_path%></li>
 	</ul>
 	<% if current_user %>
 		<hr/>
 		<ul>
-			<li><a href="#" title="My Shows">My Shows</a>
+			<li class="shows"><a href="#" title="My Shows">My Shows</a>
 				<ul>
 					<li><a href="#" title="My Movies">My Movies</a></li>
 					<li><a href="#" title="My Series">My Series</a></li>
 				</ul>
 			</li>
-			<li><a href="#" title="My Watchlist">My Watchlist</a></li>
+			<li class="watch"><a href="#" title="My Watchlist">My Watchlist</a></li>
 		</ul>
 	<% end %>
 

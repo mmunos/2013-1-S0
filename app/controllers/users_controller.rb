@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize, :only => [:show, :index]
+  skip_before_filter :admin, :only =>[:show, :index]
+  skip_before_filter :authorize, :only => [:show, :index,:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

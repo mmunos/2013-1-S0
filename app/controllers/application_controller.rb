@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_filter :authorize
+  before_filter :admin
   protect_from_forgery
   
   private
@@ -13,7 +14,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-<<<<<<< HEAD
+
   protected
   def authorize
   	unless User.find_by_id(session[:user_id])
@@ -21,7 +22,16 @@ class ApplicationController < ActionController::Base
   	end
   end
 
+  def admin
 
-=======
->>>>>>> 5ad609f9443fadfb02e854758e40c7bf469360a8
+    if User.find_by_id(session[:user_id])
+      @user = User.find_by_id(session[:user_id])
+      unless @user.role=='admin'
+        redirect_to login_url, :notice=>"Access Denied"
+      end
+    end
+  end
+
+
+
 end

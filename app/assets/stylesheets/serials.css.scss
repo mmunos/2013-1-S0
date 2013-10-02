@@ -1,3 +1,95 @@
 // Place all the styles related to the Serials controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#data{
+	color: #666666;
+}
+
+#wrapper{
+	width:70%;
+	margin-right:3%;
+	display:block;
+	float: left;
+	overflow: hidden;
+}
+
+#lateral{
+	float: left;
+	overflow: hidden;
+}
+
+#back{
+	clear:both;
+}
+
+/*= lateral */
+
+#lateral ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-family: "Roboto";
+
+}
+
+#lateral a {
+	text-decoration: underline;
+
+
+}
+
+#lateral ul li a:hover {
+	color: #efefef;
+}
+
+#lateral ul li{
+	display: block;
+	margin: 0 0 3px;
+	height: 40px;
+	padding-left:60px;
+}
+
+#lateral ul li a {
+	padding: 5px 5px 5px 90px;
+	display: block;
+	margin-top:-50px;
+}
+
+
+
+
+/* lateral icons */
+
+.seen { 
+	background:url("seen.png")no-repeat 10% 300% ;
+}
+
+.seen a:hover{
+	background: url("seen_m.png")no-repeat  10% 200%  ;
+
+}
+
+.add { 
+	background:url("add.png")no-repeat 10% 200% ;
+}
+
+.add a:hover{
+	background: url("add_m.png")no-repeat  10% 200%  ;
+}
+
+.watch { 
+	background:url("watchlist.png")no-repeat 10% 60% ;
+}
+
+.watch a:hover{
+	background: url("watchlist_m.png")no-repeat  10% 60% ;
+}
+
+.season { 
+	background:url("season.png")no-repeat 10% 90% ;
+}
+
+.season a:hover{
+	background: url("season_m.png")no-repeat  10% 90% ;
+}

@@ -1,24 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @serial.name %>
-</p>
+	<section id="wrapper">
+		<p>
+		  <h1><%= @serial.name %></h1>
+		</p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @serial.date %>
-</p>
+		<p id="data">
+		  <strong>Date:</strong> <%= @serial.date %>
+		</p>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @serial.genre %>
-</p>
+		<p id="data">
+		  <strong>Genre:</strong> <%= @serial.genre %>
+		</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @serial.description %>
-</p>
+		<p>
+		 <%= @serial.description %>
+		</p>
+	</section>
 
-<%= link_to 'Edit', edit_serial_path(@serial) %> |
-<%= link_to 'Back', serials_path %>
+	<section id="lateral">
+	 	<ul>
+			<li class="seen">Mark as seen</li>
+			<li class="add">Add to My Series</li>
+			<li class="watch">Add to My Watch List</li>
+			<li class="season">Seasons Details</li>
+
+	 	</ul>
+	</section>
+<br>
+	<div id="back">
+	<hr>
+
+	<%= link_to 'Edit', edit_serial_path(@serial) %> |
+	<%= link_to 'Back', serials_path %>
+	</div>

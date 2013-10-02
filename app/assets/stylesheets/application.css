@@ -195,11 +195,11 @@ h1 {
 
 #main-nav a {
 	text-decoration: none;
-
 }
 
+
 #main-nav ul li a:hover {
-	background: #666;
+	background-color: #666;
 	color: #efefef;
 }
 
@@ -209,13 +209,17 @@ h1 {
 }
 
 #main-nav ul li a {
-	background: #ddd;
+	background-color: #ddd;
 	padding: 5px 5px 5px 30px;
 	width: 95px;
+	background-position: 5% center;
+	background-repeat: no-repeat;
 	display: block;
 }
 
-
+#main-nav ul li a:hover {
+	background-position: inherit;
+}
 
 #main-nav ul li ul li {
 	margin: 2px 0;
@@ -227,3 +231,21 @@ h1 {
 	padding: 3px 4px;
 	font-size: 11px;
 }
+
+
+/* Menu icons */
+
+#main-nav .home > a {background-image: url("homeicon.png");}
+#main-nav .home > a:hover {background-image: url("homeicon_h.png");}
+
+#main-nav .movies > a {background-image: url("moviesicon.png");}
+#main-nav .movies > a:hover {background-image: url("moviesicon_h.png");}
+
+#main-nav .series > a {background-image: url("seriesicon.png");}
+#main-nav .series > a:hover {background-image: url("seriesicon_h.png");}
+
+#main-nav .shows > a {background-image: url("showsicon.png");}
+#main-nav .shows > a:hover {background-image: url("showsicon_h.png");}
+
+#main-nav .watch > a {background-image: url("watchicon.png");}
+#main-nav .watch > a:hover {background-image: url("watchicon_h.png");}

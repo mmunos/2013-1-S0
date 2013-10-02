@@ -29,7 +29,6 @@ body {
 	display: block;
 	width: 100%;
 	height: 100%;
-
 }
 
 #main-nav {
@@ -184,7 +183,6 @@ h1 {
 	background: none;
 }
 
-
 /*= Menu */
 
 #main-nav ul {
@@ -198,10 +196,10 @@ h1 {
 #main-nav a {
 	text-decoration: none;
 
-
 }
 
 #main-nav ul li a:hover {
+	background: #666;
 	color: #efefef;
 }
 
@@ -211,69 +209,21 @@ h1 {
 }
 
 #main-nav ul li a {
-	padding: 5px 5px 5px 40px;
+	background: #ddd;
+	padding: 5px 5px 5px 30px;
 	width: 95px;
 	display: block;
 }
 
 
+
 #main-nav ul li ul li {
-	display: block;
 	margin: 2px 0;
-	width: 72px;
 }
 
 #main-nav ul li ul li a {
-	background:url("")no-repeat  10% 50% #ddd;
-	margin-left: 50px;
-	width: 72px;
+	margin-left: 40px;
+	width: 82px;
 	padding: 3px 4px;
 	font-size: 11px;
-
-}
-
-/* Menu icons */
-
-.home { 
-	background:url("homeicon.png")no-repeat 10% 50% #ddd;
-}
-
-.home a:hover{
-	background: url("homeicon_h.png")no-repeat  10% 50%  #666;
-
-}
-
-.movies { 
-	background:url("moviesicon.png")no-repeat 10% 50% #ddd;
-}
-
-.movies a:hover{
-	background: url("moviesicon_h.png")no-repeat  10% 50%  #666;
-
-}
-
-.series { 
-	background:url("seriesicon.png")no-repeat 10% 50% #ddd;
-}
-
-.series a:hover{
-	background: url("seriesicon_h.png")no-repeat  10% 50%  #666;
-
-}
-
-.shows { 
-	background:url("showsicon.png")no-repeat 10% 50% #ddd;
-}
-
-.shows a:hover{
-	background: url("showsicon_h.png")no-repeat 10% 50%  #666;
-}
-
-.watch { 
-	background:url("watchicon.png")no-repeat 10% 50% #ddd;
-}
-
-.watch a:hover{
-	background: url("watchicon_h.png")no-repeat 10% 50%  #666;
-
 }

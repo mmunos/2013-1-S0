@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   protected
   def authorize
   	unless User.find_by_id(session[:user_id])
-  		redirect_to login_url, :notice=> "Please log in"
+  		redirect_to login_path, :notice=> "Please log in"
   	end
   end
 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     if User.find_by_id(session[:user_id])
       @user = User.find_by_id(session[:user_id])
       unless @user.role=='admin'
-        redirect_to login_url, :notice=>"Access Denied"
+        redirect_to log_in_path, :notice=>"Access Denied" 
       end
     end
   end

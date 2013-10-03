@@ -23,4 +23,11 @@ class User < ActiveRecord::Base
     #     User.find_by(email: email).try(:authenticate, password)
     # end
 
+    def to_param
+        username
+    end
+
+    def self.find(input)
+        find_by(username: input)
+    end
 end

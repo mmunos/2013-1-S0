@@ -8,6 +8,8 @@ S0::Application.routes.draw do
   get "/signup", to: "users#new", as: :sign_up
   match "/login", to: "sessions#create", via: :post
 
+  get "403", to: "pages#no_access", as: :access_denied
+
   resources :users
 
   resources :sessions, only: [:create, :new, :destroy]

@@ -235,17 +235,17 @@ h1 {
 
 /* Menu icons */
 
-#main-nav .home > a {background-image: url("homeicon.png");}
-#main-nav .home > a:hover {background-image: url("homeicon_h.png");}
+#main-nav .home > a {background-image: asset-url("homeicon.png");}
+#main-nav .home > a:hover {background-image: asset-url("homeicon_h.png");}
 
-#main-nav .movies > a {background-image: url("moviesicon.png");}
-#main-nav .movies > a:hover {background-image: url("moviesicon_h.png");}
+#main-nav .movies > a {background-image: asset-url("moviesicon.png");}
+#main-nav .movies > a:hover {background-image: asset-url("moviesicon_h.png");}
 
-#main-nav .series > a {background-image: url("seriesicon.png");}
-#main-nav .series > a:hover {background-image: url("seriesicon_h.png");}
+#main-nav .series > a {background-image: asset-url("seriesicon.png");}
+#main-nav .series > a:hover {background-image: asset-url("seriesicon_h.png");}
 
-#main-nav .shows > a {background-image: url("showsicon.png");}
-#main-nav .shows > a:hover {background-image: url("showsicon_h.png");}
+#main-nav .shows > a {background-image: asset-url("showsicon.png");}
+#main-nav .shows > a:hover {background-image: asset-url("showsicon_h.png");}
 
-#main-nav .watch > a {background-image: url("watchicon.png");}
-#main-nav .watch > a:hover {background-image: url("watchicon_h.png");}
+#main-nav .watch > a {background-image: asset-url("watchicon.png");}
+#main-nav .watch > a:hover {background-image: asset-url("watchicon_h.png");}

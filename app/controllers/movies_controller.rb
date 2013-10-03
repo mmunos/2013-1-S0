@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  skip_before_filter :admin, :only => [:show, :index]
+  skip_before_filter :user_admin, :only => [:show, :index]
   skip_before_filter :authorize, :only => [:show, :index]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 

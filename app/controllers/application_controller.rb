@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :user_admin?
+
 
   before_filter :authorize
-  before_filter :admin
+  before_filter :user_admin
   protect_from_forgery
   
   private
@@ -16,14 +18,14 @@ class ApplicationController < ActionController::Base
 
 
   protected
+  
   def authorize
   	unless User.find_by_id(session[:user_id])
   		redirect_to login_path, :notice=> "Please log in"
   	end
   end
 
-  def admin
-
+  def user_admin
     if User.find_by_id(session[:user_id])
       @user = User.find_by_id(session[:user_id])
       unless @user.role=='admin'
@@ -32,6 +34,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def user_admin?(user)
+    if user
+      user.role == "admin"
+    end
+  end
 
 end

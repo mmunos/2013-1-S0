@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize, :only => [:show, :new, :create]
-  skip_before_filter :user_admin, :only =>[:show]
+  skip_before_filter :authorize, only: [:show, :new, :create]
+  skip_before_filter :user_admin, only: [:show, :edit, :update]
+  before_action :can_edit, only: [:edit, :update] 
+
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -28,6 +30,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+
     if user_admin?(current_user)
       @user.role = params[:user][:role]
     else
@@ -82,6 +85,13 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def can_edit
+      unless user_admin?(current_user) || current_user == User.find(params[:id])
+        redirect_to access_denied_path, :notice=> "You can't edit other user's profile!" 
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

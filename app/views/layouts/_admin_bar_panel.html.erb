@@ -1,0 +1,7 @@
+<% admin_little_text = ["you rock", "admin rulz", "I got the power!"] %>
+
+<div id="admin-bar-panel">
+	<h3>Admin Panel</h3>
+		<%=  yield :admin_bar_panel if content_for? :admin_bar_panel %>
+	<small><%= admin_little_text.sample %></small>
+</div>

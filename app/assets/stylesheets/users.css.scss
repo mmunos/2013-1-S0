@@ -19,7 +19,8 @@
 	height: 120px;
 	float: left;
 	margin: 0 10px 10px 0;
-	background: asset-url("default-avatar-medium.png") center center no-repeat;
+	background: asset-url("default-avatar-medium.png") no-repeat;
+	background-position: center;
 }
 
 #user-profile-data ul {

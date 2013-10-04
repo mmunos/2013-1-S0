@@ -28,12 +28,21 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    if user_admin?(current_user)
+      @user.role = params[:user][:role]
+    else
+      @user.role = "user"
+    end
+
+    @user.score = 0
 
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
-        session[:user_id] = @user.id
+        if !user_admin?(current_user)
+          session[:user_id] = @user.id
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -46,6 +55,11 @@ class UsersController < ApplicationController
   def update
     params[:user][:movie_ids] ||= []
     params[:user][:serial_ids] ||= []
+
+    if user_admin?(current_user)
+      @user.role = params[:user][:role]
+      @user.score = params[:user][:score]
+    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -75,6 +89,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :username, :email,:password, :password_confirmation, :role, :score, :serial_ids => [], :movie_ids => [])
+      params.require(:user).permit(:name, :username, :email,:password, :password_confirmation, :serial_ids => [], :movie_ids => [])
     end
 end

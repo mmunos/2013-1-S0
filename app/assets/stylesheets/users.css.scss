@@ -1,3 +1,33 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*#user-profile-title {
+	display: inline;
+}*/
+
+#user-profile-desc {
+	border-bottom: 1px solid #eee;
+	overflow: auto;
+	position: relative;
+}
+
+
+#user-profile-picture {
+	border: 2px solid #eee;
+	width: 120px;
+	height: 120px;
+	float: left;
+	margin: 0 10px 10px 0;
+	background: asset-url("default-avatar-medium.png") center center no-repeat;
+}
+
+#user-profile-data ul {
+	list-style: none;
+}
+
+#user-profile-buttons {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}

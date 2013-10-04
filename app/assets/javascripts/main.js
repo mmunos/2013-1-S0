@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	$(".flash-bar").delay(3000).fadeOut();
+	
 	$(".flash-bar a.close").click(function(e) {
 		e.preventDefault();
 		$(".flash-bar").fadeOut();

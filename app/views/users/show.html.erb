@@ -1,48 +1,49 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
-
-<p>
-  <strong>Score:</strong>
-  <%= @user.score %>
-</p>
-
-<p>
-  <string>Series:</string>
+<% content_for :admin_bar_panel do %>
   <ul>
-  <% @user.serials.each do |s|  %>
-    <li><%= link_to s.name, serial_path(s) %></li>
-  <%end%>
+    <li><%= link_to "Edit user", edit_user_path(@user) %></li>
   </ul>
-</p>
+<% end %>
 
-<p>
-  <string>Películas:</string>
+<h1 id="user-profile-title"><%= @user.name %></h1>
+
+<div id="user-profile-desc">
+  <div id="user-profile-picture">
+  </div>
+  <div id="user-profile-data">
+    <ul> 
+      <li>Username: <strong><%= @user.username %></strong></li>
+      <li>Score: <strong><%= (@user.score != 0)? @user.score : 0; %></strong></li>
+    </ul>
+  </div>
+
+  <% if is_himself?(@user) %>
+    <div id="user-profile-buttons">
+      <%= link_to 'Edit your profile', edit_user_path(@user) %>
+    </div>
+  <% end  %>
+</div>
+
+<h2>Series</h2>
+  <% if @user.serials.any? %>
+    <ul>
+    <% @user.serials.each do |s|  %>
+      <li><%= link_to s.name, serial_path(s) %></li>
+    <%end%>
+    </ul>
+  <% else %>
+    <p class="nothing-added"><%= if is_himself?(@user); "Woah, you don't have any series added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any series yet." end%></p>
+  <% end %>
+
+<h2>Movies</h2>
+<% if @user.movies.any? %>
   <ul>
   <% @user.movies.each do |m|  %>
     <li><%= link_to m.name, movie_path(m) %></li>
   <%end%>
   </ul>
-</p>
-<% if user_admin?(current_user) %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% else %>
+    <p class="nothing-added"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
 <% end %>
+
+
+

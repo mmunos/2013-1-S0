@@ -86,6 +86,7 @@ class UsersController < ApplicationController
 
   private
 
+
     def can_edit
       unless user_admin?(current_user) || current_user == User.find(params[:id])
         redirect_to access_denied_path, :notice=> "You can't edit other user's profile!" 

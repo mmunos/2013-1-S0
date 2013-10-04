@@ -103,6 +103,21 @@ body {
 	font-size: 14px;
 }
 
+#top-user-bar small.top-bar-admin-tag {
+	background: #bbb;
+	font-variant: small-caps;
+	line-height: 11px;
+	padding: 2px 5px 4px;
+	display: inline-block;
+	letter-spacing: 0.05em;
+	text-shadow: 0 1px 1px rgba(255,255,255,1);
+	color: #666;
+	font-size: 12px;
+	border-radius: 4px;
+	margin: 0 2px;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+}
+
 #top-bar-buttons {
 	padding: 3px;
 	position: absolute;
@@ -126,7 +141,7 @@ body {
 	position: absolute;	
 }
 
-/*= Main content */
+/* Main content */
 #main-content {
 	width: 85%;
 	margin: 0 auto;
@@ -151,7 +166,7 @@ h1 {
 	z-index: 0;
 }
 
-/*= Flash bar */
+/* Flash bar */
 
 .flash-bar {
 	width: 100%;
@@ -183,9 +198,9 @@ h1 {
 	background: none;
 }
 
-/*= Menu */
+/* Menu */
 
-#main-nav ul {
+#main-nav nav ul {
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
@@ -193,22 +208,22 @@ h1 {
 	font-size: 13px
 }
 
-#main-nav a {
+#main-nav nav a {
 	text-decoration: none;
 }
 
 
-#main-nav ul li a:hover {
+#main-nav nav ul li a:hover {
 	background-color: #666;
 	color: #efefef;
 }
 
-#main-nav ul li{
+#main-nav nav ul li{
 	display: block;
 	margin: 0 0 3px;
 }
 
-#main-nav ul li a {
+#main-nav nav ul li a {
 	background-color: #ddd;
 	padding: 5px 5px 5px 30px;
 	width: 95px;
@@ -217,15 +232,15 @@ h1 {
 	display: block;
 }
 
-#main-nav ul li a:hover {
+#main-nav nav ul li a:hover {
 	background-position: inherit;
 }
 
-#main-nav ul li ul li {
+#main-nav nav ul li ul li {
 	margin: 2px 0;
 }
 
-#main-nav ul li ul li a {
+#main-nav nav ul li ul li a {
 	margin-left: 40px;
 	width: 82px;
 	padding: 3px 4px;
@@ -235,17 +250,43 @@ h1 {
 
 /* Menu icons */
 
-#main-nav .home > a {background-image: asset-url("homeicon.png");}
-#main-nav .home > a:hover {background-image: asset-url("homeicon_h.png");}
+#main-nav nav .home > a {background-image: asset-url("homeicon.png");}
+#main-nav nav .home > a:hover {background-image: asset-url("homeicon_h.png");}
 
-#main-nav .movies > a {background-image: asset-url("moviesicon.png");}
-#main-nav .movies > a:hover {background-image: asset-url("moviesicon_h.png");}
+#main-nav nav .movies > a {background-image: asset-url("moviesicon.png");}
+#main-nav nav .movies > a:hover {background-image: asset-url("moviesicon_h.png");}
 
-#main-nav .series > a {background-image: asset-url("seriesicon.png");}
-#main-nav .series > a:hover {background-image: asset-url("seriesicon_h.png");}
+#main-nav nav .series > a {background-image: asset-url("seriesicon.png");}
+#main-nav nav .series > a:hover {background-image: asset-url("seriesicon_h.png");}
 
-#main-nav .shows > a {background-image: asset-url("showsicon.png");}
-#main-nav .shows > a:hover {background-image: asset-url("showsicon_h.png");}
+#main-nav nav .shows > a {background-image: asset-url("showsicon.png");}
+#main-nav nav .shows > a:hover {background-image: asset-url("showsicon_h.png");}
 
-#main-nav .watch > a {background-image: asset-url("watchicon.png");}
-#main-nav .watch > a:hover {background-image: asset-url("watchicon_h.png");}
+#main-nav nav .watch > a {background-image: asset-url("watchicon.png");}
+#main-nav nav .watch > a:hover {background-image: asset-url("watchicon_h.png");}
+
+/* Admin Bar Panel */
+
+#admin-bar-panel {
+	background: #eee;
+	padding: 10px;
+	font-size: 12px;
+	margin: 30px auto;
+	box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+#admin-bar-panel h3 {
+	margin: 0;
+	color: #444;
+
+}
+
+#admin-bar-panel ul {
+	padding-left: 20px;
+	margin: 10px 0;
+}
+
+#admin-bar-panel small {
+	font-size: 9px;
+	color: #999;
+}

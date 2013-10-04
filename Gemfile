@@ -7,6 +7,8 @@ gem 'rails', '4.0.0'
 group :development do
 	gem 'sqlite3'
 	gem 'awesome_print'
+	gem 'quiet_assets'
+	gem 'better_errors'
 end
 
 group :production do

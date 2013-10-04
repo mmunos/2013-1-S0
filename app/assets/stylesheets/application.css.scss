@@ -103,6 +103,22 @@ body {
 	font-size: 14px;
 }
 
+#top-user-bar p {
+	margin: 0;
+	padding: 0;
+}
+
+#top-user-bar .top-bar-user-url {
+	vertical-align: top;
+}
+
+#top-user-bar .top-bar-avatar {
+	margin: 0 5px;
+	vertical-align: middle;
+	box-shadow: 0 0 2px rgba(255,255,255,.3);
+}
+
+
 #top-user-bar small.top-bar-admin-tag {
 	background: #bbb;
 	font-variant: small-caps;
@@ -210,6 +226,7 @@ h1 {
 
 #main-nav nav a {
 	text-decoration: none;
+	color: #666;
 }
 
 

@@ -12,7 +12,7 @@
 	<% if current_user %>
 		<div id="top-bar-buttons" class="show">
 			<p>
-	    	<%= greetings.sample %> <%= link_to current_user_gravatar+content_tag(:span,current_user.username, class: "top-bar-username"), user_path(current_user), class: "top-bar-user-url" %> <% if user_admin? current_user %> <small class="top-bar-admin-tag">admin</small> <%end%> | <%= link_to "Log out", log_out_path %>
+	    	<%#= greetings.sample %> <% if user_admin? current_user %> <small class="top-bar-admin-tag">admin</small> <%end%> <%= link_to current_user_gravatar+content_tag(:span,current_user.username, class: "top-bar-username"), user_path(current_user), class: "top-bar-user-url" %>  | <%= link_to "Log out", log_out_path %>
 	    	</p>
 	    </div>
 	<% else %>

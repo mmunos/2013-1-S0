@@ -4,12 +4,14 @@
 
 <h1>Log in</h1>
 
-<%= form_tag log_in_path do %>
+<%= form_tag log_in_path, class: "login" do %>
   <div class="field">
     <%= text_field_tag :email, params[:email], placeholder: "username or email" %>
   </div>
   <div class="field">
     <%= password_field_tag :password,  "", placeholder: "password" %>
   </div>
-  <div class="actions"><%= submit_tag "Log in" %></div>
+  <div class="actions"><%= submit_tag "Log in" %>
+  <p class="login-form-text">Psst! maybe you want to <%= link_to "Sign up", sign_up_path%></p></div>
+  
 <% end %>

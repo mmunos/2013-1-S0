@@ -12,53 +12,43 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :username %><br>
+    <%= f.label :username %>
     <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
+
   <div class="field">
-    <%= f.label :role %><br>
-    <%= f.text_field :role %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password %>
     <%= f.password_field :password %>
   </div>
   
   <div class="field">
-    <%= f.label :password_confirmation %><br>
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
 
+  <% if user_admin?(current_user) %>
+  <h3>Admin Options</h3>
+  
   <div class="field">
-    <%= f.label :score %><br>
+    <%= f.label :role %>
+    <%= select_tag "user[role]", options_for_select(["user","admin"], @user.role) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :score %>
     <%= f.number_field :score %>
   </div>
-  <div class="field">
-    Series Agregadas:
-    <%Serial.all.each do |serial| %>
-        <div>
-          <%= check_box_tag  "user[serial_ids][]", serial.id, @user.serials.include?(serial) %>
-          <%= label_tag  serial.name %>
-        </div>
-    <% end %>
-  </div>
-  <div class="field">
-    Películas Agregadas:
-    <%Movie.all.each do |movie| %>
-        <div>
-          <%= check_box_tag  "user[movie_ids][]", movie.id, @user.movies.include?(movie) %>
-          <%= label_tag  movie.name %>
-        </div>
-    <% end %>
-  </div>
+  
+  <% end%>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

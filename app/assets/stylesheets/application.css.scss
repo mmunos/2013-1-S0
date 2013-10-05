@@ -17,6 +17,23 @@ body {
 	margin: 0 0 40px;
 	background: #efefef;
 	font-family: "Roboto";
+	color: #555;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+	color: #222;
+}
+
+a, a:visited {
+	border-bottom: 1px solid #aaa;
+	text-decoration: none;
+	color: #444;
+}
+
+a:hover, a:focus {
+	color: #777;
+	border-bottom: 1px solid #ddd;
 }
 
 #logo {
@@ -81,6 +98,8 @@ body {
 	width: 150px;
 	opacity: .4;
 	transition: all 0.2s linear;
+	transition-property: opacity, width;
+	height: 20px;
 }
 
 
@@ -93,10 +112,6 @@ body {
 	opacity: 1;
 }
 
-#top-search-bar input {
-	height: 20px;
-}
-
 #top-user-bar {
 	float: right;
 	margin-right: 15px;
@@ -106,32 +121,42 @@ body {
 #top-user-bar p {
 	margin: 0;
 	padding: 0;
+	font-weight: lighter;
 }
 
 #top-user-bar .top-bar-user-url {
-	vertical-align: top;
+	padding: 3px 6px 6px;
+	border-radius: 2px;
+	border: 1px solid rgba(0,0,0,.01);
+	background: rgba(0,0,0,.02);
+	font-weight: normal;
+}
+
+#top-user-bar .top-bar-user-url:hover {
+	border: 1px solid rgba(0,0,0,.15);
+	background: rgba(255,255,255,.4);
 }
 
 #top-user-bar .top-bar-avatar {
-	margin: 0 5px;
+	margin: 0 5px 0 0;
 	vertical-align: middle;
 	box-shadow: 0 0 2px rgba(255,255,255,.3);
 }
 
 
 #top-user-bar small.top-bar-admin-tag {
-	background: #bbb;
+	background: #ccc;
 	font-variant: small-caps;
 	line-height: 11px;
-	padding: 2px 5px 4px;
+	padding: 1px 3px 2px;
 	display: inline-block;
 	letter-spacing: 0.05em;
-	text-shadow: 0 1px 1px rgba(255,255,255,1);
+	text-shadow: 0 1px 3px rgba(255,255,255,0.5);
 	color: #666;
-	font-size: 12px;
+	font-size: 13px;
 	border-radius: 4px;
 	margin: 0 2px;
-	box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 
 #top-bar-buttons {
@@ -225,8 +250,9 @@ h1 {
 }
 
 #main-nav nav a {
-	text-decoration: none;
+	border: 0;
 	color: #666;
+	transition: color,background-color 0.15s ease;
 }
 
 
@@ -290,6 +316,15 @@ h1 {
 	font-size: 12px;
 	margin: 30px auto;
 	box-shadow: 0 0 4px rgba(0,0,0,0.2);
+	transition: all 0.2s linear;
+	transition-property: box-shadow, background;
+
+}
+
+#admin-bar-panel:hover {
+	background: #efefef;
+	box-shadow: 0 0 8px rgba(0,0,0,0.3);
+
 }
 
 #admin-bar-panel h3 {
@@ -306,4 +341,69 @@ h1 {
 #admin-bar-panel small {
 	font-size: 9px;
 	color: #999;
+}
+
+/* Inputs */ 
+
+#main-content input[type="text"], #main-content input[type="password"],
+#main-content input[type="number"], #main-content input[type="email"], 
+#main-content textarea {
+	padding: 5px;
+	font-weight: normal;
+	font-family: Roboto;
+	font-size: 15px;
+	border-radius: 3px;
+	border:1px solid #ccc;
+	color: #555;
+}
+
+#main-content input[type="text"]:hover, #main-content input[type="password"]:hover,
+#main-content input[type="number"]:hover, #main-content input[type="email"]:hover {
+	border-color: #dedede;
+	color: #222;
+}
+
+#main-content input[type="text"]:focus, #main-content input[type="password"]:focus,
+#main-content input[type="number"]:focus, #main-content input[type="email"]:focus {
+	border-color: #aaa;
+	color: #222;
+}
+
+.field {
+	margin: 20px auto;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #f4f4f4;
+}
+
+.field > label {
+	float: left;
+	margin-top: 5px;
+	width: calc(50% - 40px);
+	padding-left: 30px;
+}
+
+form .actions {
+	width: 50%;
+	margin: 20px auto;
+	text-align: center;
+}
+#main-content input[type="submit"], #main-content button {
+	margin: 10px auto;
+	padding: 5px 10px;
+	font-weight: lighter;
+	font-family: "Roboto";
+	background: #ddd;
+	font-size: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #555;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+
+#main-content input[type="submit"]:hover, #main-content button:hover {
+	background: #555;
+	color: #ddd;
+	margin: 10px auto;
 }

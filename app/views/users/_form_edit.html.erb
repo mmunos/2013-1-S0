@@ -1,0 +1,88 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="edit-user-picture">
+  <% gravatar_hash = Digest::MD5.hexdigest(@user.email.downcase.strip)
+   gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=180&d=mm" %>
+     <%= tag(:img, src: gravatar_url, class: "edit-user-profile-pic") %>
+
+    <p class="edit-user-picture-info">You can change your profile picture at <a href="http://gravatar.com" target="_blank">gravatar.com</a></p>
+
+    <% if user_admin?(current_user) %>
+      <h3>Admin Options</h3>
+      
+      <div class="field">
+        <%= f.label :role %>
+        <%= select_tag "user[role]", options_for_select(["user","admin"], @user.role) %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :score %>
+        <%= f.number_field :score %>
+      </div>
+    <% end%>
+  </div>
+
+  <div class="edit-user-fields">
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+
+  <div class="edit-user-shows">
+    <h3>Shows</h3>
+
+
+    <div class="field">
+      Series Agregadas:
+      <%Serial.all.each do |serial| %>
+          <div>
+            <%= check_box_tag  "user[serial_ids][]", serial.id, @user.serials.include?(serial) %>
+            <%= label_tag  serial.name %>
+          </div>
+      <% end %>
+    </div>
+    <div class="field">
+      Películas Agregadas:
+      <%Movie.all.each do |movie| %>
+          <div>
+            <%= check_box_tag  "user[movie_ids][]", movie.id, @user.movies.include?(movie) %>
+            <%= label_tag  movie.name %>
+          </div>
+      <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -8,27 +8,49 @@
 
 #user-profile-desc {
 	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
 	overflow: auto;
 	position: relative;
-}
+	margin: 20px 0;
 
+	#user-profile-picture {
+		border: 2px solid #eee;
+		width: 120px;
+		height: 120px;
+		float: left;
+		margin: 0 10px 10px 0;
+	}
 
-#user-profile-picture {
-	border: 2px solid #eee;
-	width: 120px;
-	height: 120px;
-	float: left;
-	margin: 0 10px 10px 0;
-}
+	#user-profile-title {
+		margin-top: 0;
+	}
 
-#user-profile-data ul {
-	list-style: none;
+	#user-profile-data {
+		margin-left:130px;
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
+	}
 }
 
 #user-profile-buttons {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
+
+	a {
+		color: #aaa;
+		border: 0;
+		font-style: italic;
+		font-weight: lighter;
+
+		&:hover {
+			color: inherit;
+		}
+	}
 }
 
 /* Forms users */
@@ -42,6 +64,10 @@
 	text-align: center;
 	width: 60%;
 	margin: 0 auto;
+
+	input {
+		font-weight: lighter;
+	}
 
 	.login-form-text {
 		font-weight: lighter;
@@ -69,8 +95,11 @@
 }
 
 #main-content form .edit-user-fields {
-	width: 55%;
+	width: 50%;
 	float: left;
+	padding-left: 5%;
+	border-left: 1px solid #f4f4f4;
+
 }
 
 #main-content form.edit_user {

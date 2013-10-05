@@ -35,9 +35,11 @@
 
   <div class="edit-user-fields">
 
+  <h3>Information</h3>
+
     <div class="field">
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, {required: ""} %>
     </div>
     <div class="field">
       <%= f.label :username %>
@@ -45,8 +47,10 @@
     </div>
     <div class="field">
       <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.text_field :email, {validate: "", type: "email"}%>
     </div>
+
+  <h3> Change Password</h3>
 
     <div class="field">
       <%= f.label :password %>

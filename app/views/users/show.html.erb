@@ -8,13 +8,14 @@
    gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=120&d=mm"
 %>
 
-<h1 id="user-profile-title"><%= @user.name %></h1>
+
 
 <div id="user-profile-desc">
   <div id="user-profile-picture">
     <%= tag(:img, src: gravatar_url) %>
   </div>
   <div id="user-profile-data">
+    <h1 id="user-profile-title"><%= @user.name %></h1>
     <ul> 
       <li>Username: <strong><%= @user.username %></strong></li>
       <li>Score: <strong><%= (@user.score != 0)? @user.score : 0; %></strong></li>

@@ -13,25 +13,25 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, {required: ""} %>
   </div>
   <div class="field">
     <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, {required: ""} %>
   </div>
   <div class="field">
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, {type: "email", validate: "", required: ""} %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, {required: ""}%>
   </div>
   
   <div class="field">
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, {required: ""}%>
   </div>
 
   <% if user_admin?(current_user) %>
@@ -48,7 +48,7 @@
   </div>
   
   <% end%>
-  
+
   <div class="actions">
     <%= f.submit %>
   </div>

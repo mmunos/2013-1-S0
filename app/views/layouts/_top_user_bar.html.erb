@@ -35,8 +35,8 @@
 
 	<div id="top-bar-auth" class="hidden">
 		<%= form_tag log_in_path do %>
-		    <%= text_field_tag :email, params[:email], placeholder: "username or email" %>
-		    <%= password_field_tag :password,  "", placeholder: "password" %>
+		    <%= text_field_tag :email, params[:email], placeholder: "username or email", required: ""%>
+		    <%= password_field_tag :password,  "", placeholder: "password", required: "" %>
 		  	<%= submit_tag "Log in" %>
 			<span class="close">[<a href="#" title="Close Log in">x</a>]</span>
 		<% end %>

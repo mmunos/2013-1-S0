@@ -343,7 +343,7 @@ h1 {
 	color: #999;
 }
 
-/* Inputs */ 
+/* Forms */ 
 
 #main-content input[type="text"], #main-content input[type="password"],
 #main-content input[type="number"], #main-content input[type="email"], 
@@ -375,11 +375,20 @@ h1 {
 	border-bottom: 1px solid #f4f4f4;
 }
 
-.field > label {
+.field > label, .field span.field_error > label {
 	float: left;
 	margin-top: 5px;
 	width: calc(50% - 40px);
 	padding-left: 30px;
+}
+
+#main-content .field span.field_error > label {
+	text-shadow: 0 0 20px rgba(255,0,0,0.6);
+	color: black;
+}
+
+#main-content .field span.field_error input {
+	box-shadow: 0 0 10px rgba(255,0,0,0.6);
 }
 
 form .actions {
@@ -406,4 +415,31 @@ form .actions {
 	background: #555;
 	color: #ddd;
 	margin: 10px auto;
+}
+
+#error_explanation {
+  width: 500px;
+  margin: 0 auto;
+  padding: 7px;
+  border: 1px solid red;
+  border-left: 0;
+  border-right: 0;
+  background-color: rgba(255,0,0,0.4);
+
+  h2 {
+    text-align: left;
+    font-weight: normal;
+    padding: 5px 5px 5px 15px;
+    font-size: 14px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: rgba(255,0,0,0.2);
+    color: #fff;
+  }
+  ul li {
+  	color: white;
+    font-size: 14px;
+    list-style: square;
+    font-weight: lighter;
+  }
 }

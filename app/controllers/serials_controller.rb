@@ -1,7 +1,7 @@
 class SerialsController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_serial, only: [:show, :edit, :update, :destroy]
+  before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove]
 
   # GET /serials
   # GET /serials.json
@@ -60,6 +60,28 @@ class SerialsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to serials_url }
       format.json { head :no_content }
+    end
+  end
+
+  def add
+    if current_user
+      if current_user.serials.include?(@serial)
+        redirect_to @serial, notice: "You already follow this serial"
+      else
+        current_user.serials << @serial
+        redirect_to @serial, notice: "#{@serial.name} was successfully added!"
+      end
+    end
+  end
+
+  def remove
+    if current_user
+      if current_user.serials.include?(@serial)
+        current_user.serials.delete(@serial)
+        redirect_to @serial, notice: "#{@serial.name} was successfully removed!"
+      else
+        redirect_to @serial, notice: "You can't delete #{@serial.name}, D'OH!!!"
+      end
     end
   end
 

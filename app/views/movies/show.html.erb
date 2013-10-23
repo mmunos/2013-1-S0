@@ -1,34 +1,39 @@
-<p id="notice"><%= notice %></p>
+<% content_for :admin_bar_panel do %>
+    <ul>
+        <li><%= link_to 'Edit Movie', edit_movie_path(@movie) %></li>
+    </ul>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @movie.name %>
-</p>
+<div class="show-sidebar">
+  <div class="show-action-menu">
+  </div>
 
-<p>
-  <strong>Date:</strong>
-  <%= @movie.date %>
-</p>
+  <img src="http://placehold.it/216x319&text=<%= @movie.name%>" />
 
-<p>
-  <strong>Director:</strong>
-  <%= @movie.director %>
-</p>
+  <div class="show-detail-module show-details">
+    <h3>Movie Details</h3>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @movie.genre %>
-</p>
+    <ul>
+        <li>Date: <%= @movie.date %></li>
+        <li>Genre: <%= @movie.genre %></li>
+        <li>Director: <%= @movie.director %></li>
+        <li>Duration: <%= @movie.duration %> min.</li>
+    </ul>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @movie.duration %>
-</p>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @movie.description %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<div class="show-content">
+  <div class="show-header">
+    <div class="show-header-title">
+        <h1><%= @movie.name %></h1>
+    </div>
+
+    <p class="description"><%= @movie.description %></p>
+  </div>
+
+  <div class="show-users-content">
+    <h2>Reviews and posts go here…</h2>
+  </div>
+</div>

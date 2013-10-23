@@ -258,7 +258,7 @@ h1 {
 }
 
 
-#main-nav nav ul li a:hover {
+#main-nav nav ul li a:hover, #main-nav nav ul li a.active {
 	background-color: #666;
 	color: #efefef;
 }
@@ -277,7 +277,7 @@ h1 {
 	display: block;
 }
 
-#main-nav nav ul li a:hover {
+#main-nav nav ul li a:hover, #main-nav nav ul li a.active {
 	background-position: inherit;
 }
 
@@ -296,19 +296,19 @@ h1 {
 /* Menu icons */
 
 #main-nav nav .home > a {background-image: asset-url("homeicon.png");}
-#main-nav nav .home > a:hover {background-image: asset-url("homeicon_h.png");}
+#main-nav nav .home > a:hover, #main-nav nav .home > a.active {background-image: asset-url("homeicon_h.png");}
 
 #main-nav nav .movies > a {background-image: asset-url("moviesicon.png");}
-#main-nav nav .movies > a:hover {background-image: asset-url("moviesicon_h.png");}
+#main-nav nav .movies > a:hover, #main-nav nav .movies > a.active {background-image: asset-url("moviesicon_h.png");}
 
 #main-nav nav .series > a {background-image: asset-url("seriesicon.png");}
-#main-nav nav .series > a:hover {background-image: asset-url("seriesicon_h.png");}
+#main-nav nav .series > a:hover, #main-nav nav .series > a.active {background-image: asset-url("seriesicon_h.png");}
 
 #main-nav nav .shows > a {background-image: asset-url("showsicon.png");}
-#main-nav nav .shows > a:hover {background-image: asset-url("showsicon_h.png");}
+#main-nav nav .shows > a:hover, #main-nav nav .shows > a.active {background-image: asset-url("showsicon_h.png");}
 
 #main-nav nav .watch > a {background-image: asset-url("watchicon.png");}
-#main-nav nav .watch > a:hover {background-image: asset-url("watchicon_h.png");}
+#main-nav nav .watch > a:hover, #main-nav nav .watch > a.active {background-image: asset-url("watchicon_h.png");}
 
 /* Admin Bar Panel */
 
@@ -417,6 +417,15 @@ form .actions {
 	background: #555;
 	color: #ddd;
 	margin: 10px auto;
+}
+
+.center-warning {
+	text-align:center;
+	margin: 20px auto;
+	font-size: 20px;
+	color: #777;
+	font-weight: lighter;
+	font-style: italic;
 }
 
 #error_explanation {

@@ -10,14 +10,21 @@ S0::Application.routes.draw do
   get "403", to: "pages#no_access", as: :access_denied
 
   resources :users
+  get "/me", to: "users#me", as: :my_profile
+  get "/me/shows", to:"followed_shows#shows", as: :my_shows
+  get "/me/series", to:"followed_shows#serials", as: :my_serials
+  get "/me/movies", to:"followed_shows#movies", as: :my_movies
 
   resources :sessions, only: [:create, :new, :destroy]
 
-  resources :serials do
+  resources :serials, path: "/series" do
     resources :seasons do
       resources :episodes
     end
   end
+
+  get "/series/:id/add", to:"serials#add", as: :add_serial
+  get "/series/:id/remove", to:"serials#remove", as: :remove_serial
 
 
   # The priority is based upon order of creation: first created -> highest priority.

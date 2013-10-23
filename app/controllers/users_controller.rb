@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize, only: [:show, :new, :create]
-  skip_before_filter :user_admin, only: [:show, :edit, :update]
+  skip_before_filter :user_admin, only: [:show, :edit, :update, :me]
   before_action :can_edit, only: [:edit, :update] 
 
   
@@ -84,12 +84,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def me
+    redirect_to @user
+  end
+
+
   private
 
 
     def can_edit
       unless user_admin?(current_user) || current_user == User.find(params[:id])
-        redirect_to access_denied_path, :notice=> "You can't edit other user's profile!" 
+        redirect_to access_denied_path, notice: "You can't edit other user's profile!" 
       end
     end
 

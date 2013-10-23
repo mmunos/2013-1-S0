@@ -1,50 +1,42 @@
-<% content_for :admin_bar_panel do %>
-  <ul>
-    <li><%= link_to 'Edit Episode', edit_serial_season_episode_path(@serial, @season,@episode) %></li>
-    <li><%= link_to 'New Episode', new_serial_season_episode_path(@serial, @season) %></li>
 
-  </ul>
+<% content_for :admin_bar_panel do %>
+    <ul>
+        <li><%= link_to 'Edit Episode', edit_serial_season_episode_path(@serial,@season,@episode) %></li>
+    </ul>
 <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @episode.name %>
-</p>
+<div class="show-sidebar">
+  <div class="show-action-menu">
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @episode.description %>
-</p>
+  <img src="http://placehold.it/216x319&text=<%= @serial.name+ '- Season: '+@season.number.to_s+'- Episode: '+@episode.number.to_s %>" />
 
-<p>
-  <strong>Date:</strong>
-  <%= @episode.date %>
-</p>
+  <div class="show-detail-module show-details">
+    <h3>Episode Details</h3>
 
-<p>
-  <strong>Number:</strong>
-  <%= @episode.number %>
-</p>
+    <ul>
+        <li>Date: <%= @episode.date %></li>
+        <li>Writer: <%= @episode.write %></li>
+        <li>Director: <%= @episode.director %></li>
+        <li>Duration: <%= @episode.duration %> min.</li>
+    </ul>
 
-<p>
-  <strong>Write:</strong>
-  <%= @episode.write %>
-</p>
+  </div>
 
-<p>
-  <strong>Director:</strong>
-  <%= @episode.director %>
-</p>
+</div>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @episode.duration %>
-</p>
+<div class="show-content">
+  <div class="show-header">
+    <div class="show-header-title">
+      <p class="bread-crumb"><%= link_to @serial.name, serial_path(@serial) %> - <%= link_to "Season #{@season.number}",serial_season_path(@serial,@season) %></p>
+        <h1><%= @episode.name %></h1>
+        <%= link_to "View all episodes", serial_season_episodes_path(@serial,@season), class: "all-episodes-link" %>
+    </div>
 
-<p>
-  <strong>Season:</strong>
-  <%= @episode.season.serial.name%> - Season <%= @episode.season.number.to_s %> 
-</p>
+    <p class="description"><%= @episode.description %></p>
+  </div>
 
-<%= link_to 'Edit', edit_serial_season_episode_path(@serial,@season,@episode) %> |
-<%= link_to 'Back', serial_season_episodes_path(@serial,@season) %>
+  <div class="show-users-content">
+    <h2>Reviews and posts go here…</h2>
+  </div>
+</div>

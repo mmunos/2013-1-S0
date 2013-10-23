@@ -1,5 +1,11 @@
 class Movie < Show
-	#has_many :movies_users
-	#has_many :users, through: :movies_users
+
+	def to_param
+        [id,name.parameterize].join("-")
+    end
+
+    def self.find(input)
+    	find_by(id: input.split("-")[0])
+    end
 
 end

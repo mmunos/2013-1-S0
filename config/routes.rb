@@ -1,7 +1,6 @@
 S0::Application.routes.draw do
-  resources :movies
 
-  resources :serials
+  resources :movies
 
   get "/login", to: "sessions#create", as: :log_in
   get "/logout", to: "sessions#destroy", as: :log_out
@@ -14,6 +13,11 @@ S0::Application.routes.draw do
 
   resources :sessions, only: [:create, :new, :destroy]
 
+  resources :serials do
+    resources :seasons do
+      resources :episodes
+    end
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

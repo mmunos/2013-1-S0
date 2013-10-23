@@ -1,0 +1,50 @@
+<% content_for :admin_bar_panel do %>
+  <ul>
+    <li><%= link_to 'Edit Episode', edit_serial_season_episode_path(@serial, @season,@episode) %></li>
+    <li><%= link_to 'New Episode', new_serial_season_episode_path(@serial, @season) %></li>
+
+  </ul>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @episode.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @episode.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @episode.date %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @episode.number %>
+</p>
+
+<p>
+  <strong>Write:</strong>
+  <%= @episode.write %>
+</p>
+
+<p>
+  <strong>Director:</strong>
+  <%= @episode.director %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @episode.duration %>
+</p>
+
+<p>
+  <strong>Season:</strong>
+  <%= @episode.season.serial.name%> - Season <%= @episode.season.number.to_s %> 
+</p>
+
+<%= link_to 'Edit', edit_serial_season_episode_path(@serial,@season,@episode) %> |
+<%= link_to 'Back', serial_season_episodes_path(@serial,@season) %>

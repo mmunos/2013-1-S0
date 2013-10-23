@@ -1,0 +1,57 @@
+<% content_for :admin_bar_panel do %>
+  <ul>
+    <li><%= link_to 'New Season', new_serial_season_path(@serial) %></li>
+  </ul>
+<% end %>
+
+<div class="show-sidebar">
+  <div class="show-action-menu">
+  </div>
+
+  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Seasons' %>">
+
+  <div class="show-detail-module show-details">
+    <h3>Serial Details</h3>
+    <ul>
+      <li>Date: <%= @serial.date %></li>
+      <li>Genre: <%= @serial.genre %></li>
+    </ul>
+  </div>
+
+
+</div>
+
+<div class="show-content">
+  <div class="show-header">
+    <div class="show-header-title">
+      <h1><%= link_to @serial.name, serial_path(@serial) %></h1>
+    </div>
+
+    <p class="description"><%= @serial.description %></p>
+  </div>
+
+  <div class="show-list show-season-list">
+    <h2>Seasons</h2>
+
+    <% if @serial.seasons.empty? %>
+      <p class="center-warning">Oops, we didn't find any seasons!</p>
+    <% else %>
+      <% @serial.seasons.each do |season| %>
+        <div class="show-season-list-item">
+          <div class="number"><%= link_to season.number, serial_season_path(@serial,season) %></div>
+          <p class="description"><%= season.description %></p>
+          <div class="episodes-number">
+            
+            <p><%= season.episodes.size %></p>
+            <small>Episodes</small>
+          </div>
+          <div class="item-action">
+            Action
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
+

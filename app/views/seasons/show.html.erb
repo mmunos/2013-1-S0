@@ -1,0 +1,52 @@
+
+<% content_for :admin_bar_panel do %>
+  <ul>
+    <li><%= link_to 'Edit Season', edit_serial_season_path(@serial,@season) %></li>
+    <li><%= link_to 'New Episode', new_serial_season_episode_path(@serial,@season) %></li>
+  </ul>
+<% end %>
+
+<div class="show-sidebar">
+  <div class="show-action-menu">
+  </div>
+
+  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Season '+@season.number.to_s %>">
+
+  <div class="show-detail-module show-details">
+    <h3>Season Details</h3>
+    <ul>
+      <li>Date: <%= @serial.date %></li>
+    </ul>
+  </div>
+
+  <div class="show-detail-module episodes-list">
+      <h3><%= link_to "Episodes »", serial_season_episodes_path(@serial,@season) %></h3>
+    <% if @season.episodes.empty? %>
+    <p>We're sorry, we don't have any episodes yet</p>
+    <% else %>
+      <ul>
+        <% @season.episodes.each do |e| %>
+        <li><%= link_to "Episode #{e.number}", serial_season_episode_path(@serial,@season,e) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+
+</div>
+
+<div class="show-content">
+  <div class="show-header">
+    <div class="show-header-title">
+      <p class="bread-crumb"><%= link_to @serial.name, serial_path(@serial) %></p>
+      <h1>Season <%= @season.number.to_s %></h1>
+      <%= link_to "View all seasons", serial_seasons_path(@serial), class: "all-seasons-link" %>
+    </div>
+
+    <p class="description"><%= @season.description %></p>
+  </div>
+
+  <div class="show-users-content">
+    <h2>Reviews and posts go here…</h2>
+  </div>
+</div>

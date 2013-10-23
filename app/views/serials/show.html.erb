@@ -1,36 +1,48 @@
-<p id="notice"><%= notice %></p>
+<% content_for :admin_bar_panel do %>
+  <ul>
+      <li><%= link_to 'Edit Serial', edit_serial_path(@serial) %></li>
+      <li><%= link_to 'New Season', new_serial_season_path(@serial) %></li>
+  </ul>
+<% end %>
 
-	<section id="wrapper">
-		<p>
-		  <h1><%= @serial.name %></h1>
-		</p>
-
-		<p id="data">
-		  <strong>Date:</strong> <%= @serial.date %>
-		</p>
-
-		<p id="data">
-		  <strong>Genre:</strong> <%= @serial.genre %>
-		</p>
-
-		<p>
-		 <%= @serial.description %>
-		</p>
-	</section>
-
-	<div id="lateral">
-	 	<ul>
-			<li class="seen">Mark as seen</li>
-			<li class="add">Add to My Series</li>
-			<li class="watch">Add to My Watch List</li>
-			<li class="season">Seasons Details</li>
-
-	 	</ul>
+<div class="show-sidebar">
+	<div class="show-action-menu">
 	</div>
-<br>
-	<div id="back">
-	<hr>
 
-	<%= link_to 'Edit', edit_serial_path(@serial) %> |
-	<%= link_to 'Back', serials_path %>
+	<img src="http://placehold.it/216x319&text=<%= @serial.name%>">
+
+	<div class="show-detail-module show-details">
+		<h3>Serial Details</h3>
+		<ul>
+			<li>Date: <%= @serial.date %></li>
+			<li>Genre: <%= @serial.genre %></li>
+		</ul>
 	</div>
+
+	<div class="show-detail-module show-seasons">
+		<h3><%= link_to "Seasons »", serial_seasons_path(@serial) %></h3>
+		<% if @serial.seasons.empty? %>
+		<p>We're sorry, we don't have any season yet</p>
+		<% else %>
+			<ul>
+				<% @serial.seasons.each do |s| %>
+				<li><%= link_to "Season #{s.number}", serial_season_path(@serial,s) %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>
+</div>
+
+<div class="show-content">
+	<div class="show-header">
+		<div class="show-header-title">
+			<h1><%= @serial.name %></h1>
+		</div>
+
+		<p class="description"><%= @serial.description %></p>
+	</div>
+
+	<div class="show-users-content">
+		<h2>Reviews and posts go here…</h2>
+	</div>
+</div>

@@ -1,0 +1,164 @@
+
+.show-sidebar {
+	padding: 10px 5px;
+	width: 230px;
+	float: left;
+
+	img {
+		margin: 5px auto;
+		border: 1px solid #aaa;
+	}
+
+	.show-detail-module {
+		font-size: 14px;
+
+		h3 {
+			font-size: 16px;
+			font-weight: lighter;
+			border-bottom: 1px solid #dedede;
+			margin-right: 20px;
+			
+			a {
+				border-bottom: 0;
+			}
+		}
+
+	}
+
+	.show-details {
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+	}
+}
+
+.show-content {
+	margin-left: 240px;
+
+	h1 {
+		font-size: 30px;
+		border-bottom: 1px solid #ddd;
+
+		a {
+			border: 0;
+		}
+	}
+
+	.show-header {
+		margin-bottom: 30px;
+
+		.show-header-title {
+			position: relative;
+
+			p.bread-crumb {
+				margin: 15px 0 -15px;
+				font-size: 16px;
+				padding: 0;
+				font-weight: lighter;
+				a {
+					border:0;
+					&:hover {
+						border-bottom: 1px solid #ddd;
+					}
+				}
+			}
+
+			a.all-seasons-link {
+				position: absolute;
+				bottom: 5px;
+				right: 5px;
+				border: 0;
+				color: #aaa;
+				font-style: italic;
+				font-weight: lighter;
+
+				&:hover {
+					color: inherit;
+				}
+			}
+		}
+	}
+
+	.show-users-content {
+		border-top: 1px solid #eee;
+	}
+
+	.show-season-list {
+		.show-season-list-item {
+			border-bottom: 1px solid #ddd;
+			overflow: auto;
+			padding: 20px 10px;
+			.number {
+				float: left;
+				font-size: 35px;
+				width: calc(10% - 20px);
+				margin: 10px;
+				text-align: center;
+				a {
+					border-bottom: none;
+				}
+			}
+
+			.description {
+				width: calc( 60% - 20px);
+				padding: 10px;
+				border-left: 1px solid #eee;
+				font-size: 14px;
+				float: left;
+			}
+
+			.episodes-number {
+				width: calc(15% - 20px);
+				padding: 10px;
+				border-left: 1px solid #eee;
+				float: left;
+				text-align: center;
+				
+				p {
+					font-size: 25px;
+					display: block;
+					text-align: center;
+					margin: 0;
+				}
+				
+				small {
+					text-align: center;
+					font-size: 10px;
+					display: block;
+				}
+			}
+
+			.item-action {
+				border-left: 1px solid #eee;
+				width: calc(10% - 20px);
+				padding: 10px;
+				float: left;
+			}
+
+		}	
+	}
+
+	.show-episode-list {
+
+		.show-episode-list-item {
+			overflow: auto;
+			border-bottom: 1px solid #eee;
+
+			h2 {
+				font-size: 20px;
+			}
+
+			.description {
+				font-size: 14px;
+
+			}
+
+			.item-action {
+				float: right;
+				padding: 10px;
+				width: 10%;
+			}
+		}
+	}
+}

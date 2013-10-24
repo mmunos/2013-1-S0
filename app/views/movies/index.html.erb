@@ -9,7 +9,7 @@
 
 <div class="index_shows_panel">
 
-    <% @movies.each do |movie| %>
+    <% @movies.sort {|a,b| a.name <=> b.name }.each do |movie| %>
 
 
         <div class="index_shows_item">

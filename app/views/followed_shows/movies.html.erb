@@ -3,7 +3,7 @@
 
 <div class="index_shows_panel">
 	<% if @user.movies.any? %>
-	    <% @movies.each do |movie| %>
+	    <% @movies.sort {|a,b| a.name <=> b.name }.each do |movie| %>
 
 
 	        <div class="index_shows_item">

@@ -3,7 +3,7 @@
 <div class="index_shows_panel">
 
 	<% if @user.serials.any? %>
-	    <% @serials.each do |serial| %>
+	    <% @serials.sort {|a,b| a.name <=> b.name }.each do |serial| %>
 
 
 	        <div class="index_shows_item">

@@ -12,7 +12,7 @@
 
 
         <div class="index_shows_item">
-           <img src="http://placehold.it/170x273&text=<%= serial.name %>">
+           <%=link_to image_tag("http://placehold.it/170x273&text=#{serial.name}"), serial_path(serial) %>
             <p><%= link_to "#{serial.name}", serial_path(serial) %></p>
 
         </div>

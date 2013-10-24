@@ -2,16 +2,20 @@
 
 <div class="index_shows_panel">
 
-    <% @serials.each do |serial| %>
+	<% if @user.serials.any? %>
+	    <% @serials.each do |serial| %>
 
 
-        <div class="index_shows_item">
-           <img src="http://placehold.it/170x273&text=<%= serial.name %>">
-            <p><%= link_to "#{serial.name}", movie_path(serial) %></p>
+	        <div class="index_shows_item">
+	           <%=link_to image_tag("http://placehold.it/170x273&text=#{serial.name}"), serial_path(serial) %>
+	            <p><%= link_to "#{serial.name}", serial_path(serial) %></p>
 
-        </div>
+	        </div>
 
-      
-    <% end %>
+	      
+	    <% end %>
+	<% else %>
+    	<p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any series added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any series yet." end%></p>
+ 	 <% end %>
 
 </div>

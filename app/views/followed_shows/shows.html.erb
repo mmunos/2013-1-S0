@@ -3,20 +3,22 @@
 <div class="my_movies_stand">
 	<%= link_to "View all my movies", my_movies_path(), class: "all-series-link" %>
 	<h2>My Movies</h2>
-	<div class="index_shows_panel">
+		<div class="index_shows_panel">
+		<% if @user.movies.any? %>
+		    <% @movies.last(5).reverse.each do |movie| %>
 
-	    <% @movies.limit(10).each do |movie| %>
 
+		        <div class="index_shows_item">
+		           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
+		            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
 
-	        <div class="index_shows_item">
-	           <img src="http://placehold.it/170x273&text=<%= movie.name %>">
-	            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+		        </div>
 
-	        </div>
-
-	      
-	    <% end %>
-
+		      
+		    <% end %>
+		<% else %>
+	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+	  	<% end %>
 	</div>
 </div>
 
@@ -25,19 +27,23 @@
 <div class="my_series_stand">
 	<%= link_to "View all my series", my_serials_path(), class: "all-series-link" %>
 	<h2>My Series</h2>
-	<div class="index_shows_panel">
+		<div class="index_shows_panel">
 
-	    <% @serials.limit(5).each do |serial| %>
+		<% if @user.serials.any? %>
+		    <% @serials.last(5).reverse.each do |serial| %>
 
 
-	        <div class="index_shows_item">
-	           <img src="http://placehold.it/170x273&text=<%= serial.name %>">
-	            <p><%= link_to "#{serial.name}", movie_path(serial) %></p>
+		        <div class="index_shows_item">
+		           <%=link_to image_tag("http://placehold.it/170x273&text=#{serial.name}"), serial_path(serial) %>
+		            <p><%= link_to "#{serial.name}", serial_path(serial) %></p>
 
-	        </div>
+		        </div>
 
-	      
-	    <% end %>
+		      
+		    <% end %>
+		<% else %>
+	    	<p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any series added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any series yet." end%></p>
+	 	 <% end %>
 
 	</div>
 </div>

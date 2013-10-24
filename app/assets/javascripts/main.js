@@ -1,24 +1,23 @@
-$(document).ready(function() {
+$(document).ready(showganizer);
+$(window).bind('page:change', showganizer)
 
-	$(".flash-bar").delay(3000).fadeOut();
-	
-	$(".flash-bar a.close").click(function(e) {
+$(document).on("click",".flash-bar a.close",function(e) {
 		e.preventDefault();
 		$(".flash-bar").fadeOut();
-	});
-
-	$("#top-bar-login-button").click(function(e) {
-		e.preventDefault();
-		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
-		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
-	});
-
-	$("#top-bar-auth .close a").click(function(e) {
-		e.preventDefault();
-		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
-		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
-	});
-
-
-
 });
+
+$(document).on('click', "#top-bar-login-button", function(e) {
+		e.preventDefault();
+		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
+		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
+});
+
+$(document).on("click","#top-bar-auth .close a", function(e) {
+		e.preventDefault();
+		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
+		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
+});
+
+function showganizer(){
+	$(".flash-bar").delay(3000).fadeOut();
+}

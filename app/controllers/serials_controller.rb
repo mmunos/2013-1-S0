@@ -1,5 +1,5 @@
 class SerialsController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove]
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove]
 

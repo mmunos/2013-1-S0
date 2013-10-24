@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove]
 
   # GET /movies
   # GET /movies.json
@@ -62,6 +62,29 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def add
+  if current_user
+    if current_user.movies.include?(@movie)
+      redirect_to @movie, notice: "You already follow this movie"
+    else
+      current_user.movies << @movie
+      redirect_to @movie, notice: "#{@movie.name} was successfully added!"
+    end
+  end
+end
+
+def remove
+  if current_user
+    if current_user.movies.include?(@movie)
+      current_user.movies.delete(@movie)
+      redirect_to @movie, notice: "#{@movie.name} was successfully removed!"
+    else
+      redirect_to @movie, notice: "You can't delete #{@movie.name}, D'OH!!!"
+    end
+  end
+end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

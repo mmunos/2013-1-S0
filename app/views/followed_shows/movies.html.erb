@@ -1,1 +1,18 @@
+#encoding: utf-8
 <h1>My Movies</h1>
+
+<div class="index_shows_panel">
+
+    <% @movies.each do |movie| %>
+
+
+        <div class="index_shows_item">
+           <img src="http://placehold.it/170x273&text=<%= movie.name %>">
+            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+
+        </div>
+
+      
+    <% end %>
+
+</div>

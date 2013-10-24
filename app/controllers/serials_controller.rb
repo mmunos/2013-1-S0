@@ -66,7 +66,7 @@ class SerialsController < ApplicationController
   def add
     if current_user
       if current_user.serials.include?(@serial)
-        redirect_to @serial, notice: "You already follow this serial"
+        redirect_to @serial, notice: "You already follow this series"
       else
         current_user.serials << @serial
         redirect_to @serial, notice: "#{@serial.name} was successfully added!"

@@ -1,5 +1,43 @@
 <h1>My Shows</h1>
 
-<h2>My Movies</h2>
+<div class="my_movies_stand">
+	<%= link_to "View all my movies", my_movies_path(), class: "all-series-link" %>
+	<h2>My Movies</h2>
+	<div class="index_shows_panel">
 
-<h2>My Series</h2>
+	    <% @movies.limit(10).each do |movie| %>
+
+
+	        <div class="index_shows_item">
+	           <img src="http://placehold.it/170x273&text=<%= movie.name %>">
+	            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+
+	        </div>
+
+	      
+	    <% end %>
+
+	</div>
+</div>
+
+<br>
+
+<div class="my_series_stand">
+	<%= link_to "View all my series", my_serials_path(), class: "all-series-link" %>
+	<h2>My Series</h2>
+	<div class="index_shows_panel">
+
+	    <% @serials.limit(5).each do |serial| %>
+
+
+	        <div class="index_shows_item">
+	           <img src="http://placehold.it/170x273&text=<%= serial.name %>">
+	            <p><%= link_to "#{serial.name}", movie_path(serial) %></p>
+
+	        </div>
+
+	      
+	    <% end %>
+
+	</div>
+</div>

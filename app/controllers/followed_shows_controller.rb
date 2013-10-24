@@ -1,3 +1,4 @@
+#encoding: utf-8
 class FollowedShowsController < ApplicationController
   	skip_before_filter :user_admin, only: [:shows, :serials, :movies]
 	

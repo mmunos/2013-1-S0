@@ -1,37 +1,26 @@
-<h1>Listing movies</h1>
+<% content_for :admin_bar_panel do %>
+  <ul>
+    <li><%= link_to 'New Movie', new_movie_path %></li>
+  </ul>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Director</th>
-      <th>Genre</th>
-      <th>Duration</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<h1>Movies</h1>
 
-  <tbody>
+
+<div class="index_shows_panel">
+
     <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.name %></td>
-        <td><%= movie.date %></td>
-        <td><%= movie.director %></td>
-        <td><%= movie.genre %></td>
-        <td><%= movie.duration %></td>
-        <td><%= movie.description %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+
+        <div class="index_shows_item">
+           <img src="http://placehold.it/170x273&text=<%= movie.name %>">
+            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+
+        </div>
+
+      
     <% end %>
-  </tbody>
-</table>
 
-<br>
+</div>
 
-<%= link_to 'New Movie', new_movie_path %>
+

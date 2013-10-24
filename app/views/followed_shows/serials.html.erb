@@ -1,1 +1,17 @@
 <h1>My Series</h1>
+
+<div class="index_shows_panel">
+
+    <% @serials.each do |serial| %>
+
+
+        <div class="index_shows_item">
+           <img src="http://placehold.it/170x273&text=<%= serial.name %>">
+            <p><%= link_to "#{serial.name}", movie_path(serial) %></p>
+
+        </div>
+
+      
+    <% end %>
+
+</div>

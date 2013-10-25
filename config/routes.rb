@@ -1,4 +1,5 @@
 S0::Application.routes.draw do
+  resources :watchlists
 
   resources :movies
 
@@ -9,11 +10,15 @@ S0::Application.routes.draw do
 
   get "403", to: "pages#no_access", as: :access_denied
 
-  resources :users
+  resources :users do
+    resource :watchlists, path: "/watchlist"
+  end
+
   get "/me", to: "users#me", as: :my_profile
   get "/me/shows", to:"followed_shows#shows", as: :my_shows
   get "/me/series", to:"followed_shows#serials", as: :my_serials
   get "/me/movies", to:"followed_shows#movies", as: :my_movies
+  get "/me/watchlist", to:"watchlists#my_watchlist", as: :my_watchlist
 
   resources :sessions, only: [:create, :new, :destroy]
 

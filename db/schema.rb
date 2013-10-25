@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022190049) do
+ActiveRecord::Schema.define(version: 20131025180808) do
 
   create_table "episodes", force: true do |t|
     t.string   "name"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20131022190049) do
     t.text    "type"
   end
 
+  create_table "show_watchlists", force: true do |t|
+    t.integer  "show_id"
+    t.integer  "watchlist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shows", force: true do |t|
     t.string   "name"
     t.datetime "date"
@@ -67,5 +74,13 @@ ActiveRecord::Schema.define(version: 20131022190049) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "watchlists", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watchlists", ["user_id"], name: "index_watchlists_on_user_id"
 
 end

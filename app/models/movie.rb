@@ -1,4 +1,6 @@
 class Movie < Show
+	has_many :movie_users
+
 
 	def to_param
         [id,name.parameterize].join("-")

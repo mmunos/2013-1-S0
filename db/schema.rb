@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025180808) do
+ActiveRecord::Schema.define(version: 20131026220552) do
+
+  create_table "episode_users", force: true do |t|
+    t.integer  "episode_id"
+    t.integer  "watched_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "episodes", force: true do |t|
     t.string   "name"
@@ -27,6 +34,18 @@ ActiveRecord::Schema.define(version: 20131025180808) do
   end
 
   add_index "episodes", ["season_id"], name: "index_episodes_on_season_id"
+
+  create_table "movie_user", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movie_users", force: true do |t|
+    t.integer  "show_id"
+    t.integer  "watched_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "seasons", force: true do |t|
     t.text     "description"
@@ -74,6 +93,14 @@ ActiveRecord::Schema.define(version: 20131025180808) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "watcheds", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watcheds", ["user_id"], name: "index_watcheds_on_user_id"
 
   create_table "watchlists", force: true do |t|
     t.integer  "user_id"

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
     has_many :movies, through: :show_users
 
     has_one :watchlist, dependent: :destroy
+    has_one :watched, dependent: :destroy
+    
+    before_create :build_default_watched
     before_create :build_default_watchlist
     # has_many :serials_users
     # has_many :serials, through: :serials_users
@@ -34,5 +37,9 @@ class User < ActiveRecord::Base
 
     def build_default_watchlist
         build_watchlist
+    end
+
+        def build_default_watched
+        build_watched
     end
 end

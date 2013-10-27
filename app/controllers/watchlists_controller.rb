@@ -9,6 +9,7 @@ class WatchlistsController < ApplicationController
 
   def my_watchlist
     if current_user
+      @user = current_user
       @watchlist = current_user.watchlist
       render action: 'show'
     end

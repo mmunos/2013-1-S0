@@ -1,7 +1,7 @@
 class SerialsController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index, :add, :remove]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove]
+  before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch]
 
   # GET /serials
   # GET /serials.json
@@ -84,6 +84,29 @@ class SerialsController < ApplicationController
       end
     end
   end
+
+    def watch
+    if current_user
+      if current_user.watchlist.serials.include?(@serial)
+        redirect_to @serial, notice: "You already added this series to your watchlist"
+      else
+        current_user.watchlist.serials << @serial
+        redirect_to @serial, notice: "#{@serial.name} was successfully added to watchlist!"
+      end
+    end
+  end
+
+    def no_watch
+    if current_user
+      if current_user.watchlist.serials.include?(@serial)
+        current_user.watchlist.serials.delete(@serial)
+        redirect_to @serial, notice: "#{@serial.name} was successfully removed from watchlist!"
+      else
+        redirect_to @serial, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

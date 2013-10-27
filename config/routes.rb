@@ -50,6 +50,10 @@ S0::Application.routes.draw do
   get "/series/:id/remove", to:"serials#remove", as: :remove_serial
   get "/movies/:id/add", to:"movies#add", as: :add_movie
   get "/movies/:id/remove", to:"movies#remove", as: :remove_movie
+  get "/series/:id/watch", to:"serials#watch", as: :watch_serial
+  get "/series/:id/noWatch", to:"serials#no_watch", as: :no_watch_serial
+  get "/movies/:id/watch", to:"movies#watch", as: :watch_movie
+  get "/movies/:id/noWatch", to:"movies#no_watch", as: :no_watch_movie
 
 
   # The priority is based upon order of creation: first created -> highest priority.

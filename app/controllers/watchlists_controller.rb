@@ -1,5 +1,5 @@
 class WatchlistsController < ApplicationController
-  before_action :set_watchlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_watchlist, only: [:show, :edit, :update, :destroy, :remove]
 
   # GET /watchlists
   # GET /watchlists.json
@@ -15,6 +15,17 @@ class WatchlistsController < ApplicationController
     end
   end
 
+
+  def remove
+    if current_user
+      if @watchlist.serials.include?(@serial)
+        @watchlist.serials.delete(@serial)
+        redirect_to @serial, notice: "#{@serial.name} was successfully removed from watchlist!"
+      else
+        redirect_to @serial, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
+      end
+    end
+  end
 
   # GET /watchlists/1
   # GET /watchlists/1.json

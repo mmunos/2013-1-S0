@@ -39,6 +39,10 @@
     <%= f.label :duration %><br>
     <%= f.number_field :duration %>
   </div>
+  <div class="field">
+    <%= f.label :tags_list, "Tag list (separated by comma)" %><br>
+    <%= f.text_field :tags_list %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

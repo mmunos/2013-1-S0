@@ -44,6 +44,10 @@ class EpisodesController < ApplicationController
   # PATCH/PUT /episodes/1
   # PATCH/PUT /episodes/1.json
   def update
+    param_tags = params[:episode][:tags_list]
+    params[:episode].delete(:tags_list)
+    @episode.update_tags(param_tags,@episode)
+        
     respond_to do |format|
       if @episode.update(episode_params)
         format.html { redirect_to [@serial,@season,@episode], notice: 'Episode was successfully updated.' }
@@ -78,6 +82,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.require(:episode).permit(:name, :description, :date, :number, :write, :director, :duration, :season_id)
+      params.require(:episode).permit(:name, :description, :date, :number, :write, :director, :duration, :season_id, :tag_list)
     end
 end

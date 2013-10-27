@@ -23,6 +23,15 @@
 
   </div>
 
+  <div class="show-detail-module show-tags">
+    <h3>Tags</h3>
+    <%= if @episode.tags.any? 
+        tag_ul_list(@episode.tags_list) 
+      else 
+        content_tag(:p, "This episode hasn't been tagged")
+        end%>
+  </div>
+
 </div>
 
 <div class="show-content">

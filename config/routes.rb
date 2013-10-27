@@ -1,14 +1,26 @@
 S0::Application.routes.draw do
   resources :watchlists
 
+  # Movies
   resources :movies
 
+  # Series
+  resources :serials, path: "/series" do
+    resources :seasons do
+      resources :episodes
+    end
+  end
+  
+  # Session Management
+  resources :sessions, only: [:create, :new, :destroy]
   get "/login", to: "sessions#create", as: :log_in
   get "/logout", to: "sessions#destroy", as: :log_out
   get "/signup", to: "users#new", as: :sign_up
   match "/login", to: "sessions#create", via: :post
 
+  # Pages
   get "403", to: "pages#no_access", as: :access_denied
+
 
   resources :users do
     resource :watchlists, path: "/watchlist"    
@@ -18,6 +30,9 @@ S0::Application.routes.draw do
     resource :watcheds, path: "/watched"
   end
 
+
+  # User
+  # User shorthands
   get "/me", to: "users#me", as: :my_profile
   get "/me/shows", to:"followed_shows#shows", as: :my_shows
   get "/me/series", to:"followed_shows#serials", as: :my_serials
@@ -25,14 +40,12 @@ S0::Application.routes.draw do
   get "/me/watchlist", to:"watchlists#my_watchlist", as: :my_watchlist
    get "/me/watched", to:"watched#my_watched", as: :my_watched
 
-  resources :sessions, only: [:create, :new, :destroy]
-
-  resources :serials, path: "/series" do
-    resources :seasons do
-      resources :episodes
-    end
+  # User Watchlist
+  resources :users do
+    resource :watchlists, path: "/watchlist"
   end
 
+  # User show management
   get "/series/:id/add", to:"serials#add", as: :add_serial
   get "/series/:id/remove", to:"serials#remove", as: :remove_serial
   get "/movies/:id/add", to:"movies#add", as: :add_movie

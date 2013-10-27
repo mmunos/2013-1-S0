@@ -50,6 +50,10 @@ S0::Application.routes.draw do
   get "/series/:id/remove", to:"serials#remove", as: :remove_serial
   get "/movies/:id/add", to:"movies#add", as: :add_movie
   get "/movies/:id/remove", to:"movies#remove", as: :remove_movie
+  get "/series/:id/watch", to:"serials#watch", as: :watch_serial
+  get "/series/:id/noWatch", to:"serials#no_watch", as: :no_watch_serial
+  get "/movies/:id/watch", to:"movies#watch", as: :watch_movie
+  get "/movies/:id/noWatch", to:"movies#no_watch", as: :no_watch_movie
 
   # User tags on episodes
   match "/series/:serial_id/seasons/:season_id/episodes/:id/add_user_tags", to: "episodes#add_user_tags", via: :post

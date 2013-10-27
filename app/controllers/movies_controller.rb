@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index, :add, :remove]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch]
 
   # GET /movies
   # GET /movies.json
@@ -84,6 +84,28 @@ def remove
     end
   end
 end
+
+  def watch
+    if current_user
+      if current_user.watchlist.movies.include?(@movie)
+        redirect_to @movie, notice: "You already added this series to your watchlist"
+      else
+        current_user.watchlist.movies << @movie
+        redirect_to @movie, notice: "#{@movie.name} was successfully added to watchlist!"
+      end
+    end
+  end
+
+    def no_watch
+    if current_user
+      if current_user.watchlist.movies.include?(@movie)
+        current_user.watchlist.movies.delete(@movie)
+        redirect_to @movie, notice: "#{@movie.name} was successfully removed from watchlist!"
+      else
+        redirect_to @movie, notice: "You can't delete #{@movie.name} from watchlist, D'OH!!!"
+      end
+    end
+    end
 
 
   private

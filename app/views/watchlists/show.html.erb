@@ -12,7 +12,7 @@
 
 
 		        <div class="index_shows_item">
-		           <%if Serial.find_by_id(show.id) %>
+		           <%if @user.watchlist.serials.include?(show) %>
 			           <%=link_to image_tag("http://placehold.it/170x273&text=#{show.name}"), serial_path(show) %>
 			            <p><%= link_to "#{show.name}", serial_path(show) %></p>
 

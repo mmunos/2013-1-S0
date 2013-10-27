@@ -1,0 +1,8 @@
+<%= form_tag serial_season_episode_path(@serial,@season,@episode)+"/add_user_tags" do %>
+  <div class="field">
+    <%= text_field_tag :user_tags_list, "", placehoder: "Separate by comma", required: "" %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

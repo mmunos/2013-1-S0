@@ -1,8 +1,8 @@
 class EpisodesController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index]
+  skip_before_filter :user_admin, only: [:show, :index, :add_user_tags, :remove_user_tag]
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_season_serial
-  before_action :set_episode, only: [:show, :edit, :update, :destroy]
+  before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag]
 
   # GET /episodes
   # GET /episodes.json
@@ -66,6 +66,24 @@ class EpisodesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to serial_season_episodes_url }
       format.json { head :no_content }
+    end
+  end
+
+  def add_user_tags
+    if current_user
+      @episode.update_user_tags(params[:user_tags_list], @episode, current_user)
+      redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Your tags were added!"
+    else 
+      redirect_to access_denied_path
+    end
+  end
+
+  def remove_user_tag
+    if current_user
+      @episode.remove_user_tag(params[:tag_id],@episode,current_user)
+      redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Your tag has been removed"
+    else 
+      redirect_to access_denied_path
     end
   end
 

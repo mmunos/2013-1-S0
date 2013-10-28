@@ -31,27 +31,6 @@ class WatchedController < ApplicationController
 
     end
 
-    def get_season(i)
-    	s=[]
-    	season = Season.find(params[i.id])
-    	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|
-    		if e.season_id == season.id
-    			s<<e
-    		end
-    	end
-    	return s
-    end
-
-        def get_series(i)
-    	s=[]
-    	series = Serial.find(params[:serial_id])
-    	@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
-    		if e.serial_id == serial.id
-    			s<<e
-    		end
-    	end
-    	return s
-    end
 
     #full seasons
     def set_seasons

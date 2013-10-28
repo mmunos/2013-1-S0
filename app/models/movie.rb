@@ -1,6 +1,8 @@
 class Movie < Show
 	has_many :movie_users
 
+ 	has_many :reviews, as: :reviewable
+
 
 	def to_param
         [id,name.parameterize].join("-")

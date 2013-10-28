@@ -1,7 +1,11 @@
 class MoviesController < ApplicationController
+
   skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :no_watch, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch, :seen, :unseen]
+  before_action :set_parent, only:[:show, :index]
+  before_action :set_reviews, only:[:show]
+
 
   # GET /movies
   # GET /movies.json
@@ -134,6 +138,14 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
+    end
+
+    def set_reviews
+      @reviews = @movie.reviews
+    end
+
+    def set_parent
+      @parent = find_parent_models(@movie)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

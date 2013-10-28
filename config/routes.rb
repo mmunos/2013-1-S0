@@ -1,13 +1,20 @@
 S0::Application.routes.draw do
+
   resources :watchlists
 
   # Movies
-  resources :movies
+  resources :movies do 
+    resources :reviews
+  end
 
-  # Series
+  # Series, Season and Episodes
   resources :serials, path: "/series" do
+    resources :reviews
     resources :seasons do
-      resources :episodes
+      resources :reviews
+      resources :episodes do
+        resources :reviews
+      end
     end
   end
   
@@ -21,16 +28,6 @@ S0::Application.routes.draw do
   # Pages
   get "403", to: "pages#no_access", as: :access_denied
 
-
-  resources :users do
-    resource :watchlists, path: "/watchlist"    
-  end
-
-  resources :users do
-    resource :watcheds, path: "/watched"
-  end
-
-
   # User
   # User shorthands
   get "/me", to: "users#me", as: :my_profile
@@ -43,6 +40,9 @@ S0::Application.routes.draw do
   # User Watchlist
   resources :users do
     resource :watchlists, path: "/watchlist"
+  end
+  resources :users do
+    resource :watcheds, path: "/watched"
   end
 
   # User show management

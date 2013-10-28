@@ -2,6 +2,8 @@ class SerialsController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index, :add, :remove,:watch, :no_watch]
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch]
+  before_action :set_parent, only:[:show, :index]
+  before_action :set_reviews, only:[:show]
 
   # GET /serials
   # GET /serials.json
@@ -113,6 +115,15 @@ class SerialsController < ApplicationController
     def set_serial
       @serial = Serial.find(params[:id])
     end
+
+    def set_reviews
+      @reviews = @serial.reviews
+    end
+
+    def set_parent
+      @parent = find_parent_models(@serial)[0..-1]
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def serial_params

@@ -51,6 +51,7 @@ module ApplicationHelper
 		end
 	end
 
+
 		def seen_unseen_episode_link(episode)
 			if current_user && current_user.watched.episodes.include?(episode)
 				link_to "Mark as unseen", unseen_episode_path, class: "no_watch-episode-button"
@@ -72,5 +73,17 @@ module ApplicationHelper
 
 
 
+
+
+	def find_parent_models(current_model = nil)
+	    parents = Array.new
+	    params.each do |name, value|
+	      if name =~ /(.+)_id$/
+	        parents.push $1.classify.constantize.find(value)
+	      end
+	    end
+	    parents.push current_model
+	    parents
+	end
 
 end

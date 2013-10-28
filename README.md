@@ -12,10 +12,13 @@ Showganizer es un proyecto en forma de aplicación web para manejar y mantener o
 * Seguir un item
 * Watchlist
 * Panel de items que se siguen
-* 
+* Envío de correo al registrarse
 
 
 
 ### Funcionalidades incompletas
 * Marcar como visto
-* 
+* Readme
+* Buscador (barra y links en etiquetas)
+* Reviews (falta poco)
+* Imágenes

@@ -1,1 +1,47 @@
-hola
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Seen Shows</strong>
+</p>
+
+
+<div class="my_movies_stand">
+		<div class="index_shows_panel">
+		<% if @watched.movies.any? %>
+		    <% @watched.movies.reverse.each do |show| %>
+
+
+		        <div class="index_shows_item">
+
+			            <%=link_to image_tag("http://placehold.it/170x273&text=#{show.name}"), movie_path(show) %>
+			            <p><%= link_to "#{show.name}", movie_path(show) %></p>
+
+		        </div>
+
+		      
+		    <% end %>
+		<% else %>
+	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+	  	<% end %>
+	</div>
+</div>
+
+<div class="my_series_stand">
+		<div class="index_shows_panel">
+		<% if @watched.episodes.any? %>
+		    <% @series.reverse.each do |show| %>
+
+
+		        <div class="index_shows_item">
+			           <%=link_to image_tag("http://placehold.it/170x273&text=#{show.name}"), serial_path(show) %>
+			            <p><%= link_to "#{show.name}", serial_path(show) %></p>
+
+		        </div>
+
+		      
+		    <% end %>
+		<% else %>
+	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+	  	<% end %>
+	</div>
+</div>

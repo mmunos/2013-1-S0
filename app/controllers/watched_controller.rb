@@ -31,66 +31,98 @@ class WatchedController < ApplicationController
 
     end
 
+    def get_season(i)
+    	s=[]
+    	season = Season.find(params[i.id])
+    	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|
+    		if e.season_id == season.id
+    			s<<e
+    		end
+    	end
+    	return s
+    end
+
+        def get_series(i)
+    	s=[]
+    	series = Serial.find(params[:serial_id])
+    	@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
+    		if e.serial_id == serial.id
+    			s<<e
+    		end
+    	end
+    	return s
+    end
+
     #full seasons
     def set_seasons
     	@seasons = []
     	@seasons_unf=[]
-    	actual_id = -1
-    	previous_id= -1
-    	e_numero=1
-   	 	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|
-   	 		actual_id = e.season_id
-   			e_numero = e_numero + 1
-   	 		if(actual_id!=previous_id)
-   	 			e_numero = 1
-   	 			if Season.find_by_id(e.season_id).episodes.size <= e_numero
-   	 				@seasons << Season.find_by_id(e.season_id)
+    	season_all = []
 
-   	 			else
-   	 				@seasons_unf << Season.find_by_id(e.season_id)
-   	 			end
-   	 			
+   	 	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|  	 		
+   	 		unless season_all.include?(Season.find_by_id(e.season_id))
+   	 			season_all<<Season.find_by_id(e.season_id)
+   	 		end	
    	 		
-   	 		
-   	 		
-   	 		end
-   	 		previous_id = actual_id
    	 	end
+
+   	 	season_all.each do |s|
+   	 		season=[]
+    	se = Season.find_by_id(s.id)
+    	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|
+    		if e.season_id == se.id
+    			season<<e
+    		end
+    	end
+
+	 		if s.episodes.size <= season.size
+	 			@seasons << s
+
+	 		else
+	 			@seasons_unf << s
+	 		end
+
+   	 	end
+
+
 
     end
 
     #full series
     def set_series
  		@series = []
-    	actual_id = -1
-    	previous_id= -1
-    	e_numero=1
-   	 	@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
-   	 		actual_id = e.serial_id
-   	 		e_numero=e_numero + 1
+ 		series_all=[]
    	 		
-   	 		if(e.serial_id!=previous_id )
-   	 			e_numero = 1
-   	 			if (Serial.find_by_id(e.serial_id).seasons.size <= e_numero)
-   	 				@series << Serial.find_by_id(e.serial_id)
+   	 	@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|  	 		
+   	 		unless series_all.include?(Serial.find_by_id(e.serial_id))
+   	 			series_all<<Serial.find_by_id(e.serial_id)
+   	 		end	
+   	 		
+   	 	end
+
+   		series_all.each do |s|
+   	 		series=[]
+    		se = Serial.find_by_id(s.id)
+    		@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
+    			if e.serial_id == se.id
+    				series<<e
+    			end
+    		end
+   	 			if (s.seasons.size <= series.size)
+   	 				@series << Serial.find_by_id(s.id)
    	 				
    	 			end
    	 		
-   	 		
-   	 		
-   	 		end
-   	 		previous_id = actual_id
    	 	end
+   	 	
 
     end
 
         #full series
     def set_watching
  		@watching = []
-    	actual_id = -1
-    	previous_id= -1
    	 	@seasons_unf.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
-   	 		actual_id = e.serial_id
+ 
    	 		
    	 		unless @watching.include?(Serial.find_by_id(e.serial_id))
 					@watching << Serial.find_by_id(e.serial_id)   	 				

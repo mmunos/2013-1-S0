@@ -1,7 +1,7 @@
 class SerialsController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :add, :remove,:watch, :no_watch]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove,:watch, :unwatch]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch]
+  before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
 
@@ -98,7 +98,7 @@ class SerialsController < ApplicationController
     end
   end
 
-    def no_watch
+    def unwatch
     if current_user
       if current_user.watchlist.serials.include?(@serial)
         current_user.watchlist.serials.delete(@serial)

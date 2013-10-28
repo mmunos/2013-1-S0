@@ -35,16 +35,16 @@ module ApplicationHelper
 	end
 
 
-	def watch_noWatch_link(show)
+	def watch_unwatch_link(show)
 		if show.is_a?(Serial)
 			if current_user && current_user.watchlist.serials.include?(show)
-				link_to "Remove from My watchlist", no_watch_serial_path, class: "no_watch-show-button"
+				link_to "Remove from My watchlist", unwatch_serial_path, class: "unwatch-show-button"
 			else
 				link_to "Add to My Watchlist", watch_serial_path, class: "watch-show-button"
 			end
 		elsif show.is_a?(Movie)
 			if current_user && current_user.watchlist.movies.include?(show)
-				link_to "Remove from My Watchlist", no_watch_movie_path, class: "no_watch-show-button"
+				link_to "Remove from My Watchlist", unwatch_movie_path, class: "unwatch-show-button"
 			else
 				link_to "Add to My Watchlist", watch_movie_path, class: "watch-show-button"
 			end
@@ -54,7 +54,7 @@ module ApplicationHelper
 
 		def seen_unseen_episode_link(episode)
 			if current_user && current_user.watched.episodes.include?(episode)
-				link_to "Mark as unseen", unseen_episode_path, class: "no_watch-episode-button"
+				link_to "Mark as unseen", unseen_episode_path, class: "unwatch-episode-button"
 			else
 				link_to "Mark as seen", seen_episode_path, class: "watch-episode-button"
 			end
@@ -63,7 +63,7 @@ module ApplicationHelper
 
 		def seen_unseen_movie_link(episode)
 			if current_user && current_user.watched.movies.include?(episode)
-				link_to "Mark as unseen", unseen_movie_path, class: "no_watch-episode-button"
+				link_to "Mark as unseen", unseen_movie_path, class: "unwatch-episode-button"
 			else
 				link_to "Mark as seen", seen_movie_path, class: "watch-episode-button"
 			end

@@ -1,8 +1,8 @@
 class MoviesController < ApplicationController
 
-  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :no_watch, :seen, :unseen]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :unwatch, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch, :seen, :unseen]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch, :seen, :unseen]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
 
@@ -100,7 +100,7 @@ end
     end
   end
 
-    def no_watch
+    def unwatch
     if current_user
       if current_user.watchlist.movies.include?(@movie)
         current_user.watchlist.movies.delete(@movie)

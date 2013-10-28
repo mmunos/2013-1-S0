@@ -51,6 +51,25 @@ module ApplicationHelper
 		end
 	end
 
+		def seen_unseen_episode_link(episode)
+			if current_user && current_user.watched.episodes.include?(episode)
+				link_to "Mark as unseen", unseen_episode_path, class: "no_watch-episode-button"
+			else
+				link_to "Mark as seen", seen_episode_path, class: "watch-episode-button"
+			end
+
+		end
+
+		def seen_unseen_movie_link(episode)
+			if current_user && current_user.watched.movies.include?(episode)
+				link_to "Mark as unseen", unseen_movie_path, class: "no_watch-episode-button"
+			else
+				link_to "Mark as seen", seen_movie_path, class: "watch-episode-button"
+			end
+
+		end
+	
+
 
 
 

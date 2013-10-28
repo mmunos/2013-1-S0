@@ -7,6 +7,9 @@
 
 <div class="show-sidebar">
   <div class="show-action-menu">
+    <ul>
+          <li><%= seen_unseen_episode_link(@episode) %></li>
+      </ul>
   </div>
 
   <img src="http://placehold.it/216x319&text=<%= @serial.name+ '- Season: '+@season.number.to_s+'- Episode: '+@episode.number.to_s %>" />

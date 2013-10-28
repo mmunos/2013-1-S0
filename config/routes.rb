@@ -38,7 +38,7 @@ S0::Application.routes.draw do
   get "/me/series", to:"followed_shows#serials", as: :my_serials
   get "/me/movies", to:"followed_shows#movies", as: :my_movies
   get "/me/watchlist", to:"watchlists#my_watchlist", as: :my_watchlist
-  get "/me/watched", to:"watched#my_watched", as: :my_watched
+  get "/me/seen", to:"watched#my_watched", as: :my_watched
 
   # User Watchlist
   resources :users do
@@ -55,6 +55,14 @@ S0::Application.routes.draw do
   get "/movies/:id/watch", to:"movies#watch", as: :watch_movie
   get "/movies/:id/noWatch", to:"movies#no_watch", as: :no_watch_movie
   get "/watchlist/:id/remove", to:"watchlist#remove", as: :remove_from_watchlist
+  get "/movies/:id/seen", to:"movies#seen", as: :seen_movie
+  get "/movies/:id/unseen", to:"movies#unseen", as: :unseen_movie
+  get "/series/:serial_id/seasons/:season_id/episodes/:id/seen", to:"episodes#seen", as: :seen_episode
+  get "/series/:serial_id/seasons/:season_id/episodes/:id/unseen", to:"episodes#unseen", as: :unseen_episode
+
+  get "/watched/:id/watching", to:"watched#my_watched", as: :my_watching_series
+  get "/watched/:id/seen/series", to:"watched#my_watched", as: :my_seen_series
+  get "/watched/:id/seen/movies", to:"watched#my_watched", as: :my_seen_movies
 
   # User tags on episodes
   match "/series/:serial_id/seasons/:season_id/episodes/:id/add_user_tags", to: "episodes#add_user_tags", via: :post

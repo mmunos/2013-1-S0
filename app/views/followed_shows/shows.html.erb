@@ -1,28 +1,5 @@
 <h1>My Latest Shows Added</h1>
 
-<div class="my_movies_stand">
-	<%= link_to "View all my movies", my_movies_path(), class: "all-series-link" %>
-	<h2>My Movies</h2>
-		<div class="index_shows_panel">
-		<% if @user.movies.any? %>
-		    <% @movies.last(5).reverse.each do |movie| %>
-
-
-		        <div class="index_shows_item">
-		           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
-		            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
-
-		        </div>
-
-		      
-		    <% end %>
-		<% else %>
-	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
-	  	<% end %>
-	</div>
-</div>
-
-<br>
 
 <div class="my_series_stand">
 	<%= link_to "View all my series", my_serials_path(), class: "all-series-link" %>
@@ -47,3 +24,28 @@
 
 	</div>
 </div>
+
+<br>
+
+<div class="my_movies_stand">
+	<%= link_to "View all my movies", my_movies_path(), class: "all-series-link" %>
+	<h2>My Movies</h2>
+		<div class="index_shows_panel">
+		<% if @user.movies.any? %>
+		    <% @movies.last(5).reverse.each do |movie| %>
+
+
+		        <div class="index_shows_item">
+		           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
+		            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+
+		        </div>
+
+		      
+		    <% end %>
+		<% else %>
+	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+	  	<% end %>
+	</div>
+</div>
+

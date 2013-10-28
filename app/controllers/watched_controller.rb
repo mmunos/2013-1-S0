@@ -1,62 +1,23 @@
 class WatchedController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :my_watched]
-  before_action :set_watched, only: [:show, :edit, :update, :destroy, :my_watched]
-  before_action :set_seasons, only: [:my_watched]
-  before_action :set_series, only: [:my_watched]
+  skip_before_filter :user_admin, only: [ :my_watched]
+  before_action :set_watched
+  before_action :set_seasons
+  before_action :set_series
+  before_action :set_watching
 
 
-
-  def index
-    @watchlists = Watchlist.all
-  end
+ 
 
   def my_watched
     if current_user
+    	@user = current_user
       @watched = current_user.watched
       render action: 'show'
     end
   end
 
 
-  # GET /watchlists/1
-  # GET /watchlists/1.json
-  def show
-  end
-
-
-  # GET /watchlists/new
-  def new
-    @watchlist = Watchlist.new
-  end
-
-  # GET /watchlists/1/edit
-  def edit
-  end
-
-
-
-  def create
-    @watched = Watchlist.new(watched_params)
-    respond_to do |format|
-      if @watched.save
-        format.html { redirect_to @watched, notice: 'watchedlist was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @watched }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @watched.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-
-
-  def destroy
-    @watched.destroy
-    respond_to do |format|
-      format.html { redirect_to watched_url }
-      format.json { head :no_content }
-    end
-  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,23 +34,27 @@ class WatchedController < ApplicationController
     #full seasons
     def set_seasons
     	@seasons = []
-    	actual_id = 0
-    	previous_id= 0
-    	actual_e_season=0
-    	e_numero=0
+    	@seasons_unf=[]
+    	actual_id = -1
+    	previous_id= -1
+    	e_numero=1
    	 	@watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.each do |e|
    	 		actual_id = e.season_id
-   	 		@seasons << Season.find_by_id(e.season_id)
-   	 		if(actual_id!=previous_id and actual_id!=0)
-   	 			previous_id = actual_id
+   			e_numero = e_numero + 1
+   	 		if(actual_id!=previous_id)
+   	 			e_numero = 1
    	 			if Season.find_by_id(e.season_id).episodes.size <= e_numero
    	 				@seasons << Season.find_by_id(e.season_id)
+
+   	 			else
+   	 				@seasons_unf << Season.find_by_id(e.season_id)
    	 			end
-   	 			e_numero = 0
+   	 			
    	 		
-   	 		else
-   	 		e_numero = e_numero+1
+   	 		
+   	 		
    	 		end
+   	 		previous_id = actual_id
    	 	end
 
     end
@@ -99,20 +64,37 @@ class WatchedController < ApplicationController
  		@series = []
     	actual_id = -1
     	previous_id= -1
-    	actual_e_series=0
-    	e_numero=0
+    	e_numero=1
    	 	@seasons.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
    	 		actual_id = e.serial_id
+   	 		e_numero=e_numero + 1
    	 		
-   	 		if(e.serial_id!=previous_id)
-   	 			previous_id = actual_id
+   	 		if(e.serial_id!=previous_id )
+   	 			e_numero = 1
    	 			if (Serial.find_by_id(e.serial_id).seasons.size <= e_numero)
    	 				@series << Serial.find_by_id(e.serial_id)
    	 				
    	 			end
-   	 		e_numero = 0
-   	 		else
-   	 		e_numero = e_numero+1
+   	 		
+   	 		
+   	 		
+   	 		end
+   	 		previous_id = actual_id
+   	 	end
+
+    end
+
+        #full series
+    def set_watching
+ 		@watching = []
+    	actual_id = -1
+    	previous_id= -1
+   	 	@seasons_unf.sort {|a,b| a.serial_id <=> b.serial_id}.each do |e|
+   	 		actual_id = e.serial_id
+   	 		
+   	 		unless @watching.include?(Serial.find_by_id(e.serial_id))
+					@watching << Serial.find_by_id(e.serial_id)   	 				
+
    	 		end
    	 	end
 

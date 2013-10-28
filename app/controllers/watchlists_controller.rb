@@ -1,5 +1,7 @@
 class WatchlistsController < ApplicationController
+  skip_before_filter :user_admin, only: [:show, :index, :my_watchlist, :remove]
   before_action :set_watchlist, only: [:show, :edit, :update, :destroy, :remove]
+  before_action :set_show, only: [:remove]
 
   # GET /watchlists
   # GET /watchlists.json
@@ -18,11 +20,11 @@ class WatchlistsController < ApplicationController
 
   def remove
     if current_user
-      if @watchlist.serials.include?(@serial)
-        @watchlist.serials.delete(@serial)
-        redirect_to @serial, notice: "#{@serial.name} was successfully removed from watchlist!"
+      if @watchlist.shows.include?(@show)
+        @watchlist.shows.delete(@show)
+        redirect_to @watchlist, notice: "#{@serial.name} was successfully removed from watchlist!"
       else
-        redirect_to @serial, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
+        redirect_to @watchlist, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
       end
     end
   end
@@ -92,6 +94,10 @@ class WatchlistsController < ApplicationController
         @watchlist = Watchlist.find(params[:id])
       end
 
+    end
+
+    def set_show
+      @show = Show.find(params[:show_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -56,6 +56,9 @@ S0::Application.routes.draw do
   get "/movies/:id/noWatch", to:"movies#no_watch", as: :no_watch_movie
   get "/watchlist/:id/remove", to:"watchlist#remove", as: :remove_from_watchlist
 
+  # User tags on episodes
+  match "/series/:serial_id/seasons/:season_id/episodes/:id/add_user_tags", to: "episodes#add_user_tags", via: :post
+  get "/series/:serial_id/seasons/:season_id/episodes/:id/remove_user_tag/:tag_id", to: "episodes#remove_user_tag"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

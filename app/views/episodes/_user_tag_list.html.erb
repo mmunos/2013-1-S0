@@ -1,0 +1,5 @@
+<ul>
+<% @episode.user_tags_list(current_user).split(",").each do |tag| %>
+	<li><%= tag.strip %> <span><%= link_to "remove", serial_season_episode_path(@serial,@season,@episode)+"/remove_user_tag/"+tag.strip%></span></li>
+<%end%>
+</ul>

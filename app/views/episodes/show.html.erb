@@ -23,6 +23,20 @@
 
   </div>
 
+  <% if current_user %>
+  <div class="show-detail-module show-tags">
+    <h3>Your Tags</h3>
+
+    <%= render 'tag_form' %>
+
+    <% if @episode.user_user_tags(current_user).any? %>
+        <%= render 'user_tag_list' %>
+    <% else %>
+        <p> This episode hasn't been tagged </p>
+    <% end %>
+  </div>
+  <% end %>
+
   <div class="show-detail-module show-tags">
     <h3>Tags</h3>
     <%= if @episode.tags.any? 

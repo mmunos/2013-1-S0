@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131027190742) do
+ActiveRecord::Schema.define(version: 20131028003052) do
 
   create_table "episode_taggings", force: true do |t|
     t.integer  "episode_id"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20131027190742) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "reviews", force: true do |t|
+    t.integer  "user_id"
+    t.float    "rating"
+    t.text     "content"
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "seasons", force: true do |t|
     t.text     "description"

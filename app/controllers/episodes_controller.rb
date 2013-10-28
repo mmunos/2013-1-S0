@@ -3,6 +3,8 @@ class EpisodesController < ApplicationController
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_season_serial
   before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag]
+  before_action :set_parent, only:[:show, :index]
+  before_action :set_reviews, only:[:show]
 
   # GET /episodes
   # GET /episodes.json
@@ -80,8 +82,12 @@ class EpisodesController < ApplicationController
 
   def remove_user_tag
     if current_user
-      @episode.remove_user_tag(params[:tag_id],@episode,current_user)
-      redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Your tag has been removed"
+      if @episode.user_user_tags(current_user).include?(Tag.find_by(name: params[:tag_id]))
+        @episode.remove_user_tag(params[:tag_id],@episode,current_user)
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Your tag \"#{params[:tag_id]}\" has been removed"
+      else
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Whoah, trying to get rid of something you don't have? Nope"
+      end
     else 
       redirect_to access_denied_path
     end
@@ -96,6 +102,14 @@ class EpisodesController < ApplicationController
     def set_season_serial
       @serial = Serial.find(params[:serial_id])
       @season = @serial.seasons.find_by(number: params[:season_id])
+    end
+
+    def set_reviews
+      @reviews = @episode.reviews
+    end
+
+    def set_parent
+      @parent = find_parent_models(@episode)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -7,6 +7,8 @@ class Episode < ActiveRecord::Base
   has_many :user_episode_taggings
   has_many :user_tags, through: :user_episode_taggings, source: :tag
 
+  has_many :reviews, as: :reviewable
+
   validates :number, uniqueness: {scope: :season_id}, presence: true
   validates :name, presence: true, uniqueness: {scope: :season_id,case_sensitive: false}
 

@@ -51,7 +51,14 @@ module ApplicationHelper
 		end
 	end
 
-
-
-
+	def find_parent_models(current_model = nil)
+	    parents = Array.new
+	    params.each do |name, value|
+	      if name =~ /(.+)_id$/
+	        parents.push $1.classify.constantize.find(value)
+	      end
+	    end
+	    parents.push current_model
+	    parents
+	end
 end

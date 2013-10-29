@@ -1,6 +1,5 @@
 class CreateSeasons < ActiveRecord::Migration
   def change
-  	drop_table :seasons
 
     create_table :seasons do |t|
       t.text :description

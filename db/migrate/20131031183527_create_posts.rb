@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
      t.references :user, index: true
       t.text :content
-      t.references :reviewable, polymorphic: true
+      t.references :commentable , polymorphic: true
 
       t.timestamps
     end

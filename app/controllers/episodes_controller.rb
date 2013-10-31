@@ -37,7 +37,7 @@ class EpisodesController < ApplicationController
         series = Serial.find_by_id(@season.serial_id)
         User.all.each do |u|
         if u.serials.include?(series)
-          UserMailer.new_episode(u).deliver
+          #UserMailer.new_episode(u).deliver
         end
         end
         format.html { redirect_to [@serial,@season,@episode], notice: 'Episode was successfully created.' }

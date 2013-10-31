@@ -4,6 +4,7 @@ class WatchedController < ApplicationController
   before_action :set_seasons
   before_action :set_series
   before_action :set_watching
+  before_action :set_serial, only: [:tracking]
 
 
  
@@ -17,6 +18,18 @@ class WatchedController < ApplicationController
   end
 
 
+ def tracking
+      @user = current_user
+      @watched = current_user.watched
+    render action: 'tracking'
+  end
+  
+
+
+
+    def set_serial
+      @serial = Serial.find(params[:id])
+    end
   
 
   private

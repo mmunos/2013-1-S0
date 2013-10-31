@@ -35,6 +35,7 @@ S0::Application.routes.draw do
   get "/me/series", to:"followed_shows#serials", as: :my_serials
   get "/me/movies", to:"followed_shows#movies", as: :my_movies
   get "/me/watchlist", to:"watchlists#my_watchlist", as: :my_watchlist
+  get "/me/watchlist/serials/:id", to:"watched#tracking", as: :my_tracking
   get "/me/seen", to:"watched#my_watched", as: :my_watched
 
   # User Watchlist

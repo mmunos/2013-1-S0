@@ -23,8 +23,14 @@ class WatchedController < ApplicationController
       @watched = current_user.watched
     render action: 'tracking'
   end
-  
 
+   def detail
+      @user = current_user
+      @watched = current_user.watched
+      @serial = Serial.find(params[:serial_id])
+      @season = @serial.seasons.find_by(number: params[:season_id])
+    render action: 'detail'
+  end
 
 
     def set_serial

@@ -1,0 +1,64 @@
+<% content_for :admin_bar_panel do %>
+  <ul>
+    <li><%= link_to 'Edit Season', edit_serial_season_path(@serial,@season) %></li>
+    <li><%= link_to 'New Episode', new_serial_season_episode_path(@serial,@season) %></li>
+  </ul>
+<% end %>
+
+<div class="show-sidebar">
+  <div class="show-action-menu">
+  </div>
+
+  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Season '+@season.number.to_s %>">
+
+  <div class="show-detail-module show-details">
+    <h3>Season Details</h3>
+    <ul>
+      <li>Date: <%= @serial.date %></li>
+    </ul>
+  </div>
+
+
+</div>
+
+<div class="show-content">
+  <div class="show-header">
+    <div class="show-header-title">
+      <p class="bread-crumb"><%= link_to @serial.name, serial_path(@serial) %></p>
+      <h1>Tracking Season <%= @season.number.to_s %></h1>
+      <%= link_to "View all seasons", my_tracking_path(@serial), class: "all-seasons-link" %>
+    </div>
+
+    <p class="description"><%= @season.description %></p>
+  </div>
+
+<%if @seasons.include?(@season)%>
+      <p class="center-warning">You have finished this season! Well done!</p>
+    <%end%>
+
+  <div class="show-list show-episode-list">
+    <h2>Episodes</h2>
+
+    <% if @season.episodes.empty? %>
+      <p class="center-warning">Oops, we didn't find any episodes!</p>
+    <% else %>
+      <% @season.episodes.each do |episode| %>
+        <div class="show-episode-list-item">
+          <div class="title">
+            <h2><%= link_to "S"+( "%02d" % @season.number)+"E"+("%02d" % episode.number)+": "+episode.name, serial_season_episode_path(@serial,@season,episode) %></h2>
+          </div>
+          <p class="description"><%= episode.description %></p>
+
+          <div class="episode-details">
+            <ul>
+              <%if @watched.episodes.include?(episode)%>
+               <li>Episode Already Watched!</li>
+              <%end%>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

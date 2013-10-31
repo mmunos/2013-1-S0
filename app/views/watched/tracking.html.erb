@@ -38,7 +38,7 @@
 <div class="show-content">
 	<div class="show-header">
 		<div class="show-header-title">
-			<h1><%= @serial.name %></h1>
+			<h1>Tracking <%= @serial.name %></h1>
 		</div>
 
 		<p class="description"><%= @serial.description %></p>
@@ -58,7 +58,7 @@
     <% else %>
       <% @serial.seasons.all.each do |season| %>
         <div class="show-season-list-item">
-          <div class="number"><%= link_to season.number, serial_season_path(@serial,season) %></div>
+          <div class="number"><%= link_to season.number, my_tracking_detail_path(@serial,season) %></div>
 
           <%episodes=0%>
           <%episode=nil%>
@@ -75,9 +75,9 @@
 
 
           <%if(ep)%>
-          <p class="description">Last Episode Watched: <%= episode.name %> <br> Next Episode to watch: <%= ep.name%></p>
+          <p class="description">Last Episode Watched: <%= link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode) %> <br> Next Episode to watch: <%= link_to "#{ep.name}",serial_season_episode_path(@serial,season,ep)%></p>
           <%else%>
-          <p class="description">Last Episode Watched: <%= episode.name %></p>
+          <p class="description">Last Episode Watched: <%= link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode) %></p>
           <%end%>
 
           <div class="episodes-number">

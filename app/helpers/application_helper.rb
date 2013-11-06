@@ -83,9 +83,6 @@ module ApplicationHelper
 	      end
 	    end
 	    parents.push current_model
-	    unless (params[:action] == "new")
-	    	parents.push "review"
-	    end
 	    parents
 	end
 

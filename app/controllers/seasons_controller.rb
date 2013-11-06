@@ -80,6 +80,7 @@ class SeasonsController < ApplicationController
 
     def set_reviews
       @reviews = @season.reviews
+      @review = Review.new
     end
 
     def set_parent

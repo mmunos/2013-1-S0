@@ -119,6 +119,7 @@ end
 
     def set_reviews
       @reviews = @movie.reviews
+      @review = Review.new
     end
 
     def set_parent

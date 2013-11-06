@@ -1,3 +1,89 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review-form {
+	padding: 20px 10px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	overflow: auto;
+	background: rgb(245,245,245);
+	margin: 40px 0;
+	.review-form-user {
+		float:left;
+		display: block;
+		padding: 0 10px;
+
+		.review-form-username {
+			display: block;
+			text-align: center;
+			font-weight: lighter;
+		}
+	}
+
+	.review-form-content {
+		position: relative;
+		background: #fff;
+		margin-left: 150px;
+		padding-bottom: 20px;
+
+		textarea {
+			height: 100px;
+			width: calc(100% - 50px);
+			resize: vertical;
+			margin-left: 20px;
+			border: 1px solid #eee;
+		}
+		
+		.review-form-stars{
+			width: 120px;
+			padding: 10px 20px;
+			overflow: hidden;
+
+			&:not(:checked) > input {
+ 			  	position:absolute;
+    			top:-30px;
+    			clip:rect(0,0,0,0);
+			}
+
+			&:not(:checked) > label {
+			    float:right;
+			    width:1em;
+			    padding:0 .1em;
+			    overflow:hidden;
+			    white-space:nowrap;
+			    cursor:pointer;
+			    font-size:20px;
+			    line-height:1.2;
+			    color:#ddd;
+			}
+
+			&:not(:checked) > label:before {
+    			content: '★ ';
+			}
+
+			& > input:checked ~ label {
+    		color: #f70;
+			}
+
+		}
+
+		&:before {
+			content: "";
+			display: block;
+			border-top: 15px solid transparent;
+			border-left: 15px solid transparent;
+			border-right: 15px solid #fff;
+			border-bottom: 15px solid #fff;
+			position: absolute;
+			top: 0;
+			left: -30px;
+		}
+
+	}
+
+	.review-form-submit {
+		padding: 20px 30px;
+		text-align: center;
+	}
+}

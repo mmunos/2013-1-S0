@@ -106,6 +106,7 @@ class EpisodesController < ApplicationController
 
     def set_reviews
       @reviews = @episode.reviews
+      @review = Review.new
     end
 
     def set_parent

@@ -18,6 +18,10 @@ $(document).on("click","#top-bar-auth .close a", function(e) {
 		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
 });
 
+$(document).on("change", "input[type='radio']", function(e){
+	console.log($(this).attr("value"));
+});
+
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
 }

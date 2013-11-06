@@ -118,6 +118,7 @@ class SerialsController < ApplicationController
 
     def set_reviews
       @reviews = @serial.reviews
+      @review = Review.new
     end
 
     def set_parent

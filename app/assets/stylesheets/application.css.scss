@@ -310,6 +310,10 @@ h1 {
 #main-nav nav .watch > a {background-image: asset-url("watchicon.png");}
 #main-nav nav .watch > a:hover, #main-nav nav .watch > a.active {background-image: asset-url("watchicon_h.png");}
 
+#main-nav nav .seen-shows > a {background-image: asset-url("seenicon.png");}
+#main-nav nav .seen-shows > a:hover, #main-nav nav .seen-shows > a.active {background-image: asset-url("seenicon_h.png");}
+
+
 /* Admin Bar Panel */
 
 #admin-bar-panel {

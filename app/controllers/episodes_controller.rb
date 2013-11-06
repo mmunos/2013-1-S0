@@ -1,8 +1,8 @@
 class EpisodesController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :add_user_tags, :remove_user_tag]
+  skip_before_filter :user_admin, only: [:show, :index, :add_user_tags, :remove_user_tag, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_season_serial
-  before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag]
+  before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag, :seen, :unseen]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
 
@@ -34,6 +34,12 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       if @episode.save
+        series = Serial.find_by_id(@season.serial_id)
+        User.all.each do |u|
+        if u.serials.include?(series)
+          #UserMailer.new_episode(u).deliver
+        end
+        end
         format.html { redirect_to [@serial,@season,@episode], notice: 'Episode was successfully created.' }
         format.json { render action: 'show', status: :created, location: @episode }
       else
@@ -70,6 +76,32 @@ class EpisodesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+ def seen
+    if current_user
+      if current_user.watched.episodes.include?(@episode)
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You already marked this episode as seen!"
+      else
+        current_user.watched.episodes << @episode
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as seen!"
+      end
+    end
+  end
+
+    def unseen
+    if current_user
+      if current_user.watched.episodes.include?(@episode)
+        current_user.watched.episodes.delete(@episode)
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!"
+      else
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You can't unseen #{@episode.name}, D'OH!!!"
+      end
+    end
+    end
+
+
+
 
   def add_user_tags
     if current_user

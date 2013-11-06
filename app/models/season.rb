@@ -3,6 +3,7 @@ class Season < ActiveRecord::Base
   has_many :episodes
 
   has_many :reviews, as: :reviewable
+  has_many :posts, as: :commentable 
 
 
   validates :number, uniqueness: {scope: :serial_id}, presence: true

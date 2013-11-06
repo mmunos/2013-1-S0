@@ -14,6 +14,13 @@
 				</ul>
 			</li>
 			<li class="watch"><%= nav_link "My Watchlist", my_watchlist_path %></li>
+			
+			<li class="seen-shows"><%= nav_link "Seen Shows", my_watched_path %>
+				<ul>
+					<li><%= nav_link "Seen Movies", my_movies_path %></li>
+					<li><%= nav_link "Seen Series", my_serials_path %></li>
+				</ul>
+			</li>
 		</ul>
 	<% end %>
 </nav>

@@ -1,6 +1,5 @@
 class CreateEpisodes < ActiveRecord::Migration
   def change
-    drop_table :episodes
 
     create_table :episodes do |t|
       t.string :name

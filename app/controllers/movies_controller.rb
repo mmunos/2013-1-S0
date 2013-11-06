@@ -1,10 +1,11 @@
 class MoviesController < ApplicationController
 
-  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :no_watch]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :unwatch, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :no_watch]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch, :seen, :unseen]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
+
 
   # GET /movies
   # GET /movies.json
@@ -91,7 +92,7 @@ end
   def watch
     if current_user
       if current_user.watchlist.movies.include?(@movie)
-        redirect_to @movie, notice: "You already added this series to your watchlist"
+        redirect_to @movie, notice: "You already added this movie to your watchlist"
       else
         current_user.watchlist.movies << @movie
         redirect_to @movie, notice: "#{@movie.name} was successfully added to watchlist!"
@@ -99,7 +100,7 @@ end
     end
   end
 
-    def no_watch
+    def unwatch
     if current_user
       if current_user.watchlist.movies.include?(@movie)
         current_user.watchlist.movies.delete(@movie)
@@ -110,6 +111,28 @@ end
     end
     end
 
+
+ def seen
+    if current_user
+      if current_user.watched.movies.include?(@movie)
+        redirect_to @movie, notice: "You already marked this movie as seen!"
+      else
+        current_user.watched.movies << @movie
+        redirect_to @movie, notice: "#{@movie.name} was successfully marked as seen!"
+      end
+    end
+  end
+
+    def unseen
+    if current_user
+      if current_user.watched.movies.include?(@movie)
+        current_user.watched.movies.delete(@movie)
+        redirect_to @movie, notice: "#{@movie.name} was successfully marked as unseen!"
+      else
+        redirect_to @movie, notice: "You can't unseen #{@movie.name}, D'OH!!!"
+      end
+    end
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

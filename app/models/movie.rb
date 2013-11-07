@@ -1,8 +1,8 @@
 class Movie < Show
-	has_many :movie_users
+	has_many :movie_users, dependent: :destroy
 
- 	has_many :reviews, as: :reviewable
- 	has_many :posts, as: :commentable 
+ 	has_many :reviews, as: :reviewable, dependent: :destroy
+ 	has_many :posts, as: :commentable, dependent: :destroy
 
 
 	def to_param

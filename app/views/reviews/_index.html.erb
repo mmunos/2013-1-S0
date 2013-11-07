@@ -9,25 +9,39 @@
 
   <p class="center-warning"><%= no_rev_msg.html_safe %></p>
 <% else %>
-
-  <a href="#" class="open-review-form fade-open-review">Write a review</a>
+  <% if current_user and !contains_user(@reviews,current_user) %>
+    <a href="#" class="open-review-form fade-open-review">Write a review</a>
+  <% end %>
 
 
   <div id="reviews">
-  <% @reviews.each do |review| %>
+  <% @reviews.reverse.each do |review| %>
     <div class="review">
       <div class="review-user">
-        <%= user_gravatar(review.user) %>
-        <%= link_to review.user.username, user_path(review.user) %>
+        <a href="<%= user_path(review.user) %>">
+          <%= user_gravatar(review.user, 80) %>
+          <span class="review-username"><%= review.user.username %></span>
+        </a>
       </div>
       <div class="review-content">
         
         <div class="review-stars">
           <%= review.stars %>
         </div>
-        <%= simple_format(review.content) %>
+        <div class="review-text">
+          <%= simple_format(review.content) %>
+        </div>
+      </div>
+
+      <div class="review-meta">
+        <span>Posted <%= time_ago_in_words(review.created_at) %> ago</span><% if user_admin?(current_user) || review.user == current_user %> | <%= link_to 'Destroy', polymorphic_path(@parent)+"/#{review.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
       </div>
     </div>
   <% end %>
+
+  <% unless current_user %>
+    <p class="center-warning"><%= link_to 'Sign up', sign_up_path %> or <%= link_to 'log in', log_in_path %> to write a review</p>
+  <% end %> 
+
   </div>
 <% end %>

@@ -50,7 +50,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @parent, notice: 'Review was successfully updated.' }
+        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Review was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url }
+      format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Your review was deleted.' }
       format.json { head :no_content }
     end
   end

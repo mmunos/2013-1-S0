@@ -92,7 +92,101 @@
 	padding: 10px 0;
 
 	.review {
-		margin: 10px 10px 40px;
+		margin: 10px 10px 20px;
+		padding: 20px;
 		border-bottom: 1px solid #eee;
+		border-left: 1px solid #eee;
+		overflow: auto;
+		background: rgb(245,245,245);
+
+		&:hover {
+			background: rgb(240,240,240);
+			border-bottom: 1px solid #ddd;
+			border-left: 1px solid #ddd;
+
+		}
+
+
+		.review-user {
+			float:left;
+			padding: 0 5px;
+
+			a {border: 0;}
+
+			.review-username {
+				display: block;
+				text-align: center;
+
+			}
+		}
+
+		.review-content {
+			margin-left: 130px;
+			background: #fff;
+			padding: 10px;
+			position: relative;
+			overflow: visible;
+
+			.review-stars {
+	    		color: #f70;
+	    		margin-left: 5px;
+			}
+
+			.review-text {
+				padding: 0 5px;
+			}
+
+			&:after {
+				content : "„";
+				display: block;
+				font-family: Georgia, 'Times New Roman', serif;
+				position: absolute;
+				font-size: 200px;
+				bottom: 10px;
+				right: 10px;
+				color: rgba(240,240,240,0.4);
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				border-top: 15px solid transparent;
+				border-left: 15px solid transparent;
+				border-right: 15px solid #fff;
+				border-bottom: 15px solid #fff;
+				position: absolute;
+				top: 0;
+				left: -30px;
+			}
+		}
+
+		.review-meta {
+			text-align: right;
+			margin: 10px 5px 0 0;
+			color: #ccc;
+			font-weight: lighter;
+			display: inline-block;
+			float: right;
+			font-size: 12px;
+
+			a {
+				color: #ccc;
+				border-bottom: 0;
+			}
+
+			&:hover {
+				color: #ababab;
+
+				a {
+					color: #ababab;
+
+					&:hover {
+						color: #777;
+						border-bottom: 1px solid #777;
+					}
+				}
+			}
+		}
+
 	}
 }

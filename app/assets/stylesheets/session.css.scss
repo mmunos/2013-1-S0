@@ -1,3 +1,16 @@
 // Place all the styles related to the session controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#login-form {
+	.field {
+		border: 0;
+		margin: 0;
+
+		input {
+			text-align: center;
+			font-size: 18px;
+		}
+	}
+}

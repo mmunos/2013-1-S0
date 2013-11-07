@@ -9,6 +9,35 @@
 		border: 1px solid #aaa;
 	}
 
+	.show-action-menu {
+		font-size: 13px;
+		font-weight: lighter;
+		width: 220px;
+		padding: 0 0 5px;
+		margin-bottom: 10px;
+		border-bottom: 1px solid #ddd;
+
+		ul {
+			padding: 0;
+			margin: 0 auto;
+			list-style: none;
+
+			li {
+				margin: 5px 0;
+			}
+		}
+
+		a {
+			color: #aaa;
+			border: none;
+
+			&:hover {
+				color: inherit;
+			}
+		}
+
+
+	}
 	.show-detail-module {
 		font-size: 14px;
 

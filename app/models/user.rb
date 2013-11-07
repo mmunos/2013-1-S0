@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    has_many :show_users
+    has_many :show_users, dependent: :destroy
     has_many :shows, through: :show_users
     has_many :serials, through: :show_users
     has_many :movies, through: :show_users
@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
 
     def self.find(input)
         find_by(username: input)
+    end
+
+    def gravatar_url(size)
+        gravatar_hash = Digest::MD5.hexdigest(email.downcase.strip)
+        gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
     end
 
     private

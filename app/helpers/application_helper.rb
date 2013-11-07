@@ -70,10 +70,16 @@ module ApplicationHelper
 
 		end
 	
+	def user_gravatar(user, size = 80, clase = nil)
+		options = Hash.new
+		options[:src] = user.gravatar_url(size)
+		options[:class] = clase if clase
+		tag(:img, options)
+	end
 
-
-
-
+	def contains_user(collection,user)
+		collection.exists?(user_id: user.id)
+	end
 
 	def find_parent_models(current_model = nil)
 	    parents = Array.new

@@ -3,13 +3,13 @@
 </div>
 
 
-<% if @posts.nil? %>
-  <% no_rev_msg = (current_user)? "No posts yet, #{link_to 'write the first one', nil, class:'open-review-form'}!" : "No posts yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
+<% if @posts.empty? %>
+  <% no_rev_msg = (current_user)? "No posts yet, #{link_to 'write the first one', nil, class:'open-post-form'}!" : "No posts yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
 
   <p class="center-warning"><%= no_rev_msg.html_safe %></p>
 <% else %>
   <% if current_user and !contains_user(@posts,current_user) %>
-    <a href="#" class="open-review-form fade-open-review">Write a post</a>
+    <a href="#" class="open-post-form fade-open-post">Write a post</a>
   <% end %>
 
 

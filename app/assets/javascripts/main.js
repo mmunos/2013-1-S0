@@ -18,10 +18,26 @@ $(document).on("click","#top-bar-auth .close a", function(e) {
 		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
 });
 
-$(document).on("change", "input[type='radio']", function(e){
-	console.log($(this).attr("value"));
+$(document).on("click",".open-review-form", function(e) {
+		e.preventDefault();
+		if ($(this).hasClass("fade-open-review")) {
+			$(this).fadeOut();
+		}
+		$(".form-container").slideDown(400, function() {
+			$(".form-container textarea").focus();
+		});
+});
+
+$(document).on("click",".close-review-form", function(e) {
+		e.preventDefault();
+		$(".form-container").slideUp(400, function(){
+			$(".fade-open-review").fadeIn();
+			$(".review-form").closest("form")[0].reset();
+		});
+
 });
 
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
+	$(".form-container").hide();
 }

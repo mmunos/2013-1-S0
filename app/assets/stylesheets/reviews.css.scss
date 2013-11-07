@@ -8,7 +8,7 @@
 	border-bottom: 1px solid #ddd;
 	overflow: auto;
 	background: rgb(245,245,245);
-	margin: 40px 0;
+	margin: 0;
 	.review-form-user {
 		float:left;
 		display: block;
@@ -85,5 +85,14 @@
 	.review-form-submit {
 		padding: 20px 30px;
 		text-align: center;
+	}
+}
+
+#reviews {
+	padding: 10px 0;
+
+	.review {
+		margin: 10px 10px 40px;
+		border-bottom: 1px solid #eee;
 	}
 }

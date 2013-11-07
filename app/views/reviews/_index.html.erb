@@ -1,53 +1,33 @@
-<% 
-def current_user_gravatar
-    size =100
-    gravatar_hash = Digest::MD5.hexdigest(current_user.email.downcase.strip)
-    gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
-    tag(:img, src: gravatar_url, class: "top-bar-avatar")
-end
-def user_gravatar(user)
-    size =80
-    gravatar_hash = Digest::MD5.hexdigest(user.email.downcase.strip)
-    gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
-    tag(:img, src: gravatar_url, class: "top-bar-avatar")
-end 
-%>
 
-<% if current_user %>
-  <%= form_for(@parent.push(@review)) do |f| %>
-    <div class="review-form">
-      <div class="review-form-user">
-        <%= current_user_gravatar %>
+<div class="form-container">
+  <%= render "reviews/rev_form" %>
+</div>
 
-        <span class="review-form-username"><%= current_user.username %>
-      </div>
-
-      <div class="review-form-content">
-        <div class="review-form-stars">
-          <input type="radio" name="review[rating]" value="5" id="rating_5" required><label for="rating_5">5</label><input type="radio" name="review[rating]" value="4" id="rating_4"><label for="rating_4">4</label><input type="radio" name="review[rating]" value="3" id="rating_3"><label for="rating_3">3</label><input type="radio" name="review[rating]" value="2" id="rating_2"><label for="rating_2">1</label><input type="radio" name="review[rating]" value="1" id="rating_1"><label for="rating_1">1</label>
-        </div>
-        
-        <%= f.text_area :content, {required: "", placeholder:"Write your review here"} %>
-      </div>
-
-      <div class="review-form-submit">
-        <%= f.submit %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
 
 <% if @reviews.empty? %>
-  <% no_rev_msg = (current_user)? "No reviews yet, write the first one!" : "No reviews yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
+  <% no_rev_msg = (current_user)? "No reviews yet, #{link_to 'write the first one', nil, class:'open-review-form'}!" : "No reviews yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
 
   <p class="center-warning"><%= no_rev_msg.html_safe %></p>
 <% else %>
 
-  <% @reviews.each do |review| %>
-    <%= user_gravatar(review.user) %>
-    <%= review.user.username %>
-    <%= review.rating %>
-    <%= simple_format(review.content) %>
-  <% end %>
+  <a href="#" class="open-review-form fade-open-review">Write a review</a>
 
+
+  <div id="reviews">
+  <% @reviews.each do |review| %>
+    <div class="review">
+      <div class="review-user">
+        <%= user_gravatar(review.user) %>
+        <%= link_to review.user.username, user_path(review.user) %>
+      </div>
+      <div class="review-content">
+        
+        <div class="review-stars">
+          <%= review.stars %>
+        </div>
+        <%= simple_format(review.content) %>
+      </div>
+    </div>
+  <% end %>
+  </div>
 <% end %>

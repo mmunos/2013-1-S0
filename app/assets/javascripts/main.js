@@ -37,6 +37,16 @@ $(document).on("click",".close-review-form", function(e) {
 
 });
 
+$(document).on("click",".open-post-form", function(e) {
+		e.preventDefault();
+		if ($(this).hasClass("fade-open-post")) {
+			$(this).fadeOut();
+		}
+		$(".form-container").slideDown(400, function() {
+			$(".form-container textarea").focus();
+		});
+});
+
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
 	$(".form-container").hide();

@@ -7,15 +7,19 @@ S0::Application.routes.draw do
   # Movies
   resources :movies do 
     resources :reviews
+    resources :posts
   end
 
   # Series, Season and Episodes
   resources :serials, path: "/series" do
     resources :reviews
+    resources :posts
     resources :seasons do
       resources :reviews
+      resources :posts
       resources :episodes do
         resources :reviews
+        resources :posts
       end
     end
   end

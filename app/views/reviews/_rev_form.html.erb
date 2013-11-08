@@ -9,6 +9,7 @@
       </div>
 
       <div class="review-form-content">
+        <span class="review-form-charleft"><span class="review-form-charleft-number">1000</span> characters left</span>
         <div class="review-form-stars">
           <input type="radio" name="review[rating]" value="5" id="rating_5" required>
           <label for="rating_5">5</label>
@@ -22,7 +23,7 @@
           <label for="rating_1">1</label>
         </div>
         
-        <%= f.text_area :content, {required: "", placeholder:"Write your review here"} %>
+        <%= f.text_area :content, {required: "", placeholder:"Write your review here", pattern: ".{5,1000}"} %>
       </div>
 
       <div class="review-form-submit">

@@ -33,11 +33,33 @@ $(document).on("click",".close-review-form", function(e) {
 		$(".form-container").slideUp(400, function(){
 			$(".fade-open-review").fadeIn();
 			$(".review-form").closest("form")[0].reset();
+			$(".review-form-charleft").fadeOut();
+			$(".review-form-charleft-number").html(1000);
 		});
 
 });
 
+
+
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
 	$(".form-container").hide();
+	$(".review-form-charleft").hide()
+
+	$("#review_content").keyup(function(e) {
+		var charleft = 1000-$(this).val().length;
+		$(".review-form-charleft-number").html(charleft);
+		if(charleft < 0) {
+			$(".review-form-charleft").css({
+				color: 'red',
+				fontWeight: 'bold'
+			});
+			$(".review-form-submit input").attr('disabled', 'disabled').css({opacity: 0.3});
+		} else {
+			$(".review-form-charleft").removeAttr("style");
+			$(".review-form-submit input").removeAttr('disabled').removeAttr("style");
+		}
+	}).focus(function(e){
+		$(".review-form-charleft").fadeIn();
+	});
 }

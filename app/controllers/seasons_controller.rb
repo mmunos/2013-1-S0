@@ -5,6 +5,7 @@ class SeasonsController < ApplicationController
   before_action :set_season, only: [:show, :edit, :update, :destroy]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
+  before_action :set_posts, only:[:show]
 
   # GET /seasons
   # GET /seasons.json
@@ -81,6 +82,11 @@ class SeasonsController < ApplicationController
     def set_reviews
       @reviews = @season.reviews
       @review = Review.new
+    end
+    
+    def set_posts
+      @posts = @season.posts
+      @post = Post.new
     end
 
     def set_parent

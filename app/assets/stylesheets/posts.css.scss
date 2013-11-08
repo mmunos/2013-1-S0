@@ -1,3 +1,158 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post-form {
+	padding: 20px 10px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	overflow: auto;
+	background: rgb(245,245,245);
+	margin: 0;
+	.post-form-user {
+		float:left;
+		display: block;
+		padding: 0 10px;
+
+		.post-form-username {
+			display: block;
+			text-align: center;
+			font-weight: lighter;
+		}
+	}
+
+	.post-form-content {
+		position: relative;
+		background: #fff;
+		margin-left: 150px;
+		padding-bottom: 20px;
+
+		textarea {
+			height: 100px;
+			width: calc(100% - 50px);
+			resize: vertical;
+			margin-left: 20px;
+			border: 1px solid #eee;
+		}
+		
+		
+
+		&:before {
+			content: "";
+			display: block;
+			border-top: 15px solid transparent;
+			border-left: 15px solid transparent;
+			border-right: 15px solid #fff;
+			border-bottom: 15px solid #fff;
+			position: absolute;
+			top: 0;
+			left: -30px;
+		}
+
+	}
+
+	.post-form-submit {
+		padding: 20px 30px;
+		text-align: center;
+	}
+}
+
+#posts {
+	padding: 10px 0;
+
+	.post {
+		margin: 10px 10px 20px;
+		padding: 20px;
+		border-bottom: 1px solid #eee;
+		border-left: 1px solid #eee;
+		overflow: auto;
+		background: rgb(245,245,245);
+
+		&:hover {
+			background: rgb(240,240,240);
+			border-bottom: 1px solid #ddd;
+			border-left: 1px solid #ddd;
+
+		}
+
+
+		.post-user {
+			float:left;
+			padding: 0 5px;
+
+			a {border: 0;}
+
+		}
+
+		.post-content {
+			margin-left: 130px;
+			background: #fff;
+			padding: 10px;
+			position: relative;
+			overflow: visible;
+
+			.post-username {
+				display: block;
+				text-align: left;
+
+			}
+
+			.post-text {
+				padding: 0 5px;
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				border-top: 15px solid transparent;
+				border-left: 15px solid transparent;
+				border-right: 15px solid #fff;
+				border-bottom: 15px solid #fff;
+				position: absolute;
+				top: 0;
+				left: -30px;
+			}
+		}
+
+
+
+		.post-meta {
+			text-align: right;
+			margin: 10px 5px 0 0;
+			color: #ccc;
+			font-weight: lighter;
+			display: inline-block;
+			float: right;
+			font-size: 12px;
+
+			a {
+				color: #ccc;
+				border-bottom: 0;
+			}
+
+			&:hover {
+				color: #ababab;
+
+				a {
+					color: #ababab;
+
+					&:hover {
+						color: #777;
+						border-bottom: 1px solid #777;
+					}
+				}
+			}
+
+
+			.post-boost{
+			display: inline-block;
+			float: left;
+			padding-right: 2px;
+			overflow: hidden;
+
+		}
+
+		}
+
+	}
+}

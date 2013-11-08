@@ -4,6 +4,7 @@ class SerialsController < ApplicationController
   before_action :set_serial, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
+  before_action :set_posts, only:[:show]
 
   # GET /serials
   # GET /serials.json
@@ -118,6 +119,11 @@ class SerialsController < ApplicationController
 
     def set_reviews
       @reviews = @serial.reviews
+    end
+
+    def set_posts
+      @posts = @serial.posts
+      @post = Post.new
     end
 
     def set_parent

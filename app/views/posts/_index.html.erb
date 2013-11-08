@@ -1,5 +1,5 @@
-<div class="form-container">
-<%= render "posts/rev_form"%>
+<div class="form-container-post">
+<%= render "posts/post_form"%>
 </div>
 
 
@@ -15,22 +15,27 @@
 
   <div id="posts">
   <% @posts.reverse.each do |post| %>
-    <div class="review">
-      <div class="review-user">
+    <div class="post">
+      <div class="post-user">
         <a href="<%= user_path(post.user) %>">
           <%= user_gravatar(post.user, 80) %>
-          <span class="review-username"><%= post.user.username %></span>
         </a>
       </div>
-      <div class="review-content">
-        
-        <div class="review-text">
+      <div class="post-content">
+        <a href="<%= user_path(post.user) %>">
+        <span class="post-username"><%= post.user.username %></span>
+      </a>
+        <div class="post-text">
           <%= simple_format(post.content) %>
         </div>
       </div>
 
-      <div class="review-meta">
-        <span>Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Destroy', polymorphic_path(@parent)+"/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+      <div class="post-meta">
+          <div class="post-boost">
+          <span>Boost! </span>
+        </div>
+        <span> | Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Destroy', polymorphic_path(@parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+
       </div>
     </div>
   <% end %>

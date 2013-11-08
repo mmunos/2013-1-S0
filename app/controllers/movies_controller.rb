@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch, :seen, :unseen]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
+  before_action :set_posts, only:[:show]
 
 
   # GET /movies
@@ -142,6 +143,11 @@ end
 
     def set_reviews
       @reviews = @movie.reviews
+    end
+
+    def set_posts
+      @posts = @movie.posts
+      @post = Post.new
     end
 
     def set_parent

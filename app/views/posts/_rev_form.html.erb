@@ -1,6 +1,6 @@
 
 <% if current_user %>
-  <%= form_for(@parent.push(@review)) do |f| %>
+  <%= form_for((@parent.dup).push(@post)) do |f| %>
     <div class="review-form">
       <div class="review-form-user">
         <%= user_gravatar(current_user,90) %>

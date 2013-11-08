@@ -1,10 +1,16 @@
 class PostsController < ApplicationController
+  include ApplicationHelper
+
+  skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
+  skip_before_filter :authorize, only: [:index, :show]
+  before_action :set_parent
+  before_action :set_redirect_parent
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = @parent.posts
   end
 
   # GET /posts/1
@@ -25,13 +31,15 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
+    @parent.posts << @post
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to polymorphic_path(@redirect_parent), alert: @post.errors.full_messages.first }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +50,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +64,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Your post was deleted.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +75,16 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def set_parent
+      @parent = find_parent_models()[-2]
+    end
+
+    def set_redirect_parent
+      @redirect_parent = find_parent_models()
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params[:post]
+       params.require(:post).permit(:user_id, :content, :commentable_id)
     end
 end

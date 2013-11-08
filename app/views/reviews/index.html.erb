@@ -1,49 +1,27 @@
 
 <% if current_user %>
-  <div class="form-container">
+  <div class="review-form-container">
     <%= render "reviews/form" %>
   </div>
 <% end %>
 
-
+<div id="reviews">
 <% if @reviews.empty? %>
-  <% no_rev_msg = (current_user)? "No reviews yet, #{link_to 'write the first one', nil, class:'open-review-form'}!" : "No reviews yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
-
-  <p class="center-warning"><%= no_rev_msg.html_safe %></p>
+  <% message = (current_user)? "No reviews yet, #{link_to 'write the first one', nil, class:'open-review-form'}!" : "No reviews yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
 <% else %>
-  <% if current_user and !contains_user(@reviews,current_user) %>
-    <a href="#" class="open-review-form fade-open-review">Write a review</a>
-  <% end %>
-
-
-  <div id="reviews">
-  <% @reviews.reverse.each do |review| %>
-    <div class="review" id=<%= "review-#{review.id}" %>>
-      <div class="review-user">
-        <a href="<%= user_path(review.user) %>">
-          <%= user_gravatar(review.user, 80) %>
-          <span class="review-username"><%= review.user.username %></span>
-        </a>
-      </div>
-      <div class="review-content">
-        
-        <div class="review-stars">
-          <%= review.stars %>
-        </div>
-        <div class="review-text">
-          <%= simple_format(review.content) %>
-        </div>
-      </div>
-
-      <div class="review-meta">
-        <span>Posted <%= time_ago_in_words(review.created_at) %> ago</span><% if user_admin?(current_user) || review.user == current_user %> | <%= link_to 'Destroy', polymorphic_path((@array_parent.dup).push(review)), method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
-      </div>
-    </div>
-  <% end %>
-
-  <% unless current_user %>
-    <p class="center-warning"><%= link_to 'Sign up', sign_up_path %> or <%= link_to 'log in', log_in_path %> to write a review</p>
-  <% end %> 
-
-  </div>
+    <% if current_user and !contains_user(@reviews,current_user) %>
+      <% message = "#{link_to 'Write a review', nil, class:'open-review-form'}" %>
+    <% elsif current_user %>
+      <% message = "" %>
+    <% else %>
+      <% message = "#{link_to 'Sign up', sign_up_path} or #{link_to 'log in', log_in_path} to write a review" %>
+    <% end %>
 <% end %>
+  <p class="center-warning"><%= message.html_safe %></p>
+
+  <!-- <% if current_user and !contains_user(@reviews,current_user) %><a href="#" class="open-review-form fade-open-review">Write a review</a><% end %> -->
+
+
+  <% @reviews.reverse.each do |review| %>
+    <%= render partial: 'reviews/review', object: review %>
+  <% end %>

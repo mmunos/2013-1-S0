@@ -1,5 +1,4 @@
-<%=
- form_for((@array_parent.dup).push(Review.new)) do |f| %>
+<%= form_for (@array_parent.dup).push(Review.new), remote: true do |f| %>
   <div class="review-form">
     <div class="review-form-user">
       <%= user_gravatar(current_user,90) %>

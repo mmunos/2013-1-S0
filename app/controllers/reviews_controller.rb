@@ -35,9 +35,11 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if @review.save
         format.html { redirect_to polymorphic_path(@array_parent), notice: 'Review was successfully created.' }
+        format.js 
         format.json { render action: 'show', status: :created, location: @review }
       else
         format.html { redirect_to polymorphic_path(@array_parent), alert: @review.errors.full_messages.first}
+        format.js { render action: 'error', object: @review.errors }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -63,6 +65,7 @@ class ReviewsController < ApplicationController
     @review.destroy
     respond_to do |format|
       format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your review was deleted.' }
+      format.js 
       format.json { head :no_content }
     end
   end

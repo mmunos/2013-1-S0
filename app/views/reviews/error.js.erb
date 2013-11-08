@@ -1,0 +1,2 @@
+$flash_bar =  ($('.flash-bar').length > 0)? $('.flash-bar') : $('<div></div>').addClass('flash-bar');
+$flash_bar.html('<%= escape_javascript("There was an error trying to send your review.") %>').hide().prependTo('#main-content').fadeIn().delay(3000).fadeOut();

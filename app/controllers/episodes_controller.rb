@@ -5,6 +5,7 @@ class EpisodesController < ApplicationController
   before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag, :seen, :unseen]
   before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
+  before_action :set_posts, only:[:show]
 
   # GET /episodes
   # GET /episodes.json
@@ -139,6 +140,11 @@ class EpisodesController < ApplicationController
     def set_reviews
       @reviews = @episode.reviews
       @review = Review.new
+    end
+
+    def set_posts
+      @posts = @episode.posts
+      @post = Post.new
     end
 
     def set_parent

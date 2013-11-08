@@ -34,7 +34,7 @@
       </div>
 
       <div class="review-meta">
-        <span>Posted <%= time_ago_in_words(review.created_at) %> ago</span><% if user_admin?(current_user) || review.user == current_user %> | <%= link_to 'Destroy', polymorphic_path(@parent)+"/#{review.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+        <span>Posted <%= time_ago_in_words(review.created_at) %> ago</span><% if user_admin?(current_user) || review.user == current_user %> | <%= link_to 'Destroy', polymorphic_path((@parent.dup).push(review)), method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
       </div>
     </div>
   <% end %>

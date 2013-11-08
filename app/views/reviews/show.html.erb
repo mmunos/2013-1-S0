@@ -1,24 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div id="reviews">
+	<div class="review">
+		<div class="review-user">
+			<a href="<%= user_path(@review.user) %>">
+				<%= user_gravatar(@review.user, 80) %>
+				<span class="review-username"><%= @review.user.username %></span>
+			</a>
+		</div>
+		<div class="review-content">
 
-<p>
-  <strong>User:</strong>
-  <%= @review.user %>
-</p>
+			<div class="review-stars">
+				<%= @review.stars %>
+			</div>
+			<div class="review-text">
+				<%= simple_format(@review.content) %>
+			</div>
+		</div>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @review.rating %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @review.content %>
-</p>
-
-<p>
-  <strong>Reviewable:</strong>
-  <%= @review.reviewable %>
-</p>
-
-<%= link_to 'Edit', edit_polymorphic_path(find_parent_models(@review)) %> |
-<%= link_to 'Back', polymorphic_path(find_parent_models(Review)) %>
+		<div class="review-meta">
+			<span>Posted <%= time_ago_in_words(@review.created_at) %> ago</span><% if user_admin?(current_user) || @review.user == current_user %> | <%= link_to 'Destroy', polymorphic_path((@array_parent.dup).push(@review)), method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+		</div>
+	</div>
+</div>

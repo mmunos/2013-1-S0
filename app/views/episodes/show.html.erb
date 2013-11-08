@@ -64,8 +64,7 @@
 
   <div class="show-users-content">
     <h2>Reviews</h2>
-    <%= render "reviews/index" %>
+    <%= render file: "reviews/index", collection: @reviews %>
     <h2>Posts</h2>
-    <%= render "posts/index" %>
   </div>
 </div>

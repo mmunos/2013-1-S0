@@ -80,11 +80,10 @@ class SeasonsController < ApplicationController
 
     def set_reviews
       @reviews = @season.reviews
-      @review = Review.new
     end
 
     def set_parent
-      @parent = find_parent_models(@season)
+      @array_parent = find_parent_models(@season)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def season_params

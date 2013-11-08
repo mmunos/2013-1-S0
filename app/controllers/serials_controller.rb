@@ -118,11 +118,10 @@ class SerialsController < ApplicationController
 
     def set_reviews
       @reviews = @serial.reviews
-      @review = Review.new
     end
 
     def set_parent
-      @parent = find_parent_models(@serial)[0..-1]
+      @array_parent = find_parent_models(@serial)
     end
 
 

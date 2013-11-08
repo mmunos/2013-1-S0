@@ -139,7 +139,6 @@ class EpisodesController < ApplicationController
 
     def set_reviews
       @reviews = @episode.reviews
-      @review = Review.new
     end
 
     def set_posts
@@ -148,7 +147,7 @@ class EpisodesController < ApplicationController
     end
 
     def set_parent
-      @parent = find_parent_models(@episode)
+      @array_parent = find_parent_models(@episode)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

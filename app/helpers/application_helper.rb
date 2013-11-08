@@ -88,7 +88,7 @@ module ApplicationHelper
 	        parents.push $1.classify.constantize.find(value)
 	      end
 	    end
-	    parents.push current_model
+	    parents.push current_model if current_model
 	    parents
 	end
 

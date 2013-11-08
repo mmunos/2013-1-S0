@@ -142,11 +142,10 @@ end
 
     def set_reviews
       @reviews = @movie.reviews
-      @review = Review.new
     end
 
     def set_parent
-      @parent = find_parent_models(@movie)
+      @array_parent = find_parent_models(@movie)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

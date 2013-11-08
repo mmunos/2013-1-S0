@@ -1,16 +1,14 @@
 class ReviewsController < ApplicationController
-  include ApplicationHelper
-
   skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
   skip_before_filter :authorize, only: [:index, :show]
   before_action :set_parent
-  before_action :set_redirect_parent
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
   def index
     @reviews = @parent.reviews
+    redirect_to polymorphic_path(@array_parent)
   end
 
   # GET /reviews/1
@@ -21,6 +19,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    redirect_to polymorphic_path(@array_parent)
   end
 
   # GET /reviews/1/edit
@@ -36,10 +35,10 @@ class ReviewsController < ApplicationController
     
     respond_to do |format|
       if @review.save
-        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Review was successfully created.' }
+        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Review was successfully created.' }
         format.json { render action: 'show', status: :created, location: @review }
       else
-        format.html { redirect_to polymorphic_path(@redirect_parent), alert: @review.errors.full_messages.first}
+        format.html { redirect_to polymorphic_path(@array_parent), alert: @review.errors.full_messages.first}
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +49,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Review was successfully updated.' }
+        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Review was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +63,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Your review was deleted.' }
+      format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your review was deleted.' }
       format.json { head :no_content }
     end
   end
@@ -76,11 +75,17 @@ class ReviewsController < ApplicationController
     end
 
     def set_parent
-      @parent = find_parent_models()[-2]
-    end
-
-    def set_redirect_parent
-      @redirect_parent = find_parent_models()
+      @serial = (params[:serial_id]) ? Serial.find(params[:serial_id]): nil;
+      @season = (@serial)? @serial.seasons.find_by(number: params[:season_id]) : nil;
+      @episode = (@season)? @season.episodes.find_by(number: params[:episode_id]): nil;
+      @movie = (params[:movie_id]) ? Movie.find(params[:movie_id]): nil;
+      parents = Array.new 
+      models = [@movie, @serial, @season, @episode]
+      models.each do |model|
+        parents << model if model
+      end
+      @parent = parents[-1]
+      @array_parent = parents
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

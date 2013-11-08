@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
   skip_before_filter :authorize, only: [:index, :show]
-  before_action :set_parent
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
@@ -72,20 +71,6 @@ class ReviewsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
-    end
-
-    def set_parent
-      @serial = (params[:serial_id]) ? Serial.find(params[:serial_id]): nil;
-      @season = (@serial)? @serial.seasons.find_by(number: params[:season_id]) : nil;
-      @episode = (@season)? @season.episodes.find_by(number: params[:episode_id]): nil;
-      @movie = (params[:movie_id]) ? Movie.find(params[:movie_id]): nil;
-      parents = Array.new 
-      models = [@movie, @serial, @season, @episode]
-      models.each do |model|
-        parents << model if model
-      end
-      @parent = parents[-1]
-      @array_parent = parents
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

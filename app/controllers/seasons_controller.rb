@@ -3,7 +3,6 @@ class SeasonsController < ApplicationController
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_serial
   before_action :set_season, only: [:show, :edit, :update, :destroy]
-  before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
   before_action :set_posts, only:[:show]
 
@@ -88,9 +87,6 @@ class SeasonsController < ApplicationController
       @post = Post.new
     end
 
-    def set_parent
-      @array_parent = find_parent_models(@season)
-    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def season_params
       params.require(:season).permit(:description, :date, :number, :serial_id)

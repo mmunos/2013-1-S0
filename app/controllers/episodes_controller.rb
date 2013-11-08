@@ -3,7 +3,6 @@ class EpisodesController < ApplicationController
   skip_before_filter :authorize, only: [:show, :index]
   before_action :set_season_serial
   before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag, :seen, :unseen]
-  before_action :set_parent, only:[:show, :index]
   before_action :set_reviews, only:[:show]
   before_action :set_posts, only:[:show]
 
@@ -144,10 +143,6 @@ class EpisodesController < ApplicationController
     def set_posts
       @posts = @episode.posts
       @post = Post.new
-    end
-
-    def set_parent
-      @array_parent = find_parent_models(@episode)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

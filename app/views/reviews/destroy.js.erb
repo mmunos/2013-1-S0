@@ -1,1 +1,3 @@
-$("#review-<%= @review.id %>").fadeOut();
+$("#review-<%= @review.id %>").fadeOut(400, function() {
+	$("p.center-warning").fadeIn();
+});

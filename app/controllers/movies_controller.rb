@@ -68,26 +68,32 @@ class MoviesController < ApplicationController
   end
 
   def add
-  if current_user
-    if current_user.movies.include?(@movie)
-      redirect_to @movie, notice: "You already follow this movie"
-    else
-      current_user.movies << @movie
-      redirect_to @movie, notice: "#{@movie.name} was successfully added!"
+    if current_user
+      if current_user.movies.include?(@movie)
+        redirect_to @movie, notice: "You already follow this movie"
+      else
+        current_user.movies << @movie
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully added!" }
+          format.js
+        end
+      end
     end
   end
-end
 
-def remove
-  if current_user
-    if current_user.movies.include?(@movie)
-      current_user.movies.delete(@movie)
-      redirect_to @movie, notice: "#{@movie.name} was successfully removed!"
-    else
-      redirect_to @movie, notice: "You can't delete #{@movie.name}, D'OH!!!"
+  def remove
+    if current_user
+      if current_user.movies.include?(@movie)
+        current_user.movies.delete(@movie)
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully removed!" }
+          format.js
+        end
+      else
+        redirect_to @movie, notice: "You can't delete #{@movie.name}, D'OH!!!"
+      end
     end
   end
-end
 
   def watch
     if current_user
@@ -95,44 +101,56 @@ end
         redirect_to @movie, notice: "You already added this movie to your watchlist"
       else
         current_user.watchlist.movies << @movie
-        redirect_to @movie, notice: "#{@movie.name} was successfully added to watchlist!"
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully added to watchlist!" }
+          format.js
+        end
       end
     end
   end
 
-    def unwatch
+  def unwatch
     if current_user
       if current_user.watchlist.movies.include?(@movie)
         current_user.watchlist.movies.delete(@movie)
-        redirect_to @movie, notice: "#{@movie.name} was successfully removed from watchlist!"
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully removed from watchlist!" }
+          format.js
+        end
       else
         redirect_to @movie, notice: "You can't delete #{@movie.name} from watchlist, D'OH!!!"
       end
     end
-    end
+  end
 
 
- def seen
+  def seen
     if current_user
       if current_user.watched.movies.include?(@movie)
         redirect_to @movie, notice: "You already marked this movie as seen!"
       else
         current_user.watched.movies << @movie
-        redirect_to @movie, notice: "#{@movie.name} was successfully marked as seen!"
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as seen!" }
+          format.js
+        end
       end
     end
   end
 
-    def unseen
+  def unseen
     if current_user
       if current_user.watched.movies.include?(@movie)
         current_user.watched.movies.delete(@movie)
-        redirect_to @movie, notice: "#{@movie.name} was successfully marked as unseen!"
+        respond_to do |format|
+          format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as unseen!" }
+          format.js
+        end
       else
         redirect_to @movie, notice: "You can't unseen #{@movie.name}, D'OH!!!"
       end
     end
-    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

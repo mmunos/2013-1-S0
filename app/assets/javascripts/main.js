@@ -1,3 +1,16 @@
+/* Spinner preset */
+
+$.fn.spin.presets.showganizer = {
+  lines: 12,
+  length: 10,
+  width: 4,
+  radius: 13,
+  color: "#000",
+  top: 12,
+  left: 12
+}
+
+
 $(document).ready(showganizer);
 $(window).bind('page:change', showganizer)
 
@@ -58,7 +71,12 @@ $(document).on("click",".close-post-form", function(e) {
 			$(".fade-open-post").fadeIn();
 			$(".post-form").closest("form")[0].reset();
 		});
+});
 
+$(document).bind("ajaxSend", function(){
+        $("#loading-indicator").fadeIn();
+    }).bind("ajaxComplete", function(){
+        $("#loading-indicator").fadeOut();
 });
 
 function showganizer(){
@@ -84,6 +102,10 @@ function showganizer(){
 	}).focus(function(e){
 		$(".review-form-charleft").fadeIn();
 	});
+
+    /* Spinner */
+
+    $("#loading-indicator").spin('showganizer');
 
 }
 

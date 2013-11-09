@@ -71,7 +71,10 @@ class SerialsController < ApplicationController
         redirect_to @serial, notice: "You already follow this series"
       else
         current_user.serials << @serial
-        redirect_to @serial, notice: "#{@serial.name} was successfully added!"
+        respond_to do |format|
+          format.html { redirect_to @serial, notice: "#{@serial.name} was successfully added!" }
+          format.js
+        end
       end
     end
   end
@@ -80,29 +83,38 @@ class SerialsController < ApplicationController
     if current_user
       if current_user.serials.include?(@serial)
         current_user.serials.delete(@serial)
-        redirect_to @serial, notice: "#{@serial.name} was successfully removed!"
+        respond_to do |format|
+          format.html { redirect_to @serial, notice: "#{@serial.name} was successfully removed!" }
+          format.js
+        end
       else
         redirect_to @serial, notice: "You can't delete #{@serial.name}, D'OH!!!"
       end
     end
   end
 
-    def watch
+  def watch
     if current_user
       if current_user.watchlist.serials.include?(@serial)
         redirect_to @serial, notice: "You already added this series to your watchlist"
       else
         current_user.watchlist.serials << @serial
-        redirect_to @serial, notice: "#{@serial.name} was successfully added to watchlist!"
+        respond_to do |format|
+          format.html { redirect_to @serial, notice: "#{@serial.name} was successfully added to watchlist!" }
+          format.js
+        end
       end
     end
   end
 
-    def unwatch
+  def unwatch
     if current_user
       if current_user.watchlist.serials.include?(@serial)
         current_user.watchlist.serials.delete(@serial)
-        redirect_to @serial, notice: "#{@serial.name} was successfully removed from watchlist!"
+        respond_to do |format|
+          format.html { redirect_to @serial, notice: "#{@serial.name} was successfully removed from watchlist!" }
+          format.js
+        end
       else
         redirect_to @serial, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
       end

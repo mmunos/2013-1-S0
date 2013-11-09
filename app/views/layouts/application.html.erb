@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Showganizer</title>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,300italic,500italic,400italic' rel='stylesheet' type='text/css'>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-
-
-
-	<div id="main-nav">
-		<%= render "layouts/logo" %>
-		<%= render "layouts/main_nav" %>
-		<%= render "layouts/admin_bar_panel" if user_admin?(current_user) %>
- 	</div>
-
-	<div id="main">
-		<div id="top-bar">
-			<%= render "layouts/top_search" %>
-
-			<%= render "layouts/top_user_bar" %>
+	<head>
+		<title>Showganizer</title>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,300italic,500italic,400italic' rel='stylesheet' type='text/css'>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id="main-nav">
+			<%= render "layouts/logo" %>
+			<%= render "layouts/main_nav" %>
+			<%= render "layouts/admin_bar_panel" if user_admin?(current_user) %>
 		</div>
 
+		<div id="main">
+			<div id="top-bar">
+				<%= render "layouts/top_search" %>
+				<%= render "layouts/top_user_bar" %>
+			</div>
+			<section id="main-content">
+				<%= render "layouts/flash_bar" %>
+				<%= yield %>
+			</section>
+		</div>
 
-		<section id="main-content">
-			<%= render "layouts/flash_bar" %>
-			<%= yield %>
-		</section>
-	</div>
-
-</body>
+		<%= render 'layouts/loading_indicator' %>
+	</body>
 </html>

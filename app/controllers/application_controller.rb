@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base  
   include ApplicationHelper
+  attr_reader :array_parents
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -24,7 +25,7 @@ class ApplicationController < ActionController::Base
 
       if (params[:episode_id] || params[:controller]=="episodes")
         episode_number = (params[:controller] == "episodes")? params[:id]: params[:episode_id];
-        episode = serial.season.episodes.find_by(number: episode_number)
+        episode = season.episodes.find_by(number: episode_number)
       end
     elsif params[:movie_id]
       movie = Movie.find(params[:movie_id])

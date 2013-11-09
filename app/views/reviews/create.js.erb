@@ -1,4 +1,4 @@
-var $review = $('<%= escape_javascript render partial: "review", object: @review %>');
+var $review = $('<%= escape_javascript render @review %>');
 $review.hide();
 $("#reviews").prepend($review);
 $('#reviews p.center-warning').fadeOut('fast');

@@ -19,9 +19,7 @@
 <% end %>
   <p class="center-warning"><%= message.html_safe %></p>
 
-  <!-- <% if current_user and !contains_user(@reviews,current_user) %><a href="#" class="open-review-form fade-open-review">Write a review</a><% end %> -->
-
-
+  
   <% @reviews.reverse.each do |review| %>
-    <%= render partial: 'reviews/review', object: review %>
+    <%= render review %>
   <% end %>

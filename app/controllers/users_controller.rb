@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   skip_before_filter :authorize, only: [:show, :new, :create]
   skip_before_filter :user_admin, only: [:show, :edit, :update, :me]
   before_action :can_edit, only: [:edit, :update] 
-
-  
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -58,13 +56,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    params[:user][:movie_ids] ||= []
-    params[:user][:serial_ids] ||= []
-
     if user_admin?(current_user)
       @user.role = params[:user][:role]
       @user.score = params[:user][:score]
     end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -87,13 +83,11 @@ class UsersController < ApplicationController
   end
 
   def me
-    redirect_to @user
+    redirect_to current_user
   end
 
 
   private
-
-
     def can_edit
       unless user_admin?(current_user) || current_user == User.find(params[:id])
         redirect_to access_denied_path, notice: "You can't edit other user's profile!" 
@@ -107,6 +101,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :serial_ids => [], :movie_ids => [])
+      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
     end
 end

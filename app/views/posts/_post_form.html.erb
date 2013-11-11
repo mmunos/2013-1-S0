@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'widgEditor' %>
+<%= javascript_include_tag 'widgEditor' %>
 
 <% if current_user %>
   <%= form_for((@array_parent.dup).push(@post)) do |f| %>
@@ -10,7 +12,7 @@
 
       <div class="post-form-content">
         
-        <%= f.text_area :content, {required: "", placeholder:"Write your post here"} %>
+        <%= f.text_area :content, {required: "", placeholder:"Write your post here", class: "widgEditor"}  %>
       </div>
 
       <div class="post-form-submit">

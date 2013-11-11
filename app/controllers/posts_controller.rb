@@ -3,14 +3,13 @@ class PostsController < ApplicationController
 
   skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
   skip_before_filter :authorize, only: [:index, :show]
-  before_action :set_parent
-  before_action :set_redirect_parent
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = @parent.posts
+    redirect_to polymorphic_path(@array_parent)
   end
 
   # GET /posts/1
@@ -21,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    redirect_to polymorphic_path(@array_parent)
   end
 
   # GET /posts/1/edit
@@ -36,10 +36,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Post was successfully created.' }
+        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
-        format.html { redirect_to polymorphic_path(@redirect_parent), alert: @post.errors.full_messages.first }
+        format.html { redirect_to polymorphic_path(@array_parent), alert: @post.errors.full_messages.first }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Post was successfully updated.' }
+        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to polymorphic_path(@redirect_parent), notice: 'Your post was deleted.' }
+      format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your post was deleted.' }
       format.json { head :no_content }
     end
   end
@@ -73,14 +73,6 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
-    end
-
-    def set_parent
-      @parent = find_parent_models()[-2]
-    end
-
-    def set_redirect_parent
-      @redirect_parent = find_parent_models()
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

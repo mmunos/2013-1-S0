@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'widgEditor' %>
 
 <% if current_user %>
-  <%= form_for((@array_parent.dup).push(@post),:html => { :multipart => true },remote: true ) do |f| %>
+  <%= form_for((@array_parent.dup).push(Post.new),:html => { :multipart => true }) do |f| %>
     <div class="post-form">
       <div class="post-form-user">
         <%= user_gravatar(current_user,90) %>

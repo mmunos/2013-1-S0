@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  include ApplicationHelper
-
   skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
   skip_before_filter :authorize, only: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -36,8 +34,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.js 
         format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully created.' }
+        format.js         
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { redirect_to polymorphic_path(@array_parent), alert: @post.errors.full_messages.first }

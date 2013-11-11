@@ -25,7 +25,7 @@
         <a href="<%= user_path(post.user) %>">
         <span class="post-username"><%= post.user.username %></span>
       </a>
-      <br><br>
+      <br>
       <% if post.photo.url() %>
        <%= link_to  (image_tag post.photo.url()), post.photo.url %>
       <% end %>

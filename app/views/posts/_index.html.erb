@@ -25,6 +25,9 @@
         <a href="<%= user_path(post.user) %>">
         <span class="post-username"><%= post.user.username %></span>
       </a>
+      <% if @post.photo? %>
+      <%= image_tag @post.photo.url(:small) %>
+      <% end %>
         <div class="post-text">
           <%= simple_format(post.content) %>
         </div>
@@ -34,7 +37,7 @@
           <div class="post-boost">
           <span>Boost! </span>
         </div>
-        <span> | Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Destroy', polymorphic_path(@parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+        <span> | Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Delete', polymorphic_path(@parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
 
       </div>
     </div>

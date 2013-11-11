@@ -11,12 +11,15 @@ group :development do
 	gem 'awesome_print'
 	gem 'quiet_assets'
 	gem 'better_errors'
+	gem "paperclip", "~> 3.0"
 end
 
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
 end
+
+gem "paperclip", "~> 3.0"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

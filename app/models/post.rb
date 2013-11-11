@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable , polymorphic: true
 
-  has_attached_file :photo, :styles => { :small => "150x150>" },
+  has_attached_file :photo, #:styles => { :small => "250x350>" },
                   :url  => "/assets/posts/:id/:style/:basename.:extension",
                   :path => ":rails_root/public/assets/posts/:id/:style/:basename.:extension"
 

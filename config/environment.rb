@@ -8,6 +8,7 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance_tag|
   "<span class='field_error'>#{html_tag}</span>".html_safe
 end
 
+Paperclip.options[:command_path] = "/usr/local/bin/"
 
 ActionMailer::Base.smtp_settings = {
  :address              => "smtp.gmail.com",

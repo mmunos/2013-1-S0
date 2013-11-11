@@ -14,15 +14,15 @@ module ApplicationHelper
 	def add_remove_link(show)
 		if show.is_a?(Serial)
 			if current_user && current_user.serials.include?(show)
-				link_to "Remove from My Series", remove_serial_path, class: "remove-show-button"
+				link_to "Remove from My Series", remove_serial_path, class: "remove-show-button", remote: true, data: {disable_with: "Removing…"}
 			else
-				link_to "Add to My Series", add_serial_path, class: "add-show-button"
+				link_to "Add to My Series", add_serial_path, class: "add-show-button", remote: true, data: {disable_with: "Adding…"}
 			end
 		elsif show.is_a?(Movie)
 			if current_user && current_user.movies.include?(show)
-				link_to "Remove from My Movies", remove_movie_path, class: "remove-show-button"
+				link_to "Remove from My Movies", remove_movie_path, class: "remove-show-button", remote: true, data: {disable_with: "Removing…"}
 			else
-				link_to "Add to My Movies", add_movie_path, class: "add-show-button"
+				link_to "Add to My Movies", add_movie_path, class: "add-show-button", remote: true, data: {disable_with: "Adding…"}
 			end
 		end
 	end
@@ -38,37 +38,37 @@ module ApplicationHelper
 	def watch_unwatch_link(show)
 		if show.is_a?(Serial)
 			if current_user && current_user.watchlist.serials.include?(show)
-				link_to "Remove from My watchlist", unwatch_serial_path, class: "unwatch-show-button"
+				link_to "Remove from My watchlist", unwatch_serial_path, class: "unwatch-show-button", remote: true, data: {disable_with: "Removing…"}
 			else
-				link_to "Add to My Watchlist", watch_serial_path, class: "watch-show-button"
+				link_to "Add to My Watchlist", watch_serial_path, class: "watch-show-button", remote: true, data: {disable_with: "Adding…"}
 			end
 		elsif show.is_a?(Movie)
 			if current_user && current_user.watchlist.movies.include?(show)
-				link_to "Remove from My Watchlist", unwatch_movie_path, class: "unwatch-show-button"
+				link_to "Remove from My Watchlist", unwatch_movie_path, class: "unwatch-show-button", remote: true, data: {disable_with: "Removing…"}
 			else
-				link_to "Add to My Watchlist", watch_movie_path, class: "watch-show-button"
+				link_to "Add to My Watchlist", watch_movie_path, class: "watch-show-button", remote: true, data: {disable_with: "Adding…"}
 			end
 		end
 	end
 
 
-		def seen_unseen_episode_link(episode)
-			if current_user && current_user.watched.episodes.include?(episode)
-				link_to "Mark as unseen", unseen_episode_path, class: "unwatch-episode-button"
-			else
-				link_to "Mark as seen", seen_episode_path, class: "watch-episode-button"
-			end
-
+	def seen_unseen_episode_link(episode)
+		if current_user && current_user.watched.episodes.include?(episode)
+			link_to "Mark as unseen", unseen_episode_path, class: "unseen-episode-button"
+		else
+			link_to "Mark as seen", seen_episode_path, class: "seen-episode-button"
 		end
 
-		def seen_unseen_movie_link(episode)
-			if current_user && current_user.watched.movies.include?(episode)
-				link_to "Mark as unseen", unseen_movie_path, class: "unwatch-episode-button"
-			else
-				link_to "Mark as seen", seen_movie_path, class: "watch-episode-button"
-			end
+	end
 
+	def seen_unseen_movie_link(episode)
+		if current_user && current_user.watched.movies.include?(episode)
+			link_to "Mark as unseen", unseen_movie_path, class: "unseen-episode-button", remote: true, data: {disable_with: "Marking…"}
+		else
+			link_to "Mark as seen", seen_movie_path, class: "seen-episode-button", remote: true, data: {disable_with: "Marking…"}
 		end
+
+	end
 	
 	def user_gravatar(user, size = 80, clase = nil)
 		options = Hash.new

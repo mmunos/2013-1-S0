@@ -6,11 +6,7 @@
 
 <div class="show-sidebar">
   <div class="show-action-menu">
-      <ul>
-          <li><%= add_remove_link(@movie) %></li>
-          <li><%= watch_unwatch_link(@movie) %></li>
-          <li><%= seen_unseen_movie_link(@movie) %></li>
-      </ul>
+      <%= render 'action_menu' %>
   </div>
 
   <img src="http://placehold.it/216x319&text=<%= @movie.name%>" />

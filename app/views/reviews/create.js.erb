@@ -3,8 +3,8 @@ $review.hide();
 $("#reviews").prepend($review);
 $('#reviews p.center-warning').fadeOut('fast');
 $(".review-form-container").fadeOut('fast', function() {
-	$review.fadeIn('fast');	
-	$flash_bar =  ($('.flash-bar').length > 0)? $('.flash-bar') : $('<div></div>').addClass('flash-bar');
-	$flash_bar.html("Review was successfully created.").hide().prependTo('#main-content')
-	.fadeIn().delay(3000).fadeOut();
+    $review.fadeIn('fast'); 
+    $flash_bar =  ($('.flash-bar').length > 0)? $('.flash-bar') : $('<div></div>').addClass('flash-bar');
+    $flash_bar.html("Review was successfully created.").hide().prependTo('#main-content')
+    .fadeIn().delay(3000).fadeOut();
 }).find("form")[0].reset();

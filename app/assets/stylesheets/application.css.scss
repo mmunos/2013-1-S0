@@ -204,6 +204,11 @@ h1 {
 	opacity: 1;
 	z-index: 1;
 }
+
+.no-display {
+	display: none;
+}
+
 .hidden {
 	opacity: 0;
 	z-index: 0;
@@ -277,7 +282,7 @@ h1 {
 	display: block;
 }
 
-#main-nav nav ul li a:hover, #main-nav nav ul li a.active {
+#main-nav nav ul li a:hover, #main-nav nav ul li a.active {
 	background-position: inherit;
 }
 
@@ -402,7 +407,7 @@ form .actions {
 	margin: 20px auto;
 	text-align: center;
 }
-#main-content input[type="submit"], #main-content button {
+#main-content input[type="submit"], #main-content button {
 	margin: 10px auto;
 	padding: 5px 10px;
 	font-weight: lighter;
@@ -457,4 +462,24 @@ form .actions {
     list-style: square;
     font-weight: lighter;
   }
+}
+
+/* Loading Indicator */
+
+#loading-indicator {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background: rgba(0,0,0,0.1);
+	border-radius: 5px 0 0 0;
+	color: #fff;
+	font-weight: bolder;
+	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	z-index: 1000;
+	width: 75px;
+	height: 75px;
+	display: none;
+
+	p {display: none;}
+
 }

@@ -25,6 +25,9 @@
         <a href="<%= user_path(post.user) %>">
         <span class="post-username"><%= post.user.username %></span>
       </a>
+      <% if @post.photo? %>
+      <%= image_tag @post.photo.url(:small) %>
+      <% end %>
         <div class="post-text">
           <%= simple_format(post.content) %>
         </div>

@@ -36,10 +36,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.js 
         format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { redirect_to polymorphic_path(@array_parent), alert: @post.errors.full_messages.first }
+        #format.js { render action: 'error', object: @post.errors }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -64,6 +66,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
+      format.js 
       format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your post was deleted.' }
       format.json { head :no_content }
     end

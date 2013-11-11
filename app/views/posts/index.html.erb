@@ -1,25 +1,27 @@
-<h1>Listing posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<% if current_user %>
+  <div class="post-form-container">
+    <%= render "posts/form" %>
+  </div>
+<% end%>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+<div id="posts">
+<% if @posts.empty? %>
+  <% message = (current_user)? "No posts yet, #{link_to 'write the first one', nil, class:'open-post-form'}!" : "No posts yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
+<% else %>
+    <% if current_user %>
+      <% 
+        message = "#{link_to 'Write a post', nil, class:'open-post-form'}"
+        hidden = (contains_user(@posts,current_user))? true: false;
+       %>
+    <% else %>
+      <% message = "#{link_to 'Sign up', sign_up_path} or #{link_to 'log in', log_in_path} to write a post" %>
     <% end %>
-  </tbody>
-</table>
+<% end %>
+  <p class="center-warning<%= " no-display" if hidden %>"><%= message.html_safe %></p>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+  
+  <% @posts.reverse.each do |post| %>
+    <%= render post %>
+  <% end %>

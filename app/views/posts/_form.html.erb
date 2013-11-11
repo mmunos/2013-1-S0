@@ -1,31 +1,25 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%= stylesheet_link_tag 'widgEditor' %>
+<%= javascript_include_tag 'widgEditor' %>
 
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<% if current_user %>
+  <%= form_for((@array_parent.dup).push(@post),:html => { :multipart => true },remote: true ) do |f| %>
+    <div class="post-form">
+      <div class="post-form-user">
+        <%= user_gravatar(current_user,90) %>
+
+        <span class="post-form-username"><%= current_user.username %></span>
+      </div>
+
+      <div class="post-form-content">
+        
+        <%= f.text_area :content, {required: "", placeholder:"Write your post here", class: "widgEditor"}  %>
+      </div>
+
+      <%= f.file_field :photo %>
+
+      <div class="post-form-submit">
+        <%= f.submit "Create Review", data: { disable_with: "Creating..." } %> or <%= link_to 'Cancel', nil, class: "close-post-form" %>
+      </div>
     </div>
   <% end %>
-
-
-<div class="field">
-    <%= f.label :user %><br>
-    <%= f.text_field :user %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :commentable %><br>
-    <%= f.text_field :commentable %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

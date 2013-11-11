@@ -58,17 +58,19 @@ $(document).on("click",".open-post-form", function(e) {
 		e.preventDefault();
 		if ($(this).hasClass("fade-open-post")) {
 			$(this).fadeOut();
+		}else {
+			$(this).parent('.center-warning').fadeOut();
 		}
-		$(".form-container-post").slideDown(400, function() {
-			$(".form-container-post textarea").focus();
+		$(".post-form-container").slideDown(400, function() {
+			$(".post-form-container textarea").focus();
 		});
 });
 
 
 $(document).on("click",".close-post-form", function(e) {
 		e.preventDefault();
-		$(".form-container-post").slideUp(400, function(){
-			$(".fade-open-post").fadeIn();
+		$(".fade-open-post, #posts p.center-warning").fadeIn();
+		$(".post-form-container").slideUp(400, function(){
 			$(".post-form").closest("form")[0].reset();
 		});
 });
@@ -82,7 +84,7 @@ $(document).bind("ajaxSend", function(){
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
 	$(".review-form-container").hide();
-	$(".form-container-post").hide();
+	$(".post-form-container").hide();
 
 	$(".review-form-charleft").hide()
 

@@ -76,6 +76,34 @@ module ApplicationHelper
 		end
 
 	end
+
+	def tracking_details_season(ep,episode, episodes,season)
+		html = '' 
+
+  		html << content_tag(:p, :class => "description") do
+
+          if(ep)
+           concat "Last Episode Watched: "
+           concat link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode) 
+           concat content_tag(:br)
+           concat "Next Episode to watch: "
+           concat link_to "#{ep.name}",serial_season_episode_path(@serial,season,ep)
+          else
+            if episode 
+               concat "Last Episode Watched: "
+	           concat link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode)
+
+            else 
+               concat "You haven't started to watch this series!"
+               concat content_tag(:br)
+               concat "First Episode to watch: " 
+	           concat link_to "#{season.episodes.first.name}",serial_season_episode_path(@serial,season,season.episodes.first)
+             
+            end
+          end
+         end	
+		return html.html_safe
+	end
 	
 	def user_gravatar(user, size = 80, clase = nil)
 		options = Hash.new

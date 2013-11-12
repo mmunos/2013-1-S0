@@ -60,32 +60,12 @@
         <div class="show-season-list-item">
           <div class="number"><%= link_to season.number, my_tracking_detail_path(@serial,season) %></div>
 
-          <%episodes=0%>
-          <%episode=nil%>
-          <%ep=nil%>
-          <%season.episodes.all.each do |e|%>
-            <%unless not e.nil?%>
-            	<%if @watched.episodes.sort {|a,b| a.season_id <=> b.season_id}.include?(e)%>
-            		<%episodes=episodes+1%>
-            		<%episode=e%>
-            	<%end%>
-            	<%if e.number==episode.number+1%>
-            		<%ep=e%>
-            	<%end%>
-            <%end%>
-          <%end%>
+          <% ep = @watched.next_episode(@watched,season)
+          episode = @watched.get_episode
+          episodes = @watched.get_episodes
+          %>
 
-
-          <%if(ep)%>
-          <p class="description">Last Episode Watched: <%= link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode) %> <br> Next Episode to watch: <%= link_to "#{ep.name}",serial_season_episode_path(@serial,season,ep)%></p>
-          <%else%>
-            <%if episode %>
-              <p class="description">Last Episode Watched: <%= link_to "#{episode.name}",serial_season_episode_path(@serial,season,episode) %></p>
-            <%else %>
-              <p class="description">You haven't started to watch this series!
-              <br> First Episode to watch: <%= link_to "#{season.episodes.first.name}",serial_season_episode_path(@serial,season,season.episodes.first)%></p>
-            <%end%>
-          <%end%>
+          <%= tracking_details_season(ep,episode, episodes,season) %>
 
           <div class="episodes-number">
             

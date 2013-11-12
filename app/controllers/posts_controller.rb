@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create,:delete_photo]
   skip_before_filter :authorize, only: [:index, :show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :delete_photo]
 
   # GET /posts
   # GET /posts.json
@@ -69,6 +69,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
+    delete_photo
     respond_to do |format|
       format.js 
       format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your post was deleted.' }
@@ -76,7 +77,9 @@ class PostsController < ApplicationController
     end
   end
 
-
+def delete_photo
+  @post.photo.destroy
+end
 
 
   private

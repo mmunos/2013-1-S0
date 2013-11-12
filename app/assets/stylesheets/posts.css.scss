@@ -84,6 +84,11 @@
 
 		}
 
+		.post-tags li{
+		  display:inline-block; margin-right:4px; vertical-align:top; 
+              overflow:hidden; 
+		}
+
 		.post-content {
 			margin-left: 130px;
 			background: #fff;

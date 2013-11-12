@@ -34,6 +34,13 @@ module ApplicationHelper
 		end	
 	end
 
+	def tag_hash_list(tags_list)
+		tags = tags_list.split(",")
+		content_tag :ul do
+			tags.collect{|tag| concat(content_tag(:li,"#"+tag.squish))}
+		end	
+	end	
+
 
 	def watch_unwatch_link(show)
 		if show.is_a?(Serial)

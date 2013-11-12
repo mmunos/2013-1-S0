@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111013032) do
+ActiveRecord::Schema.define(version: 20131111234443) do
 
   create_table "episode_taggings", force: true do |t|
     t.integer  "episode_id"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 20131111013032) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "post_taggings", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_taggings", ["post_id"], name: "index_post_taggings_on_post_id"
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"

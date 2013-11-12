@@ -3,4 +3,5 @@ class Tag < ActiveRecord::Base
 
 	has_many :user_episode_taggings
 	has_many :episode_taggings
+	has_many :post_taggings
 end

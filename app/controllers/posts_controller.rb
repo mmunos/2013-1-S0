@@ -31,6 +31,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @parent.posts << @post
+    param_tags = params[:post][:tags_list]
+    @post.update_tags(param_tags,@post)
 
     respond_to do |format|
       if @post.save
@@ -48,6 +50,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    param_tags = params[:post][:tags_list]
+    params[:post].delete(:tags_list)
+    @post.update_tags(param_tags,@post)
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully updated.' }
@@ -70,6 +76,9 @@ class PostsController < ApplicationController
     end
   end
 
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -78,6 +87,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-       params.require(:post).permit(:user_id, :content, :commentable_id, :photo)
+       params.require(:post).permit(:user_id, :content, :commentable_id, :photo,:tag_list)
     end
 end

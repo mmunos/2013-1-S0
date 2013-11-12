@@ -18,6 +18,15 @@
         </div>
       </div>
 
+      <div class="post-tags">
+ <%= if post.tags.any? 
+        tag_hash_list(post.tags_list) 
+      else 
+        :P
+        end%>
+      
+      </div>
+
       <div class="post-meta">
           <div class="post-boost">
           <span>Boost! </span>

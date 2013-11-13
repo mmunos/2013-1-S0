@@ -109,6 +109,7 @@ function showganizer(){
 
     $("#loading-indicator").spin('showganizer');
 
+
 }
 
 

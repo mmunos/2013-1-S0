@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#zone_main {
+    overflow: auto;
+    width: 100%;
+}
+
+#tabs {
+    display:inline-block;
+    width:65%;
+    float:left;
+}
+
 .post-form {
 	padding: 20px 10px 0;
 	border-top: 1px solid #ddd;

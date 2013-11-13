@@ -11,8 +11,8 @@
       <div class="post-form-content">
 
         <div class="post-form-type-option">
-          <input type="radio" name="post[type]" value="image" id="image-option" required>
-          <input type="radio" name="post[type]" value="link" id="link-option" required>
+          <input type="radio" name="post[post_type]" value="image" id="image-option" required>
+          <input type="radio" name="post[post_type]" value="link" id="link-option" required>
 
           <label for="image-option">Post an image</label>
           <label for="link-option">Post a link</label>
@@ -27,7 +27,7 @@
           </span>
         </div>
         <div class="post-form-link post-form-type">
-          <%= f.text_field :url, {placeholder: "http://example.org/"}%>
+          <%= f.text_field :url, { placeholder: "http://example.org/" } %>
           <%= f.text_field :url_title, {placeholder: "Title of this link"} %>
         </div>
 

@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :url_title
       t.string :url
       t.text :content
-      t.string :type
+      t.string :post_type
       t.references :commentable , polymorphic: true
 
       t.timestamps

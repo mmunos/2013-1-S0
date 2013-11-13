@@ -167,6 +167,11 @@
 
 			a {border: 0;}
 
+			.post-username {
+				display: block;
+				text-align: center;
+			}
+
 		}
 
 		.post-content {
@@ -175,12 +180,6 @@
 			padding: 10px;
 			position: relative;
 			overflow: visible;
-
-			.post-username {
-				display: block;
-				text-align: left;
-
-			}
 
 			.post-text {
 				padding: 0 5px;

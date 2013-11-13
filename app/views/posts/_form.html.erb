@@ -17,11 +17,6 @@
 
       <%= f.file_field :photo %>
 
-  <div class="field">
-    <%= f.label :tags_list, "Tag list (separated by comma)" %><br>
-    <%= f.text_field :tags_list %>
-  </div>
-
       <div class="post-form-submit">
         <%= f.submit "Create Review", data: { disable_with: "Creating..." } %> or <%= link_to 'Cancel', nil, class: "close-post-form" %>
       </div>

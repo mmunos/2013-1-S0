@@ -31,8 +31,6 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @parent.posts << @post
-    param_tags = params[:post][:tags_list]
-    @post.update_tags(param_tags,@post)
 
     respond_to do |format|
       if @post.save
@@ -50,9 +48,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    param_tags = params[:post][:tags_list]
-    params[:post].delete(:tags_list)
-    @post.update_tags(param_tags,@post)
 
     respond_to do |format|
       if @post.update(post_params)
@@ -77,15 +72,15 @@ class PostsController < ApplicationController
     end
   end
 
-def delete_photo
-  @post.photo.destroy
-end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def delete_photo
+      @post.photo.destroy
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

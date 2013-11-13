@@ -1,6 +1,7 @@
 
 <% if current_user %>
-  <%= form_for((@array_parent.dup).push(Post.new),:html => { :multipart => true }) do |f| %>
+  <%= form_for((@array_parent.dup).push(Post.new),html: { multipart: true }, remote: true) do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="post-form">
       <div class="post-form-user">
         <%= user_gravatar(current_user,90) %>
@@ -21,14 +22,14 @@
         <div class="post-form-image post-form-type">
           <div class="post-form-image-button">
             <span>Select File...</span>
-            <%= f.file_field :photo, {accept: 'image/png,image/gif,image/jpeg', id: "post-form-file-input"} %>
+            <%= f.file_field :photo, {accept: 'image/png,image/gif,image/jpeg', id: "post-form-file-input", required: ""} %>
           </div>
           <span class="post-form-image-filename">You have not selected any image.
           </span>
         </div>
         <div class="post-form-link post-form-type">
-          <%= f.text_field :url, { placeholder: "http://example.org/" } %>
-          <%= f.text_field :url_title, {placeholder: "Title of this link"} %>
+          <%= f.url_field :url, { placeholder: "http://example.org/", id: "post-form-link-url"} %>
+          <%= f.text_field :url_title, {placeholder: "Title of this link", id: "post-form-link-url-title"} %>
         </div>
 
         <%= f.text_area :content, {required: "", placeholder: "Caption", id: "post-caption"}  %>

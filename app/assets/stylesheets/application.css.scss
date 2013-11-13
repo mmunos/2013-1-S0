@@ -357,7 +357,8 @@ h1 {
 /* Forms */ 
 
 #main-content input[type="text"], #main-content input[type="password"],
-#main-content input[type="number"], #main-content input[type="email"], 
+#main-content input[type="number"], #main-content input[type="email"],
+#main-content input[type="url"],
 #main-content textarea {
 	padding: 5px;
 	font-weight: normal;
@@ -369,7 +370,8 @@ h1 {
 }
 
 #main-content input[type="text"]:hover, #main-content input[type="password"]:hover,
-#main-content input[type="number"]:hover, #main-content input[type="email"]:hover {
+#main-content input[type="number"]:hover, #main-content input[type="email"]:hover,
+#main-content input[type="url"]:hover {
 	border-color: #dedede;
 	color: #222;
 }
@@ -426,6 +428,39 @@ form .actions {
 	background: #555;
 	color: #ddd;
 	margin: 10px auto;
+}
+
+#main-content .user-content-tabs {
+	
+	ul {
+		list-style-type: none;
+		margin: 10px 0 40px;
+		padding: 5px 10px;
+		width: calc(100% - 20px);
+		border-bottom: 1px solid rgb(220,220,220);
+
+		li {
+			display: inline;
+			font-size: 20px;
+		}
+	}
+
+	a {
+		padding: 5px 10px;
+		background: blue;
+		border: 1px solid rgb(220,220,220);
+		background: rgb(245,245,245);
+		color: rgb(20,20,20);
+		border-radius: 2px 2px 0 0;
+
+	}
+	a.active {
+		color: red;
+		border-bottom: 1px solid #fff;
+		background: #fff;
+		font-weight: bold;
+		color: #000;
+	}
 }
 
 .center-warning {

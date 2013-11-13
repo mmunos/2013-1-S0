@@ -1,0 +1,8 @@
+$(".user-content-content").fadeOut(400, function() {
+	$(".user-content-tabs li .active").removeClass('active');
+	$(".show-ajax-posts").addClass('active');
+	$(this).empty();
+	$(this).append('<%= escape_javascript render file: "posts/index.html.erb", collection: @posts %>');
+	YouShouldntBeVisibleGuys();
+	$(this).fadeIn();
+});

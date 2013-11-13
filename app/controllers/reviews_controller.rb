@@ -7,7 +7,10 @@ class ReviewsController < ApplicationController
   # GET /reviews.json
   def index
     @reviews = @parent.reviews
-    redirect_to polymorphic_path(@array_parent)
+    respond_to do |format|
+      format.html { redirect_to polymorphic_path(@array_parent) }
+      format.js
+    end
   end
 
   # GET /reviews/1
@@ -29,7 +32,6 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-    @review.user = current_user
     @parent.reviews << @review
     
     respond_to do |format|

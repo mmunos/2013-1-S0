@@ -1,4 +1,7 @@
-<div class="post" id="post-<%= post.id %>">
+<% post_title = (post.url_title != "")? post.url_title : post.url; %>
+
+
+<div class="post <%= post.post_type %>-post" id="post-<%= post.id %>">
       <div class="post-user">
         <a href="<%= user_path(post.user) %>">
           <%= user_gravatar(post.user, 80) %>
@@ -6,10 +9,19 @@
         </a>
       </div>
       <div class="post-content">
+      
+      <% if post.type?(:image) %>
+        <div class="post-content-image">
+          <%= image_tag post.photo.url(:display) %>
+        </div>
+      <% elsif post.type?(:link) %>
+        <div class="post-content-link">
+          <a href="<%= post.url %>" title="<%= post_title %>" target="_blank">
+            <span class="post-content-link-title"><%= post_title %></span> 
 
-      <% if post.photo.exists? %>
-            <br>
-          <%= link_to  (image_tag post.photo.url()), post.photo.url %>
+            <%= "<span class=\"post-content-link-url\">#{post.url}</span>".html_safe if (post.url_title != "") %>
+          </a>
+        </div>
       <% end %>
      
         <div class="post-text">
@@ -18,7 +30,7 @@
       </div>
 
       <div class="post-meta">
-        <span> | Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Delete', polymorphic_path(@array_parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' }, remote: true %> <% end %>
+        <span>Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Delete', polymorphic_path(@array_parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' }, remote: true %> <% end %>
       </div>
       
     </div>

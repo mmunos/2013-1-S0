@@ -1,13 +1,16 @@
 class PostsController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create,:delete_photo]
-  skip_before_filter :authorize, only: [:index, :show]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :destroy, :create, :delete_photo]
+  skip_before_filter :authorize, only: [:index, :show, :create] 
   before_action :set_post, only: [:show, :edit, :update, :destroy, :delete_photo]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = @parent.posts
-    redirect_to polymorphic_path(@array_parent)
+    respond_to do |format|
+      format.html {redirect_to polymorphic_path(@array_parent)}
+      format.js
+    end
   end
 
   # GET /posts/1
@@ -29,7 +32,6 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.user = current_user
     @parent.posts << @post
 
     respond_to do |format|
@@ -39,7 +41,7 @@ class PostsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { redirect_to polymorphic_path(@array_parent), alert: @post.errors.full_messages.first }
-        #format.js { render action: 'error', object: @post.errors }
+        format.js { render action: 'error', object: @post.errors }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

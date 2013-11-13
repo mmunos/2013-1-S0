@@ -1,4 +1,6 @@
 <%= form_for (@array_parent.dup).push(Review.new), remote: true do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <div class="review-form">
     <div class="review-form-user">
       <%= user_gravatar(current_user,90) %>

@@ -1,8 +1,8 @@
 var $post = $('<%= escape_javascript render @post %>');
-$post.hide();
-$("#posts").prepend($post);
-$('#posts p.center-warning').fadeOut('fast');
+$post.hide().insertAfter("#posts p.center-warning");
+$('#posts p.center-warning').fadeIn('fast');
 $(".post-form-container").fadeOut('fast', function() {
+	resetPostForm();
     $post.fadeIn('fast'); 
     $flash_bar =  ($('.flash-bar').length > 0)? $('.flash-bar') : $('<div></div>').addClass('flash-bar');
     $flash_bar.html("Post was successfully created.").hide().prependTo('#main-content')

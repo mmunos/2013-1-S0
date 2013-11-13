@@ -1,0 +1,26 @@
+<% content_for :head do %>
+	<script type="text/javascript">
+    	$(function() {
+		var autoRevClick = function() {
+    		$(".show-ajax-reviews").click();
+    	}
+    	autoRevClick();
+    	$(document).on("page:load", autoRevClick)});
+  	</script>	
+<% end %>
+
+<div class="user-content-tabs">
+	<ul>
+		<li><%= link_to "Reviews", polymorphic_path(@array_parent)+"/reviews", { class: "show-ajax-reviews active", remote: true } %></li>
+		<li><%= link_to "Posts", polymorphic_path(@array_parent)+"/posts", { class: "show-ajax-posts", remote: true }%></li>
+	</ul>
+</div>
+
+<div class="user-content-content">
+	<noscript>
+	    <h2>Reviews</h2>
+	    <%= render file: "reviews/index", collection: @reviews %>
+	    <h2>Posts</h2>
+	    <%= render file: "posts/index", collection: @posts %>
+	</noscript>
+</div>

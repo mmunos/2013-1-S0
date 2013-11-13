@@ -12,7 +12,7 @@ $.fn.spin.presets.showganizer = {
 
 
 $(document).ready(showganizer);
-$(window).bind('page:change', showganizer)
+$(window).on('page:load', showganizer)
 
 $(document).on("click",".flash-bar a.close",function(e) {
 		e.preventDefault();
@@ -76,11 +76,16 @@ $(document).on("change", ".post-form-type-option input", function(e) {
 	$(".post-form-type").slideUp(400, function() {
 		if (type == "link") {
 			var file_input = $("#post-form-file-input");
+
 			file_input.wrap("<form>").parent().get(0).reset();
 			$(".post-form-image-filename").html("You have not selected any image.")
 			file_input.unwrap();
+			file_input.removeAttr('required');
+			$("#post-form-link-url").attr('required','required');
 		} else if (type = "image") {
 			$(".post-form-link input").val("");
+			$("#post-form-link-url").removeAttr('required');
+			$("#post-form-file-input").attr('required', 'required');
 		}
 	});
 	$(".post-form-"+type+", #post-caption").fadeIn();
@@ -96,27 +101,20 @@ $(document).on("click",".close-post-form", function(e) {
 		e.preventDefault();
 		$(".fade-open-post, #posts p.center-warning").fadeIn();
 		$(".post-form-container").slideUp(400, function(){
-			$(".post-form").closest("form")[0].reset();
-			$(".post-form-type-option").find(".selected").removeClass('selected');
-			$(".post-form-type, #post-caption").hide();
-			$(".post-form-type-option label.small").removeClass("small");
-			var file_input = $("#post-form-file-input");
-			file_input.wrap("<form>").parent().get(0).reset();
-			$(".post-form-image-filename").html("You have not selected any image.")
-			file_input.unwrap();
+			resetPostForm();
 		});
 });
 
 $(document).bind("ajaxSend", function(){
         $("#loading-indicator").fadeIn();
     }).bind("ajaxComplete", function(){
+    	YouShouldntBeVisibleGuys();
         $("#loading-indicator").fadeOut();
 });
 
 function showganizer(){
 	$(".flash-bar").delay(3000).fadeOut();
-	$(".review-form-container, .review-form-charleft, .post-form-container, .post-form-image, .post-form-link, #post-caption").hide();
-
+	YouShouldntBeVisibleGuys();
 
 	$("#review_content").keyup(function(e) {
 		var charleft = 1000-$(this).val().length;
@@ -142,4 +140,17 @@ function showganizer(){
 
 }
 
+function YouShouldntBeVisibleGuys() {
+	$(".review-form-container, .review-form-charleft, .post-form-container, .post-form-image, .post-form-link, #post-caption").hide();
+}
 
+function resetPostForm() {
+	$(".post-form").closest("form")[0].reset();
+	$(".post-form-type-option").find(".selected").removeClass('selected');
+	$(".post-form-type, #post-caption").hide();
+	$(".post-form-type-option label.small").removeClass("small");
+	var file_input = $("#post-form-file-input");
+	file_input.wrap("<form>").parent().get(0).reset();
+	$(".post-form-image-filename").html("You have not selected any image.")
+	file_input.unwrap();
+}

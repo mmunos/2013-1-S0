@@ -31,8 +31,6 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @parent.posts << @post
-    param_tags = params[:post][:tags_list]
-    @post.update_tags(param_tags,@post)
 
     respond_to do |format|
       if @post.save
@@ -74,9 +72,6 @@ class PostsController < ApplicationController
     end
   end
 
-
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -85,7 +80,7 @@ class PostsController < ApplicationController
 
     def delete_photo
       @post.photo.destroy
-    end    
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params

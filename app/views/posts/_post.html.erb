@@ -19,9 +19,15 @@
         </div>
       </div>
 
+<<<<<<< HEAD
 
       <div class="post-meta">
         <span> | Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Delete', polymorphic_path(@array_parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' }, remote: true %> <% end %>
 
+=======
+      <div class="post-meta">
+        <span>Posted <%= time_ago_in_words(post.created_at) %> ago</span><% if user_admin?(current_user) || post.user == current_user %> | <%= link_to 'Delete', polymorphic_path(@array_parent)+"/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' }, remote: true %> <% end %>
+>>>>>>> 4ab9ffdb202e048e6dc9bff6769158adf1394427
       </div>
+      
     </div>

@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable , polymorphic: true
-  has_many :post_taggings, dependent: :destroy
-  has_many :tags, through: :post_taggings
+  #has_many :post_taggings, dependent: :destroy
+  #has_many :tags, through: :post_taggings
 
 
   has_attached_file :photo, #:styles => { :small => "250x350>" },

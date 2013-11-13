@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag 'widgEditor' %>
-<%= javascript_include_tag 'widgEditor' %>
 
 <% if current_user %>
   <%= form_for((@array_parent.dup).push(Post.new),:html => { :multipart => true }) do |f| %>
@@ -11,14 +9,35 @@
       </div>
 
       <div class="post-form-content">
-        
-        <%= f.text_area :content, {required: "", class: "widgEditor"}  %>
+
+        <div class="post-form-type-option">
+          <input type="radio" name="post[type]" value="image" id="image-option" required>
+          <input type="radio" name="post[type]" value="link" id="link-option" required>
+
+          <label for="image-option">Post an image</label>
+          <label for="link-option">Post a link</label>
+        </div>
+
+        <div class="post-form-image post-form-type">
+          <div class="post-form-image-button">
+            <span>Select File...</span>
+            <%= f.file_field :photo, {accept: 'image/png,image/gif,image/jpeg', id: "post-form-file-input"} %>
+          </div>
+          <span class="post-form-image-filename">You have not selected any image.
+          </span>
+        </div>
+        <div class="post-form-link post-form-type">
+          <%= f.text_field :url, {placeholder: "http://example.org/"}%>
+          <%= f.text_field :url_title, {placeholder: "Title of this link"} %>
+        </div>
+
+        <%= f.text_area :content, {required: "", placeholder: "Caption", id: "post-caption"}  %>
       </div>
 
-      <%= f.file_field :photo %>
+      
 
       <div class="post-form-submit">
-        <%= f.submit "Create Review", data: { disable_with: "Creating..." } %> or <%= link_to 'Cancel', nil, class: "close-post-form" %>
+        <%= f.submit "Create Post", data: { disable_with: "Creating..." } %> or <%= link_to 'Cancel', nil, class: "close-post-form" %>
       </div>
     </div>
   <% end %>

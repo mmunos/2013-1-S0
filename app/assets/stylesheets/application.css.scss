@@ -407,7 +407,7 @@ form .actions {
 	margin: 20px auto;
 	text-align: center;
 }
-#main-content input[type="submit"], #main-content input[type="file"], #main-content button {
+#main-content input[type="submit"], #main-content button, .post-form-image-button {
 	margin: 10px auto;
 	padding: 5px 10px;
 	font-weight: lighter;
@@ -422,7 +422,7 @@ form .actions {
 }
 
 
-#main-content input[type="submit"]:hover, #main-content button:hover {
+#main-content input[type="submit"]:hover, #main-content button:hover, .post-form-image-button:hover {
 	background: #555;
 	color: #ddd;
 	margin: 10px auto;

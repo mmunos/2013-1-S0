@@ -11,6 +11,7 @@ group :development do
 	gem 'awesome_print'
 	gem 'quiet_assets'
 	gem 'better_errors'
+	gem "paperclip-dropbox", ">= 1.1.7"
 	gem "paperclip", "~> 3.0"
 end
 
@@ -19,6 +20,7 @@ group :production do
 	gem 'rails_12factor'
 end
 
+gem "paperclip-dropbox", ">= 1.1.7"
 gem "paperclip", "~> 3.0"
 
 # Use SCSS for stylesheets

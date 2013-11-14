@@ -89,6 +89,8 @@ class EpisodesController < ApplicationController
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You already marked this episode as seen!"
       else
         current_user.watched.episodes << @episode
+        current_user.score += 2
+        current_user.save
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as seen!"
       end
     end
@@ -98,6 +100,8 @@ class EpisodesController < ApplicationController
     if current_user
       if current_user.watched.episodes.include?(@episode)
         current_user.watched.episodes.delete(@episode)
+        current_user.score -=2
+        current_user.save
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!"
       else
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You can't unseen #{@episode.name}, D'OH!!!"

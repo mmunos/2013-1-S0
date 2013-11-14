@@ -447,16 +447,19 @@ form .actions {
 
 	a {
 		padding: 5px 10px;
+		margin: 0 5px 0 0;
 		background: blue;
 		border: 1px solid rgb(220,220,220);
 		background: rgb(245,245,245);
 		color: rgb(20,20,20);
-		border-radius: 2px 2px 0 0;
+		border-radius: 3px 3px 0 0;
+		transition: all 0.1s linear;
 
 	}
 	a.active {
 		color: red;
 		border-bottom: 1px solid #fff;
+		border-radius: 0;
 		background: #fff;
 		font-weight: bold;
 		color: #000;

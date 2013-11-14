@@ -105,6 +105,14 @@ $(document).on("click",".close-post-form", function(e) {
 		});
 });
 
+$(document).on('click', '.user-content-tabs a', function(e){
+		history.pushState(null, null, $(this).attr('href'));
+});
+
+$(window).bind('popstate', function(e) {
+	$(".user-content-tabs").find("a[href='"+window.location.pathname+"']").trigger('click.rails');
+});
+
 $(document).bind("ajaxSend", function(){
         $("#loading-indicator").fadeIn();
     }).bind("ajaxComplete", function(){

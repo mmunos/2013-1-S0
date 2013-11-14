@@ -29,8 +29,13 @@ class EpisodesController < ApplicationController
   # POST /episodes
   # POST /episodes.json
   def create
+    param_tags = params[:episode][:tags_list]
+    params[:episode].delete(:tags_list)
     @episode = Episode.new(episode_params)
     @episode.season_id = @season.id
+    @episode.update_tags(param_tags, @episode)
+
+
 
     respond_to do |format|
       if @episode.save
@@ -54,7 +59,7 @@ class EpisodesController < ApplicationController
   def update
     param_tags = params[:episode][:tags_list]
     params[:episode].delete(:tags_list)
-    @episode.update_tags(param_tags,@episode)
+    @episode.update_tags(param_tags, @episode)
         
     respond_to do |format|
       if @episode.update(episode_params)

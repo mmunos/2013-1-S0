@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :date %>
-    <%= f.datetime_select :date %>
+    <%= f.datetime_select :date, start_year: 1900, end_year: Time.now.year+2, discard_hour: true %>
   </div>
   <div class="field">
     <%= f.label :genre %>

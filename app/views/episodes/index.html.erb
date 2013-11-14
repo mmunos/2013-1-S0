@@ -14,7 +14,7 @@
   <div class="show-detail-module show-details">
     <h3>Season Details</h3>
     <ul>
-      <li>Date: <%= @serial.date %></li>
+      <li>Date: <%= @serial.date.to_date().to_s(:long) %></li>
     </ul>
   </div>
 
@@ -47,8 +47,8 @@
 
           <div class="episode-details">
             <ul>
-              <li>Date <%= episode.date %></li>
-              <li>Duration: <%= episode.duration %> min.</li>
+              <li>Date: <%= episode.date.to_date().to_s(:long) %></li>
+              <li>| Duration: <%= episode.duration %> min.</li>
             </ul>
           </div>
         </div>

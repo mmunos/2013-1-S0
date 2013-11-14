@@ -13,7 +13,7 @@
   <div class="show-detail-module show-details">
     <h3>Serial Details</h3>
     <ul>
-      <li>Date: <%= @serial.date %></li>
+      <li>Date: <%= @serial.date.to_date().to_s(:long) %></li>
       <li>Genre: <%= @serial.genre %></li>
     </ul>
   </div>

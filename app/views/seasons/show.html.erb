@@ -15,7 +15,7 @@
   <div class="show-detail-module show-details">
     <h3>Season Details</h3>
     <ul>
-      <li>Date: <%= @serial.date %></li>
+      <li>Date: <%= @season.date.to_date().to_s(:long) %></li>
     </ul>
   </div>
 

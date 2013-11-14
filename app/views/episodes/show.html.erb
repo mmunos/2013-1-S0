@@ -18,7 +18,7 @@
     <h3>Episode Details</h3>
 
     <ul>
-        <li>Date: <%= @episode.date %></li>
+        <li>Date: <%= @episode.date.to_date().to_s(:long) %></li>
         <li>Writer: <%= @episode.write %></li>
         <li>Director: <%= @episode.director %></li>
         <li>Duration: <%= @episode.duration %> min.</li>

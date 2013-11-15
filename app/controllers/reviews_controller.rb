@@ -36,8 +36,9 @@ class ReviewsController < ApplicationController
     
     respond_to do |format|
       if @review.save
-        current_user.score += 5
-        current_user.save
+        u=User.find_by_id(@review.user_id)
+        u.score += 5
+        u.save
         format.html { redirect_to polymorphic_path(@array_parent), notice: 'Review was successfully created.' }
         format.js 
         format.json { render action: 'show', status: :created, location: @review }
@@ -67,8 +68,9 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1.json
   def destroy
     @review.destroy
-    current_user.score -= 5
-    current_user.save
+    u=User.find_by_id(@review.user_id)
+    u.score -= 5
+    u.save
     respond_to do |format|
       format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your review was deleted.' }
       format.js 

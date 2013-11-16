@@ -5,13 +5,14 @@ class ReviewsController < ApplicationController
 
   # GET /reviews
   # GET /reviews.json
-  def index
-    @reviews = @parent.reviews
-    respond_to do |format|
-      format.html { redirect_to polymorphic_path(@array_parent) }
-      format.js
-    end
-  end
+
+  # def index
+  #   @reviews = @parent.reviews
+  #   respond_to do |format|
+  #     format.html { redirect_to polymorphic_path(@array_parent) }
+  #     format.js
+  #   end
+  # end
 
   # GET /reviews/1
   # GET /reviews/1.json

@@ -2,18 +2,18 @@
   <div class="post-form-container">
     <%= render "posts/form" %>
   </div>
-<% end%>
+<% end %>
 
 
 <div id="posts">
-  <% if @posts.empty? %>
+  <% if posts.empty? %>
     <% message = (current_user)? "No posts yet, #{link_to 'write the first one', nil, class:'open-post-form'}!" : "No posts yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
   <% else %>
         <% message = (current_user)? "#{link_to 'Write a post', nil, class:'open-post-form'}" : "#{link_to 'Sign up', sign_up_path} or #{link_to 'log in', log_in_path} to write a post"  %>
   <% end %>
     <p class="center-warning"><%= message.html_safe %></p>
     
-    <% @posts.reverse.each do |post| %>
+    <% posts.reverse.each do |post| %>
       <%= render post %>
     <% end %>
 </div>

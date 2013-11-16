@@ -1,26 +1,35 @@
 S0::Application.routes.draw do
 
-  resources :posts
-
-  resources :watchlists
-
-  # Movies
-  resources :movies do 
-    resources :reviews
-    resources :posts
+  # Concerns
+  ## Reviews
+  concern :reviewable do 
+    resources :reviews, only: [:create, :destroy, :update]
   end
 
+  ## Reviews Action
+  get "/movies/:id/reviews", to:"movies#show_reviews"
+  get "/movies/:id/posts", to:"movies#show_posts"
+  get "/series/:id/reviews", to:"serials#show_reviews"
+  get "/series/:id/posts", to:"serials#show_posts"
+  get "/series/:serial_id/seasons/:id/reviews", to: "seasons#show_reviews"
+  get "/series/:serial_id/seasons/:id/posts", to: "seasons#show_posts"
+  get "/series/:serial_id/seasons/:season_id/episodes/:id/reviews", to:"episodes#show_reviews"
+  get "/series/:serial_id/seasons/:season_id/episodes/:id/posts", to:"episodes#show_posts"
+
+
+  ## Posts
+concern :commentable do 
+    resources :posts, only: [:index, :create, :destroy, :update]
+  end
+
+
+  # Movies
+  resources :movies, concerns: [:reviewable, :commentable]
+
   # Series, Season and Episodes
-  resources :serials, path: "/series" do
-    resources :reviews
-    resources :posts
-    resources :seasons do
-      resources :reviews
-      resources :posts
-      resources :episodes do
-        resources :reviews
-        resources :posts
-      end
+  resources :serials, path: "/series", concerns: [:reviewable, :commentable] do
+    resources :seasons, concerns: [:reviewable, :commentable] do
+        resources :episodes, concerns: [:reviewable, :commentable]
     end
   end
   
@@ -35,7 +44,7 @@ S0::Application.routes.draw do
   get "403", to: "pages#no_access", as: :access_denied
 
   # User
-  # User shorthands
+  ## User shorthands
   get "/me", to: "users#me", as: :my_profile
   get "/me/shows", to:"followed_shows#shows", as: :my_shows
   get "/me/series", to:"followed_shows#serials", as: :my_serials
@@ -45,7 +54,7 @@ S0::Application.routes.draw do
   get "/me/watchlist/serials/:serial_id/seasons/:season_id", to:"watched#detail", as: :my_tracking_detail
   get "/me/seen", to:"watched#my_watched", as: :my_watched
 
-  # User Watchlist
+  ## User Watchlist
   resources :users do
     resource :watchlists, path: "/watchlist"
   end
@@ -53,7 +62,7 @@ S0::Application.routes.draw do
     resource :watcheds, path: "/watched"
   end
 
-  # User show management
+  ## User show management
   get "/series/:id/add", to:"serials#add", as: :add_serial
   get "/series/:id/remove", to:"serials#remove", as: :remove_serial
   get "/movies/:id/add", to:"movies#add", as: :add_movie
@@ -72,15 +81,19 @@ S0::Application.routes.draw do
   get "/watched/:id/seen/series", to:"watched#my_watched", as: :my_seen_series
   get "/watched/:id/seen/movies", to:"watched#my_watched", as: :my_seen_movies
 
-  # User tags on episodes
+  ## User tags on episodes
   match "/series/:serial_id/seasons/:season_id/episodes/:id/add_user_tags", to: "episodes#add_user_tags", via: :post
   get "/series/:serial_id/seasons/:season_id/episodes/:id/remove_user_tag/:tag_id", to: "episodes#remove_user_tag"
+
+  # Static Pages
+  ## Home
+  root 'pages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'pages#index'
+  #root 'pages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

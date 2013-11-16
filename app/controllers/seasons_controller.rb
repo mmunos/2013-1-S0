@@ -1,10 +1,12 @@
 class SeasonsController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index]
-  skip_before_filter :authorize, only: [:show, :index]
+  include UserReviewsPosts
+
+  skip_before_filter :user_admin, only: [:show, :index, :show_reviews, :show_posts]
+  skip_before_filter :authorize, only: [:show, :index, :show_reviews, :show_posts]
   before_action :set_serial
-  before_action :set_season, only: [:show, :edit, :update, :destroy]
-  before_action :set_reviews, only:[:show]
-  before_action :set_posts, only:[:show]
+  before_action :set_season, except: [:index, :create, :new]
+  before_action :set_reviews, only:[:show, :show_reviews]
+  before_action :set_posts, only:[:show, :show_posts]
 
   # GET /seasons
   # GET /seasons.json
@@ -84,7 +86,6 @@ class SeasonsController < ApplicationController
     
     def set_posts
       @posts = @season.posts
-      @post = Post.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

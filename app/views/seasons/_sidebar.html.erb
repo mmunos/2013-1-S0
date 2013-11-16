@@ -1,0 +1,25 @@
+  <div class="show-action-menu">
+    <%= render 'action_menu' %>
+  </div>
+
+  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Season '+@season.number.to_s %>">
+
+  <div class="show-detail-module show-details">
+    <h3>Season Details</h3>
+    <ul>
+      <li>Date: <%= @season.date.to_date().to_s(:long) %></li>
+    </ul>
+  </div>
+
+  <div class="show-detail-module episodes-list">
+    <h3><%= link_to "Episodes »", serial_season_episodes_path(@serial,@season) %></h3>
+    <% if @season.episodes.empty? %>
+    <p>We're sorry, we don't have any episodes yet</p>
+    <% else %>
+      <ul>
+        <% @season.episodes.each do |e| %>
+        <li><%= link_to "Episode #{e.number}", serial_season_episode_path(@serial,@season,e) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>

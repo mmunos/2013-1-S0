@@ -1,4 +1,3 @@
-
 <% if current_user %>
   <%= form_for((@array_parent.dup).push(Post.new),html: { multipart: true }, remote: true) do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>

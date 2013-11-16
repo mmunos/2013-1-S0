@@ -1,0 +1,6 @@
+<% content_for :admin_bar_panel do %>
+  <ul>
+      <li><%= link_to 'Edit Serial', edit_serial_path(@serial) %></li>
+      <li><%= link_to 'New Season', new_serial_season_path(@serial) %></li>
+  </ul>
+<% end %>

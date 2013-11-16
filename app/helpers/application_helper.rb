@@ -61,11 +61,10 @@ module ApplicationHelper
 
 	def seen_unseen_episode_link(episode)
 		if current_user && current_user.watched.episodes.include?(episode)
-			link_to "Mark as unseen", unseen_episode_path, class: "unseen-episode-button"
+			link_to "Mark as unseen", unseen_episode_path, class: "unseen-episode-button", remote: true, data: {disable_with: "Marking…"}
 		else
-			link_to "Mark as seen", seen_episode_path, class: "seen-episode-button"
+			link_to "Mark as seen", seen_episode_path, class: "seen-episode-button", remote: true, data: {disable_with: "Marking…"}
 		end
-
 	end
 
 	def seen_unseen_movie_link(episode)
@@ -114,17 +113,6 @@ module ApplicationHelper
 
 	def contains_user(collection,user)
 		collection.exists?(user_id: user.id)
-	end
-
-	def find_parent_models(current_model = nil)
-	    parents = Array.new
-	    params.each do |name, value|
-	      if name =~ /(.+)_id$/
-	        parents.push $1.classify.constantize.find(value)
-	      end
-	    end
-	    parents.push current_model if current_model
-	    parents
 	end
 
 end

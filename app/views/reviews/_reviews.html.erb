@@ -5,13 +5,12 @@
 <% end %>
 
 <div id="reviews">
-  <% if @reviews.empty? %>
+  <% if reviews.empty? %>
     <% message = (current_user)? "No reviews yet, #{link_to 'write the first one', nil, class:'open-review-form'}!" : "No reviews yet, #{link_to 'Sign up', sign_up_path } or #{link_to 'log in', log_in_path } to leave the first!";%>
   <% else %>
       <% if current_user 
-        
           message = "#{link_to 'Write a review', nil, class:'open-review-form'}"
-          hidden = (contains_user(@reviews,current_user))? true: false;
+          hidden = (contains_user(reviews,current_user))? true: false;
         else
           message = "#{link_to 'Sign up', sign_up_path} or #{link_to 'log in', log_in_path} to write a review"
         end %>
@@ -19,7 +18,7 @@
   <p class="center-warning<%= " no-display" if hidden %>"><%= message.html_safe %></p>
 
   
-  <% @reviews.reverse.each do |review| %>
+  <% reviews.reverse.each do |review| %>
     <%= render review %>
   <% end %>
 </div>

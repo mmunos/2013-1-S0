@@ -1,10 +1,12 @@
 class EpisodesController < ApplicationController
-  skip_before_filter :user_admin, only: [:show, :index, :add_user_tags, :remove_user_tag, :seen, :unseen]
-  skip_before_filter :authorize, only: [:show, :index]
+  include UserReviewsPosts
+
+  skip_before_filter :user_admin, only: [:show, :index, :add_user_tags, :remove_user_tag, :seen, :unseen, :show_reviews, :show_posts]
+  skip_before_filter :authorize, only: [:show, :index, :show_reviews, :show_posts]
   before_action :set_season_serial
-  before_action :set_episode, only: [:show, :edit, :update, :destroy, :add_user_tags, :remove_user_tag, :seen, :unseen]
-  before_action :set_reviews, only:[:show]
-  before_action :set_posts, only:[:show]
+  before_action :set_episode, except: [:index, :create, :new]
+  before_action :set_reviews, only:[:show, :show_reviews]
+  before_action :set_posts, only:[:show, :show_posts]
 
   # GET /episodes
   # GET /episodes.json
@@ -83,30 +85,33 @@ class EpisodesController < ApplicationController
   end
 
 
- def seen
+  def seen
     if current_user
       if current_user.watched.episodes.include?(@episode)
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You already marked this episode as seen!"
       else
         current_user.watched.episodes << @episode
-        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as seen!"
+        respond_to do |format|
+          format.html { redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as seen! :D" }
+          format.js { render 'layouts/update_action_menu' }
+        end
       end
     end
   end
 
-    def unseen
+  def unseen
     if current_user
       if current_user.watched.episodes.include?(@episode)
         current_user.watched.episodes.delete(@episode)
-        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!"
+        respond_to do |format|
+          format.html { redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!" }
+          format.js { render 'layouts/update_action_menu' }
+        end
       else
-        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You can't unseen #{@episode.name}, D'OH!!!"
+        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You can't unseen #{@episode.name}, cause you have not seen it!"
       end
     end
-    end
-
-
-
+  end
 
   def add_user_tags
     if current_user
@@ -147,7 +152,6 @@ class EpisodesController < ApplicationController
 
     def set_posts
       @posts = @episode.posts
-      @post = Post.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

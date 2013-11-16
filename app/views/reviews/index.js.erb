@@ -2,7 +2,7 @@ $(".user-content-content").fadeOut(400, function() {
 	$(".user-content-tabs li .active").removeClass('active');
 	$(".show-ajax-reviews").addClass('active');
 	$(this).empty();
-	$(this).append('<%= escape_javascript render file: "reviews/index.html.erb", collection: @reviews %>');
+	$(this).append('<%= escape_javascript render partial: "reviews/reviews", object: @reviews %>');
 	YouShouldntBeVisibleGuys();
 	$(this).fadeIn();
 });

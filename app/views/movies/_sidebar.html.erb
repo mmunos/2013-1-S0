@@ -1,0 +1,16 @@
+  <div class="show-action-menu">
+      <%= render 'action_menu' %>
+  </div>
+
+  <img src="http://placehold.it/216x319&text=<%= @movie.name%>" />
+
+  <div class="show-detail-module show-details">
+    <h3>Movie Details</h3>
+
+    <ul>
+        <li>Date: <%= @movie.date.to_date().to_s(:long) %></li>
+        <li>Genre: <%= @movie.genre %></li>
+        <li>Director: <%= @movie.director %></li>
+        <li>Duration: <%= @movie.duration %> min.</li>
+    </ul>
+  </div>

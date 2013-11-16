@@ -5,13 +5,13 @@ class PostsController < ApplicationController
 
   # GET /posts
   # GET /posts.json
-  def index
-    @posts = @parent.posts
-    respond_to do |format|
-      format.html {redirect_to polymorphic_path(@array_parent)}
-      format.js
-    end
-  end
+  # def index
+  #   @posts = @parent.posts
+  #   respond_to do |format|
+  #     format.html {redirect_to polymorphic_path(@array_parent)}
+  #     format.js
+  #   end
+  # end
 
   # GET /posts/1
   # GET /posts/1.json
@@ -36,11 +36,11 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully created.' }
+        format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Post was successfully created.' }
         format.js         
         format.json { render action: 'show', status: :created, location: @post }
       else
-        format.html { redirect_to polymorphic_path(@array_parent), alert: @post.errors.full_messages.first }
+        format.html { redirect_to polymorphic_path(@array_parent)+"/posts", alert: @post.errors.full_messages.first }
         format.js { render action: 'error', object: @post.errors }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to polymorphic_path(@array_parent), notice: 'Post was successfully updated.' }
+        format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
     delete_photo
     respond_to do |format|
       format.js 
-      format.html { redirect_to polymorphic_path(@array_parent), notice: 'Your post was deleted.' }
+      format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Your post was deleted.' }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,9 @@
+<div class="show-header">
+<div class="show-header-title">
+  <p class="bread-crumb"><%= link_to @serial.name, serial_path(@serial) %></p>
+  <h1>Season <%= @season.number.to_s %></h1>
+  <%= link_to "View all seasons", serial_seasons_path(@serial), class: "all-seasons-link" %>
+</div>
+
+<p class="description"><%= @season.description %></p>
+</div>

@@ -1,0 +1,12 @@
+<div class="user-content-tabs">
+	<ul>
+		<li><%= link_to "Reviews", polymorphic_path(@array_parent)+"/reviews", { class: "show-ajax-reviews", remote: true } %></li>
+		<li><%= link_to "Posts", polymorphic_path(@array_parent)+"/posts", { class: "show-ajax-posts active", remote: true }%></li>
+	</ul>
+</div>
+
+<div class="user-content-content">
+
+    <%= render partial: "posts/posts", object: @posts %>
+
+</div>

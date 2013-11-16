@@ -1,11 +1,11 @@
 class MoviesController < ApplicationController
+  include UserReviewsPosts
 
-  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :unwatch, :seen, :unseen]
-  skip_before_filter :authorize, only: [:show, :index]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add, :remove, :watch, :unwatch, :seen, :unseen]
-  before_action :set_reviews, only:[:show]
-  before_action :set_posts, only:[:show]
-
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove, :watch, :unwatch, :seen, :unseen, :show_reviews, :show_posts]
+  skip_before_filter :authorize, only: [:show, :index, :show_reviews, :show_posts]
+  before_action :set_movie, except: [:index, :create, :new]
+  before_action :set_reviews, only:[:show, :show_reviews]
+  before_action :set_posts, only:[:show, :show_posts]
 
   # GET /movies
   # GET /movies.json
@@ -75,7 +75,7 @@ class MoviesController < ApplicationController
         current_user.movies << @movie
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully added!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       end
     end
@@ -87,7 +87,7 @@ class MoviesController < ApplicationController
         current_user.movies.delete(@movie)
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully removed!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       else
         redirect_to @movie, notice: "You can't delete #{@movie.name}, D'OH!!!"
@@ -103,7 +103,7 @@ class MoviesController < ApplicationController
         current_user.watchlist.movies << @movie
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully added to watchlist!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       end
     end
@@ -115,7 +115,7 @@ class MoviesController < ApplicationController
         current_user.watchlist.movies.delete(@movie)
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully removed from watchlist!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       else
         redirect_to @movie, notice: "You can't delete #{@movie.name} from watchlist, D'OH!!!"
@@ -132,7 +132,7 @@ class MoviesController < ApplicationController
         current_user.watched.movies << @movie
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as seen!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       end
     end
@@ -144,13 +144,14 @@ class MoviesController < ApplicationController
         current_user.watched.movies.delete(@movie)
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as unseen!" }
-          format.js
+          format.js { render 'layouts/update_action_menu' }
         end
       else
         redirect_to @movie, notice: "You can't unseen #{@movie.name}, D'OH!!!"
       end
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -164,7 +165,6 @@ class MoviesController < ApplicationController
 
     def set_posts
       @posts = @movie.posts
-      @post = Post.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

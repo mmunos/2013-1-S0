@@ -36,6 +36,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        u=User.find_by_id(@post.user_id)
+        u.score += 1
+        u.save
         format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Post was successfully created.' }
         format.js         
         format.json { render action: 'show', status: :created, location: @post }
@@ -67,6 +70,9 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     delete_photo
+    u=User.find_by_id(@post.user_id)
+    u.score -= 1
+    u.save
     respond_to do |format|
       format.js 
       format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Your post was deleted.' }

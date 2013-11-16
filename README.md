@@ -18,14 +18,16 @@ Showganizer es un proyecto en forma de aplicación web para manejar y mantener o
 * Reviews
 * Posts
 * Imágenes
-
+* Sistema de puntaje de usuarios (en base a acciones o asignaciones)
+* Seeds
+* Dropbox integration
 
 ### Funcionalidades incompletas
 * Readme
-* Buscador (barra y links en etiquetas)
 * Tags para series y movies
+* Buscador (barra y links en etiquetas)
 * Búsqueda avanzada (filtros como género, año, actores, etc). 
-* Sistema de puntaje de usuarios (en base a acciones o asignaciones). ==> al final
 * Dashboard
 * Diseño y detalles
+* Post y reviews paths
 

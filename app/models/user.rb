@@ -38,6 +38,24 @@ class User < ActiveRecord::Base
         gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
     end
 
+    def score_update(parent)
+        self.score = self.watched.episodes.size*2 + self.watched.movies.size*2
+        unless(parent.nil?)
+            count= parent.posts.size + parent.reviews.size*5
+            save_posts_reviews_count(count)
+        end
+        unless(@pr_count.nil?)
+            self.score = self.score + @pr_count
+        end
+        self.save
+        self.score
+    end
+   
+    def save_posts_reviews_count count
+        @pr_count = count
+    end
+
+
     private
 
     def build_default_watchlist

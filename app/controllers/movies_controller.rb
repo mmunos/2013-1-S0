@@ -130,8 +130,7 @@ class MoviesController < ApplicationController
         redirect_to @movie, notice: "You already marked this movie as seen!"
       else
         current_user.watched.movies << @movie
-        current_user.score += 2
-        current_user.save
+        current_user.score_update(nil)
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as seen!" }
           format.js { render 'layouts/update_action_menu' }
@@ -144,8 +143,7 @@ class MoviesController < ApplicationController
     if current_user
       if current_user.watched.movies.include?(@movie)
         current_user.watched.movies.delete(@movie)
-        current_user.score -= 2
-        current_user.save
+        current_user.score_update(nil)
         respond_to do |format|
           format.html { redirect_to @movie, notice: "#{@movie.name} was successfully marked as unseen!" }
           format.js { render 'layouts/update_action_menu' }

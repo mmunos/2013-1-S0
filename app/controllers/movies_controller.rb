@@ -16,6 +16,13 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    movies_search = Movie.search_rating(@movie.name)
+    unless(movies_search['total']==0)
+      @rating = movies_search['movies'][0]['ratings']['audience_score']
+      @poster = movies_search['movies'][0]['posters']['original']
+      @movie.poster = @poster
+      @movie.save
+    end
   end
 
   # GET /movies/new
@@ -171,6 +178,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:name, :date, :director, :genre, :duration, :description)
+      params.require(:movie).permit(:name, :date, :director, :genre, :duration, :description, :poster)
     end
 end

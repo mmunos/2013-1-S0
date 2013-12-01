@@ -16,6 +16,14 @@ class SerialsController < ApplicationController
   # GET /serials/1
   # GET /serials/1.json
   def show
+    if @serial.poster.nil?
+    series_search = Serial.search_poster(@serial.name)
+      unless(series_search[0].nil?)
+        @poster = series_search[0]['images']['poster']
+        @serial.poster = @poster
+        @serial.save
+      end
+    end
   end
 
   # GET /serials/new

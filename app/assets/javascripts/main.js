@@ -164,3 +164,73 @@ function resetPostForm() {
 	$(".post-form-image-filename").html("You have not selected any image.")
 	file_input.unwrap();
 }
+
+
+$(document).on("click",".fill-movie-form", function(e) {
+	e.preventDefault();
+	var apikey = "49af96950b5c6d76b85aa58a56d38145";
+	var baseUrl = "http://api.trakt.tv/search";
+
+	// construct the uri with our apikey
+	var moviesSearchUrl = baseUrl + '/movies.json/' + apikey;
+	var query = document.getElementById('name').value
+	if(!query)
+		{query = 0}
+  // send off the query
+  $.ajax({
+    url: moviesSearchUrl + '?query=' + encodeURI(query),
+    dataType: "jsonp",
+    success: searchCallback
+  });
+});
+
+// callback for when we get back the results
+function searchCallback(data) {
+ var movie = data[0];
+ 	document.getElementById('name').value = movie.title;
+ 	//alert(movie.release_dates.theater);
+ 	//ocument.getElementById('date').default = movie.release_dates.theater+' 00:00:00';
+ 	//document.getElementById('director').value = movie.title;
+ 	document.getElementById('genre').value = movie.genres;
+ 	document.getElementById('duration').value = movie.runtime;
+ 	document.getElementById('description').value = movie.overview;
+	document.getElementById('poster').value =  movie.images.poster;
+	var yourElement = document.getElementById('info');
+ 	yourElement.setAttribute('href', movie.url);
+ 	$("#info").fadeIn();
+
+
+}
+
+
+$(document).on("click",".fill-serial-form", function(e) {
+	e.preventDefault();
+	var apikey = "49af96950b5c6d76b85aa58a56d38145";
+	var baseUrl = "http://api.trakt.tv/search";
+
+	// construct the uri with our apikey
+	var moviesSearchUrl = baseUrl + '/shows.json/' + apikey;
+	var query = document.getElementById('name').value
+	if(!query)
+		{query = 0}
+  // send off the query
+  $.ajax({
+    url: moviesSearchUrl + '?query=' + encodeURI(query),
+    dataType: "jsonp",
+    success: searchCallbackserial
+  });
+});
+
+// callback for when we get back the results
+function searchCallbackserial(data) {
+ var movie = data[0];
+ 	document.getElementById('name').value = movie.title;
+ 	document.getElementById('genre').value = movie.genres;
+ 	document.getElementById('description').value = movie.overview;
+	document.getElementById('poster').value =  movie.images.poster;
+	var yourElement = document.getElementById('info');
+ 	yourElement.setAttribute('href', movie.url);
+ 	$("#info").fadeIn();
+
+
+}

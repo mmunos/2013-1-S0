@@ -2,7 +2,7 @@
       <%= render 'action_menu' %>
   </div>
 
-  <img src="http://placehold.it/216x319&text=<%= @movie.name%>" />
+<img src="<%= @poster%>">
 
   <div class="show-detail-module show-details">
     <h3>Movie Details</h3>
@@ -13,4 +13,9 @@
         <li>Director: <%= @movie.director %></li>
         <li>Duration: <%= @movie.duration %> min.</li>
     </ul>
+  
+  <h3>Rating Score: <%=@rating%>/100</h3>
+  <div class="tomatometer rotten"><span style="width:<%=@rating%>%;"></span></div>
+  <center><i class="icon huge certified"></i></center>
+
   </div>

@@ -13,29 +13,35 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, id: 'name' %>
+    <%=link_to 'Clik here to fill the fields', nil, class:'fill-movie-form'%>
   </div>
+
+<div><%=link_to 'More info here', nil, id:'info', hidden: true %></div>
+
   <div class="field">
     <%= f.label :date %>
-    <%= f.datetime_select :date, start_year: 1900, end_year: Time.now.year+2, discard_hour: true %>
+    <%= f.datetime_select :date, start_year: 1900, end_year: Time.now.year+2, discard_hour: true, id: 'date' %>
   </div>
   <div class="field">
     <%= f.label :director %>
-    <%= f.text_field :director %>
+    <%= f.text_field :director, id:'director' %>
   </div>
   <div class="field">
     <%= f.label :genre %>
-    <%= f.text_field :genre %>
+    <%= f.text_field :genre, id:'genre' %>
   </div>
   <div class="field">
     <%= f.label :duration %>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, id:'duration' %>
   </div>
   <div class="field">
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, id: 'description' %>
+    <%= f.text_field :poster, id: 'poster',hidden: true %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

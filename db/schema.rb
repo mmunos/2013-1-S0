@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111013032) do
+ActiveRecord::Schema.define(version: 20131130232721) do
 
   create_table "episode_taggings", force: true do |t|
     t.integer  "episode_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20131111013032) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "poster"
   end
 
   create_table "tags", force: true do |t|

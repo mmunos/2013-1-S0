@@ -20,4 +20,11 @@ class Post < ActiveRecord::Base
   	post_type == type.to_s
   end
 
+  def as_json(options={})
+    options[:except] ||= [:user_id, :commentable_id, :commentable_type]
+    json = super(options)
+    json["username"] = self.user.username
+    json
+  end 
+
 end

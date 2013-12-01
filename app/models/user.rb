@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
     has_one :watchlist, dependent: :destroy
     has_one :watched, dependent: :destroy
+
+    has_one :access_token
     
     before_create :build_default_watched
     before_create :build_default_watchlist
@@ -38,6 +40,14 @@ class User < ActiveRecord::Base
         gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
     end
 
+    def get_access_token
+        unless self.access_token
+            self.access_token = AccessToken.create
+        end
+        self.access_token.token
+    end
+
+
     def score_update(parent)
         self.score = self.watched.episodes.size*2 + self.watched.movies.size*2
         unless(parent.nil?)
@@ -62,7 +72,7 @@ class User < ActiveRecord::Base
         build_watchlist
     end
 
-        def build_default_watched
+    def build_default_watched
         build_watched
     end
 end

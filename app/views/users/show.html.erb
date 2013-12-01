@@ -6,6 +6,7 @@
 
 <% gravatar_hash = Digest::MD5.hexdigest(@user.email.downcase.strip)
    gravatar_url = "http://www.gravatar.com/avatar/#{gravatar_hash}?s=120&d=mm"
+   user_access_token = @user.get_access_token
 %>
 
 
@@ -19,6 +20,7 @@
     <ul> 
       <li>Username: <strong><%= @user.username %></strong></li>
       <li>Score: <strong><%= (@user.score != 0)? @user.score : 0; %></strong></li>
+      <li><small>Access Token: <%= user_access_token %></small></li>
     </ul>
   </div>
 

@@ -18,10 +18,9 @@ S0::Application.routes.draw do
 
 
   ## Posts
-concern :commentable do 
+  concern :commentable do 
     resources :posts, only: [:index, :create, :destroy, :update]
   end
-
 
   # Movies
   resources :movies, concerns: [:reviewable, :commentable]
@@ -88,6 +87,50 @@ concern :commentable do
   # Static Pages
   ## Home
   root 'pages#index'
+
+  # API
+  namespace :api, defaults: {format: 'json'} do
+    
+    resources :movies do
+      member do
+        get 'add'
+        get 'remove'
+        get 'watch'
+        get 'unwatch'
+        get 'seen'
+        get 'unseen'
+        get 'reviews'
+        get 'posts'
+      end
+    end
+
+    resources :serials, path: "series" do
+      member do
+        get 'add'
+        get 'remove'
+        get 'watch'
+        get 'unwatch'
+        get 'reviews'
+        get 'posts'
+      end
+
+      resources :seasons do
+        member do
+          get 'reviews'
+          get 'posts'
+        end
+
+        resources :episodes do
+          member do
+            get 'seen'
+            get 'unseen'
+            get 'reviews'
+            get 'posts'
+          end
+        end
+      end
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

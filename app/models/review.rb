@@ -1,3 +1,4 @@
+
 class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :reviewable, polymorphic: true
@@ -20,4 +21,11 @@ class Review < ActiveRecord::Base
 
   	stars_array.join("")
   end
+
+  def as_json(options={})
+    options[:except] ||= [:user_id, :reviewable_id, :reviewable_type]
+    json = super(options)
+    json["username"] = self.user.username
+    json
+  end 
 end

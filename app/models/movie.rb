@@ -1,6 +1,5 @@
 class Movie < Show
 	require 'net/http'
-	has_many :movie_users, dependent: :destroy
 
 	def to_param
         [id,name.parameterize].join("-")

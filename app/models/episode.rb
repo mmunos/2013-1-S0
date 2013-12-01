@@ -68,19 +68,21 @@ class Episode < ActiveRecord::Base
   end
 
   def update_tags(update_tags,episode)
-    param_tags =[]
-    update_tags.split(",").uniq.map do |n|
-      param_tags << Tag.find_or_create_by(name: n.strip.downcase)
-    end
-    new_tags = param_tags - tags
-    remove_tags = tags - param_tags
-    new_tags.each do |tag|
-      EpisodeTagging.create(episode: episode, tag: tag)
-    end
-    remove_tags.each do |tag|
-      remove_record = EpisodeTagging.where(episode: episode, tag:tag)
-      remove_record.each do |o|
-        o.destroy
+    if update_tags
+      param_tags =[]
+      update_tags.split(",").uniq.map do |n|
+        param_tags << Tag.find_or_create_by(name: n.strip.downcase)
+      end
+      new_tags = param_tags - tags
+      remove_tags = tags - param_tags
+      new_tags.each do |tag|
+        EpisodeTagging.create(episode: episode, tag: tag)
+      end
+      remove_tags.each do |tag|
+        remove_record = EpisodeTagging.where(episode: episode, tag:tag)
+        remove_record.each do |o|
+          o.destroy
+        end
       end
     end
   end

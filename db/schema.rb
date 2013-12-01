@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130232721) do
+ActiveRecord::Schema.define(version: 20131201172301) do
+
+  create_table "access_tokens", force: true do |t|
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "access_tokens", ["user_id"], name: "index_access_tokens_on_user_id"
 
   create_table "episode_taggings", force: true do |t|
     t.integer  "episode_id"

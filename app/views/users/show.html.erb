@@ -20,7 +20,9 @@
     <ul> 
       <li>Username: <strong><%= @user.username %></strong></li>
       <li>Score: <strong><%= (@user.score != 0)? @user.score : 0; %></strong></li>
+      <% if is_himself?(@user) || user_admin?(current_user) %>
       <li><small>Access Token: <%= user_access_token %></small></li>
+      <% end %>
     </ul>
   </div>
 

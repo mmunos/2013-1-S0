@@ -1,0 +1,19 @@
+<h1>My Movies</h1>
+
+<div class="index_shows_panel">
+	<% if @user.movies.any? %>
+	    <% @movies.sort {|a,b| a.name <=> b.name }.each do |movie| %>
+
+
+	        <div class="index_shows_item">
+	           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
+	            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+
+	        </div>
+
+	      
+	    <% end %>
+	<% else %>
+    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+  	<% end %>
+</div>

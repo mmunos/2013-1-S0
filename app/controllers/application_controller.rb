@@ -49,7 +49,10 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless User.find_by_id(session[:user_id])
-      redirect_to login_path, notice: "Please log in"
+      respond_to do |format| 
+        format.html {redirect_to login_path, notice: "Please log in"}
+        format.js { render 'layouts/login_required.js.erb' }
+      end
     end
   end
 
@@ -67,8 +70,4 @@ class ApplicationController < ActionController::Base
       user.role == "admin"
     end
   end
-
-
-
-
 end

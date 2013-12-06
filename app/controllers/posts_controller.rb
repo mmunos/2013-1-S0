@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     @post.destroy
     delete_photo
     u=User.find_by_id(@post.user_id)
-    u.score_update
+    u.score_update(nil)
     respond_to do |format|
       format.js 
       format.html { redirect_to polymorphic_path(@array_parent)+"/posts", notice: 'Your post was deleted.' }

@@ -3,5 +3,5 @@
             <h1><%= @serial.name %></h1>
     </div>
 
-    <p class="description"><%= @serial.description %></p>
+    <p class="description"><%= simple_format(@serial.description) %></p>
 </div>

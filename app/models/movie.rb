@@ -1,6 +1,9 @@
 class Movie < Show
 	require 'net/http'
 
+	validates :name, presence: true
+	validates :date, presence: true
+
 	def to_param
         [id,name.parameterize].join("-")
     end
@@ -25,10 +28,4 @@ class Movie < Show
 		request = Net::HTTP::Get.new(uri.request_uri)
 		status = JSON.parse(http.request(request).body)
 	end
-
-
-
-
-
-################
 end

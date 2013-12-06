@@ -5,5 +5,5 @@
   <%= link_to "View all seasons", serial_seasons_path(@serial), class: "all-seasons-link" %>
 </div>
 
-<p class="description"><%= @season.description %></p>
+<p class="description"><%= simple_format @season.description %></p>
 </div>

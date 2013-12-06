@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, id: 'name' %>
-    <%=link_to 'Clik here to fill the fields', nil, class:'fill-movie-form'%>
+    <%= f.text_field :name, id: 'name', {required: ""} %>
+    <%= link_to 'Clik here to fill the fields', nil, class:'fill-movie-form'%>
   </div>
 
-<div><%=link_to 'More info here', nil, id:'info', hidden: true %></div>
+<div> <%=link_to 'More info here', nil, id:'info', hidden: true %></div>
 
   <div class="field">
     <%= f.label :date %>

@@ -1,5 +1,6 @@
 <% content_for :admin_bar_panel do %>
     <ul>
         <li><%= link_to 'Edit Movie', edit_movie_path(@movie) %></li>
+        <li><%= link_to 'Delete Movie', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' } %></li>
     </ul>
 <% end %>

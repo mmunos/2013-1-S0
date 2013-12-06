@@ -1,3 +1,46 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Home
+
+#home_banner {
+
+	padding: 0 30px 20px;
+	border-bottom: 1px solid #E8A3FF;
+	overflow: auto;
+	background: #FCF5FF;
+
+
+	h1 {
+		display: none;
+	}
+
+	.desc {
+		font-weight: lighter;
+		font-size: 40px;
+		width: 40%;
+		display: inline-block;
+		color: #6E0096;
+	}
+
+	.new-user-button {
+		float: right;
+		margin: 80px 5% 0 0;
+		background: purple;
+		padding: 20px;
+		font-size: 20px;
+		border-radius: 3px;
+		font-weight: lighter;
+		color: white;
+		border: 1px solid #E67ED8;
+		box-shadow: 0 3px 0 #E67ED8;
+		transition: all 0.1s ease-in-out;
+
+		&:hover {
+			background: green;
+			box-shadow: none;
+			border-color: transparent;
+		}
+	}
+}

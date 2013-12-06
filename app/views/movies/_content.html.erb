@@ -3,5 +3,5 @@
     <h1><%= @movie.name %></h1>
 </div>
 
-<p class="description"><%= @movie.description %></p>
+<p class="description"><%= simple_format(@movie.description) %></p>
 </div>

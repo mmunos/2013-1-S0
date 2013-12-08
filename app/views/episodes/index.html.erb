@@ -38,7 +38,7 @@
     <% if @season.episodes.empty? %>
       <p class="center-warning">Oops, we didn't find any episodes!</p>
     <% else %>
-      <% @season.episodes.each do |episode| %>
+      <% @season.episodes.sort_by{|e| e.number}.each do |episode| %>
         <div class="show-episode-list-item">
           <div class="title">
             <h2><%= link_to "S"+( "%02d" % @season.number)+"E"+("%02d" % episode.number)+": "+episode.name, serial_season_episode_path(@serial,@season,episode) %></h2>

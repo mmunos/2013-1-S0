@@ -10,37 +10,54 @@
 	border-bottom: 1px solid #E8A3FF;
 	overflow: auto;
 	background: #FCF5FF;
-
+	position: relative;
 
 	h1 {
 		display: none;
 	}
 
-	.desc {
+	p {
+		width: 60%;
 		font-weight: lighter;
+		font-size: 20px;
+	}
+
+	.desc {
+		font-width: 40%;
 		font-size: 40px;
-		width: 40%;
-		display: inline-block;
 		color: #6E0096;
 	}
 
-	.new-user-button {
-		float: right;
-		margin: 80px 5% 0 0;
-		background: purple;
-		padding: 20px;
-		font-size: 20px;
-		border-radius: 3px;
-		font-weight: lighter;
-		color: white;
-		border: 1px solid #E67ED8;
-		box-shadow: 0 3px 0 #E67ED8;
-		transition: all 0.1s ease-in-out;
+	.home-actions {
+		position: absolute;
+		top: 30%; 
+		right: 10%;
 
-		&:hover {
-			background: green;
-			box-shadow: none;
-			border-color: transparent;
+		.new-user-button {
+			display: block;
+			text-align: center;
+			background: purple;
+			padding: 20px;
+			font-size: 20px;
+			border-radius: 3px;
+			font-weight: lighter;
+			color: white;
+			border: 1px solid #E67ED8;
+			box-shadow: 0 3px 0 #E67ED8;
+			transition: all 0.1s ease-in-out;
+
+			&:hover {
+				background: green;
+				box-shadow: none;
+				border-color: transparent;
+			}
+		}
+
+		span {
+			font-weight: lighter;
+			margin-top: 25px;
+			text-align: center;
+			display: block;
 		}
 	}
 }

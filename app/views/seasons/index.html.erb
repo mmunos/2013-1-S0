@@ -8,7 +8,7 @@
   <div class="show-action-menu">
   </div>
 
-  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Seasons' %>">
+  <img src="<%= @serial.poster%>">
 
   <div class="show-detail-module show-details">
     <h3>Serial Details</h3>
@@ -36,7 +36,7 @@
     <% if @serial.seasons.empty? %>
       <p class="center-warning">Oops, we didn't find any seasons!</p>
     <% else %>
-      <% @serial.seasons.each do |season| %>
+      <% @serial.seasons.sort_by{|s| s.number}.each do |season| %>
         <div class="show-season-list-item">
           <div class="number"><%= link_to season.number, serial_season_path(@serial,season) %></div>
           <p class="description"><%= season.description %></p>
@@ -45,9 +45,9 @@
             <p><%= season.episodes.size %></p>
             <small>Episodes</small>
           </div>
-          <div class="item-action">
-            Action
-          </div>
+          <!--<div class="item-action">
+            
+          </div> -->
         </div>
       <% end %>
     <% end %>

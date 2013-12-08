@@ -1,6 +1,6 @@
 <nav>
 	<ul>
-		<li class="home"><%= nav_link "Home", root_path%></li>
+		<% unless current_user %> <li class="home"><%= nav_link "Home", root_path%></li><% end %>
 		<li class="movies"><%= nav_link "Movies", movies_path%></li>
 		<li class="series"><%= nav_link "Series", serials_path%></li>
 	</ul>

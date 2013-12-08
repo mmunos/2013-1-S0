@@ -94,6 +94,14 @@ a:hover, a:focus {
 	margin-left: 10px;
 }
 
+#top-search-bar input[type="submit"]{
+	background: #555;
+  	color: #ddd;
+  	font-size: 14px;
+	padding-bottom: 20px;
+	border-radius: 10px;
+}
+
 #top-search-bar input {
 	font-style: italic;
 	width: 150px;
@@ -108,7 +116,7 @@ a:hover, a:focus {
 	opacity: 1;
 }
 
-#top-search-bar input:focus {
+#top-search-bar input[type="text"]:focus {
 	width: 250px;
 	opacity: 1;
 }

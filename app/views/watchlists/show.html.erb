@@ -13,11 +13,11 @@
 
 		        <div class="index_shows_item">
 		           <%if @user.watchlist.serials.include?(show) %>
-			           <%=link_to image_tag("http://placehold.it/170x273&text=#{show.name}"), my_tracking_path(show) %>
+			           <%=link_to image_tag("#{show.poster}"), my_tracking_path(show) %>
 			            <p><%= link_to "#{show.name}", my_tracking_path(show) %></p>
 
 		            <%else%>
-			            <%=link_to image_tag("http://placehold.it/170x273&text=#{show.name}"), movie_path(show) %>
+			            <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
 			            <p><%= link_to "#{show.name}", movie_path(show) %></p>
 		          <%end%>
 

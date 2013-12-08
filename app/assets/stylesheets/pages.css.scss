@@ -28,24 +28,36 @@
 		color: #6E0096;
 	}
 
-	.new-user-button {
+	.home-actions {
 		position: absolute;
 		top: 30%; 
 		right: 10%;
-		background: purple;
-		padding: 20px;
-		font-size: 20px;
-		border-radius: 3px;
-		font-weight: lighter;
-		color: white;
-		border: 1px solid #E67ED8;
-		box-shadow: 0 3px 0 #E67ED8;
-		transition: all 0.1s ease-in-out;
 
-		&:hover {
-			background: green;
-			box-shadow: none;
-			border-color: transparent;
+		.new-user-button {
+			display: block;
+			text-align: center;
+			background: purple;
+			padding: 20px;
+			font-size: 20px;
+			border-radius: 3px;
+			font-weight: lighter;
+			color: white;
+			border: 1px solid #E67ED8;
+			box-shadow: 0 3px 0 #E67ED8;
+			transition: all 0.1s ease-in-out;
+
+			&:hover {
+				background: green;
+				box-shadow: none;
+				border-color: transparent;
+			}
+		}
+
+		span {
+			font-weight: lighter;
+			margin-top: 25px;
+			text-align: center;
+			display: block;
 		}
 	}
 }

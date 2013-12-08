@@ -4,6 +4,9 @@
 	<p class="desc">Keep track, follow and organize all your movies and series.</p>
 	<p>Organize and discover new shows using tags, watchlist and posts.</p>
 
-	<%= link_to 'Create Account', new_user_path , class: "new-user-button" %>
+	<div class="home-actions">
+		<%= link_to 'Create Account', new_user_path , class: "new-user-button" %>
+		<span>… or <%= link_to 'log in', new_session_path %> if you're one of us.</span>
+	</div>
 
 </div>

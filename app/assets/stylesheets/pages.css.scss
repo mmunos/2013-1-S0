@@ -10,23 +10,28 @@
 	border-bottom: 1px solid #E8A3FF;
 	overflow: auto;
 	background: #FCF5FF;
-
+	position: relative;
 
 	h1 {
 		display: none;
 	}
 
-	.desc {
+	p {
+		width: 60%;
 		font-weight: lighter;
+		font-size: 20px;
+	}
+
+	.desc {
+		font-width: 40%;
 		font-size: 40px;
-		width: 40%;
-		display: inline-block;
 		color: #6E0096;
 	}
 
 	.new-user-button {
-		float: right;
-		margin: 80px 5% 0 0;
+		position: absolute;
+		top: 30%; 
+		right: 10%;
 		background: purple;
 		padding: 20px;
 		font-size: 20px;

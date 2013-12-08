@@ -23,6 +23,7 @@ $(document).on('click', "#top-bar-login-button", function(e) {
 		e.preventDefault();
 		$("#top-bar-buttons, #top-bar-auth").toggleClass("hidden");
 		$("#top-bar-buttons, #top-bar-auth").toggleClass("show");
+		$("#top-bar-auth #email").focus();
 });
 
 $(document).on("click","#top-bar-auth .close a", function(e) {

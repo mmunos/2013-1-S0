@@ -109,7 +109,6 @@ class EpisodesController < ApplicationController
           format.html { redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!" }
           format.js { render 'layouts/update_action_menu' }
         end        
-        redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "#{@episode.name} was successfully marked as unseen!"
       else
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "You can't unseen #{@episode.name}, cause you have not seen it!"
       end

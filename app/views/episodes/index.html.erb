@@ -9,7 +9,7 @@
   <div class="show-action-menu">
   </div>
 
-  <img src="http://placehold.it/216x319&text=<%= @serial.name+ ' Season '+@season.number.to_s %>">
+  <img src="<%= @serial.poster%>">
 
   <div class="show-detail-module show-details">
     <h3>Season Details</h3>
@@ -38,7 +38,7 @@
     <% if @season.episodes.empty? %>
       <p class="center-warning">Oops, we didn't find any episodes!</p>
     <% else %>
-      <% @season.episodes.each do |episode| %>
+      <% @season.episodes.sort_by{|e| e.number}.each do |episode| %>
         <div class="show-episode-list-item">
           <div class="title">
             <h2><%= link_to "S"+( "%02d" % @season.number)+"E"+("%02d" % episode.number)+": "+episode.name, serial_season_episode_path(@serial,@season,episode) %></h2>

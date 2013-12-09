@@ -1,5 +1,7 @@
 S0::Application.routes.draw do
 
+  resources :searches
+
   # Concerns
   ## Reviews
   concern :reviewable do 

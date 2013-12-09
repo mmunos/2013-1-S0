@@ -1,0 +1,28 @@
+<%@search = Search.new%>
+<%= form_for(@search) do |f| %>
+  <% if @search.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@search.errors.count, "error") %> prohibited this search from being saved:</h2>
+
+      <ul>
+      <% @search.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--<div class="field">
+    <%= f.label :keywords %><br>-->
+    <%= f.text_field :keywords, placeholder: "search movies, series, etc...", required: "" %>
+ <!-- </div>
+  <div class="field">
+    <%= f.label :tags %><br>
+    <%= f.text_field :tags %>
+  </div>
+  <div class="field">
+    <%= f.label :info %><br>
+    <%= f.text_field :info %>
+  </div>-->
+    <%= f.submit "Search" %>
+<% end %>

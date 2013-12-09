@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201172301) do
+ActiveRecord::Schema.define(version: 20131208202541) do
 
   create_table "access_tokens", force: true do |t|
     t.string   "token"
@@ -94,6 +94,14 @@ ActiveRecord::Schema.define(version: 20131201172301) do
   end
 
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+
+  create_table "searches", force: true do |t|
+    t.string   "keywords"
+    t.string   "tags"
+    t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "seasons", force: true do |t|
     t.text     "description"

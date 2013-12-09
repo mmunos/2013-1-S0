@@ -26,9 +26,10 @@ class SearchesController < ApplicationController
   # POST /searches
   # POST /searches.json
   def create
-    @search = Search.find(Search.keywords_list(search_params[:keywords]))
+    @search = Search.find((search_params[:keywords].downcase))
     unless @search
     @search = Search.new(search_params)
+    @search.keywords = search_params[:keywords].downcase
     end
     respond_to do |format|
       if @search.save

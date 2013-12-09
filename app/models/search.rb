@@ -6,7 +6,7 @@ class Search < ActiveRecord::Base
 
   def self.find(input)
     Search.all.each do |s|
-      if s.to_param == input
+      if s.keywords == input
         return s
       end
     end
@@ -40,7 +40,7 @@ class Search < ActiveRecord::Base
   def episodes_by_name
     results = []
     Search.keywords_list(keywords).each do |keyword|
-      Episode.where("name LIKE ?", "%#{keyword}%").each do |episode|
+      Episode.where("name LIKE ?", "#{keyword.downcase}").each do |episode|
         results << episode if results.exclude?(episode)
       end
     end

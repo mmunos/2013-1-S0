@@ -12,7 +12,7 @@ class Serial < Show
     end
 
 	def self.search_poster(title)
-		  	apikey = "49af96950b5c6d76b85aa58a56d38145";
+		  	apikey = APP_CONFIG['token_t'];
 		  	baseUrl = "http://api.trakt.tv/search";
 
 		  	moviesSearchUrl = baseUrl + '/shows.json/' + apikey;

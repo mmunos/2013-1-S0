@@ -13,7 +13,7 @@ class Movie < Show
     end
 
     def self.search_rating(title)
-	  	apikey = "c8djpdgrn6wnptcy9ftmkadn";
+	  	apikey = APP_CONFIG['token_r'];
 	  	baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
 
 	  	moviesSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;

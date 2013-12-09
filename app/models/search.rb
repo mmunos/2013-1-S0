@@ -1,97 +1,93 @@
 class Search < ActiveRecord::Base
-	belongs_to :user
 
-def to_param
-    [keywords.parameterize]
-end
+  def to_param
+    keywords.parameterize("+")
+  end
 
-def shows
-  @shows ||= find_shows
-end
-
-def tagging
-  @episodes ||= find_episodes
-	@tags ||= find_tags
-end
-
-def episodes(tags)
-  @episodes ||= find_episodes
-  @episodes.each do |e|
-    if(tags.include?(e))
-      @episodes.delete(e)
+  def self.find(input)
+    Search.all.each do |s|
+      if s.to_param == input
+        return s
+      end
     end
+    nil
   end
-  @episodes
-end
 
-def details
-	@info ||= find_info
-end
-
-def find_season(e)
-	season = Season.find_by_id(e)
-end
-
-def find_series(e)
-	series = Serial.find_by_id(e)
-end
-
-private
-
-def find_shows
-  Show.all(:conditions => conditions)
-end
-
-def find_episodes
-  Episode.all(:conditions => keyword_episodes)
-end
-
-def find_tags
-	tag = []
-  Episode.all.each do |e|
-  	if(e.tags_list.include?"#{keywords}")
-  		tag<<(e)
-  	end
-
+  def shows_by_name
+    find_shows[0]
   end
-  tag
-end
 
-def find_info
-	show = []
-	k = keywords.slice(0,1).capitalize + keywords.slice(1..-1)
-  Show.all.each do |e|
-  	if(e.genre.include?"#{k}")
-  		show<<(e)
-  	end
-  
+  def movies_by_name
+    find_shows[1]
   end
-  show
-end
 
-def keyword_conditions
-  ["shows.name LIKE ?", "%#{keywords}%"] unless keywords.blank?
-end
+  def serials_by_name
+    find_shows[2]
+  end
 
-def keyword_episodes
-  ["episodes.name LIKE ?", "%#{keywords}%"] unless keywords.blank?
-end
+  def shows_by_genre
+    results = []
+    Search.keywords_list(keywords).each do |keyword|
+      Show.all.each do |show|
+        if show.genre.downcase.include?(keyword.downcase)
+          results << show if results.exclude?(show)
+        end
+      end
+    end
+    results
+  end
 
+  def episodes_by_name
+    results = []
+    Search.keywords_list(keywords).each do |keyword|
+      Episode.where("name LIKE ?", "%#{keyword}%").each do |episode|
+        results << episode if results.exclude?(episode)
+      end
+    end
+    results
+  end
 
-def conditions
-  [conditions_clauses.join(' AND '), *conditions_options]
-end
+  def episodes_by_tags
+    results = []
+    Search.keywords_list(keywords).split(" ").each do |keyword|
+      Episode.all.each do |episode|
+        if episode.tags.map{|t| t.name}.include?(keyword)
+          results << episode if results.exclude?(episode)
+        end
+      end
+    end
+    results
+  end
 
-def conditions_clauses
-  conditions_parts.map { |condition| condition.first }
-end
+  def shows
+    shows_by_name | shows_by_genre
+  end
 
-def conditions_options
-  conditions_parts.map { |condition| condition[1..-1] }.flatten
-end
+  def episodes 
+    episodes_by_tags | episodes_by_name
+  end
 
-def conditions_parts
-  private_methods(false).grep(/_conditions$/).map { |m| send(m) }.compact
-end
+  def results
+    shows | episodes
+  end
 
+  def self.keywords_list(keywords)
+    keywords.split(",").flatten.join(" ").split(" ").join("+").split("+")
+  end
+
+  private
+
+  def find_shows
+    results = []
+    movies = []
+    serials = []
+    Search.keywords_list(keywords).each do |keyword|
+      Show.where("name LIKE ?", "%#{keyword}%").each do |show|
+        results << show if results.exclude?(show)
+        movies << show if show.is_a?(Movie) and movies.exclude?(show)
+        serials << show if show.is_a?(Serial) and serials.exclude?(show)
+      end
+    end
+    [results, movies, serials]
+  end
 end

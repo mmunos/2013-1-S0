@@ -1,6 +1,6 @@
 S0::Application.routes.draw do
 
-  resources :searches
+  resources :searches, path: "/search"
 
   # Concerns
   ## Reviews

@@ -26,14 +26,10 @@ class SearchesController < ApplicationController
   # POST /searches
   # POST /searches.json
   def create
-   
-    keywords =  params[:keywords]
-    search = Search.where("searches.keywords LIKE #{keywords}")
-    if @search
-      render 'show'
-    else
-
+    @search = Search.find(Search.keywords_list(search_params[:keywords]))
+    unless @search
     @search = Search.new(search_params)
+    end
     respond_to do |format|
       if @search.save
         format.html { redirect_to @search }
@@ -43,8 +39,6 @@ class SearchesController < ApplicationController
         format.json { render json: @search.errors, status: :unprocessable_entity }
       end
     end
-
-  end
   end
 
   # PATCH/PUT /searches/1
@@ -74,7 +68,7 @@ class SearchesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_search
-      @search = Search.where("searches.keywords LIKE #{params[:keywords]}")
+      @search = Search.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

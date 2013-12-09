@@ -1,5 +1,5 @@
 class WatchedController < ApplicationController
-  skip_before_filter :user_admin, only: [ :my_watched]
+  skip_before_filter :user_admin, only: [ :my_watched, :movies, :tracking, :detail, :series]
   before_action :set_watched
   before_action :set_seasons
   before_action :set_series
@@ -14,6 +14,22 @@ class WatchedController < ApplicationController
     	@user = current_user
       @watched = current_user.watched
       render action: 'show'
+    end
+  end
+
+  def movies
+    if current_user
+      @user = current_user
+      @watched = current_user.watched
+      render action: 'movies'
+    end
+  end
+
+    def series
+    if current_user
+      @user = current_user
+      @watched = current_user.watched
+      render action: 'serials'
     end
   end
 

@@ -78,9 +78,9 @@ S0::Application.routes.draw do
   get "/series/:serial_id/seasons/:season_id/episodes/:id/seen", to:"episodes#seen", as: :seen_episode
   get "/series/:serial_id/seasons/:season_id/episodes/:id/unseen", to:"episodes#unseen", as: :unseen_episode
 
-  get "/watched/:id/watching", to:"watched#my_watched", as: :my_watching_series
-  get "/watched/:id/seen/series", to:"watched#my_watched", as: :my_seen_series
-  get "/watched/:id/seen/movies", to:"watched#my_watched", as: :my_seen_movies
+  get "/me/:id/watching", to:"watched#my_watched", as: :my_watching_series
+  get "/me/:id/seen/series", to:"watched#series", as: :my_seen_series
+  get "/me/:id/seen/movies", to:"watched#movies", as: :my_seen_movies
 
   ## User tags on episodes
   match "/series/:serial_id/seasons/:season_id/episodes/:id/add_user_tags", to: "episodes#add_user_tags", via: :post

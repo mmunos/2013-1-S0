@@ -6,7 +6,7 @@
 
 
 	        <div class="index_shows_item">
-	           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
+	           <%=link_to image_tag("#{movie.poster}"), movie_path(movie) %>
 	            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
 
 	        </div>

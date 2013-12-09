@@ -1,19 +1,24 @@
-<h1>My Movies</h1>
+<h1>Movies Already Seen</h1>
 
-<div class="index_shows_panel">
-	<% if @user.movies.any? %>
-	    <% @movies.sort {|a,b| a.name <=> b.name }.each do |movie| %>
+<div class="my_movies_stand">
+	<%= link_to "View all my seen movies", my_seen_movies_path(@user), class: "all-series-link" %>
+
+		<div class="index_shows_panel">
+		<% if @watched.movies.any? %>
+		    <% @watched.movies.reverse.each do |show| %>
 
 
-	        <div class="index_shows_item">
-	           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
-	            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
+		        <div class="index_shows_item">
 
-	        </div>
+			            <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
+			            <p><%= link_to "#{show.name}", movie_path(show) %></p>
 
-	      
-	    <% end %>
-	<% else %>
-    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', serials_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
-  	<% end %>
+		        </div>
+
+		      
+		    <% end %>
+		<% else %>
+	    <p class="center-warning"><%= if is_himself?(@user); "Woah, you don't have any movies added, why not #{link_to 'browsing', movies_path }?".html_safe else "#{@user.username} hasn't added any movies yet." end%></p>
+	  	<% end %>
+	</div>
 </div>

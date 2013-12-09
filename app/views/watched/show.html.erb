@@ -9,7 +9,7 @@
 	<h2>Series that I'm Watching</h2>
 		<div class="index_shows_panel">
 		<% if @watching.any? %>
-		    <% @watching.reverse.each do |show| %>
+		    <% @watching.last(5).reverse.each do |show| %>
 
 
 		        <div class="index_shows_item">
@@ -35,7 +35,7 @@
 	<h2>Series Already Seen</h2>
 		<div class="index_shows_panel">
 		<% if @series.any? %>
-		    <% @series.reverse.each do |show| %>
+		    <% @series.last(5).reverse.each do |show| %>
 
 
 		        <div class="index_shows_item">
@@ -60,7 +60,7 @@
 	<h2>Movies Already Seen</h2>
 		<div class="index_shows_panel">
 		<% if @watched.movies.any? %>
-		    <% @watched.movies.reverse.each do |show| %>
+		    <% @watched.movies.last(5).reverse.each do |show| %>
 
 
 		        <div class="index_shows_item">

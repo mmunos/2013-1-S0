@@ -11,7 +11,7 @@
 
 
 		        <div class="index_shows_item">
-		           <%=link_to image_tag("http://placehold.it/170x273&text=#{serial.name}"), serial_path(serial) %>
+		           <%=link_to image_tag("#{serial.poster}"), serial_path(serial) %>
 		            <p><%= link_to "#{serial.name}", serial_path(serial) %></p>
 
 		        </div>
@@ -36,7 +36,7 @@
 
 
 		        <div class="index_shows_item">
-		           <%=link_to image_tag("http://placehold.it/170x273&text=#{movie.name}"), movie_path(movie) %>
+		           <%=link_to image_tag("#{movie.poster}"), movie_path(movie) %>
 		            <p><%= link_to "#{movie.name}", movie_path(movie) %></p>
 
 		        </div>

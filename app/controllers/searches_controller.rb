@@ -5,12 +5,6 @@ class SearchesController < ApplicationController
   # GET /searches.json
   def index
     @searches = Search.all
-    if(params(:keywords))
-      s=Search.new
-      s.keywords = "#{params[:keywords]}"
-      s.save
-    end
-    render "search/show"
   end
 
   # GET /searches/1

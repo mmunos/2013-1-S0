@@ -17,8 +17,8 @@
 			
 			<li class="seen-shows"><%= nav_link "Seen Shows", my_watched_path %>
 				<ul>
-					<li><%= nav_link "Seen Movies", my_movies_path %></li>
-					<li><%= nav_link "Seen Series", my_serials_path %></li>
+					<li><%= nav_link "Seen Movies", my_seen_movies_path(current_user) %></li>
+					<li><%= nav_link "Seen Series", my_seen_series_path(current_user) %></li>
 				</ul>
 			</li>
 		</ul>

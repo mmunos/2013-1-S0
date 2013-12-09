@@ -10,7 +10,12 @@ def shows
 end
 
 def tagging
+  @episodes ||= find_episodes
 	@tags ||= find_tags
+end
+
+def episodes
+  @episodes ||= find_episodes
 end
 
 def details
@@ -31,13 +36,17 @@ def find_shows
   Show.all(:conditions => conditions)
 end
 
+def find_episodes
+  Episode.all(:conditions => keyword_episodes)
+end
+
 def find_tags
 	tag = []
   Episode.all.each do |e|
   	if(e.tags_list.include?"#{keywords}")
   		tag<<(e)
   	end
-  
+
   end
   tag
 end
@@ -56,6 +65,10 @@ end
 
 def keyword_conditions
   ["shows.name LIKE ?", "%#{keywords}%"] unless keywords.blank?
+end
+
+def keyword_episodes
+  ["episodes.name LIKE ?", "%Rose%"] unless keywords.blank?
 end
 
 

@@ -1,12 +1,12 @@
 class SeasonsController < ApplicationController
   include UserReviewsPosts
 
-  skip_before_filter :user_admin, only: [:show, :index, :show_reviews, :show_posts]
+  skip_before_filter :user_admin, only: [:show, :index, :show_reviews, :show_posts, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index, :show_reviews, :show_posts]
   before_action :set_serial
   before_action :set_season, except: [:index, :create, :new]
-  before_action :set_reviews, only:[:show, :show_reviews]
-  before_action :set_posts, only:[:show, :show_posts]
+  before_action :set_reviews, only: [:show, :show_reviews]
+  before_action :set_posts, only: [:show, :show_posts]
 
   # GET /seasons
   # GET /seasons.json
@@ -67,6 +67,36 @@ class SeasonsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to serial_seasons_url }
       format.json { head :no_content }
+    end
+  end
+
+  def seen
+    if current_user
+      @season.episodes.each do |episode|
+        unless current_user.watched.episodes.include?(episode)
+          current_user.watched.episodes << episode
+          current_user.score_update(nil)
+        end
+      end 
+      respond_to do |format|
+          format.html { redirect_to serial_season_url(@serial,@season), notice: "This whole season was marked as seen!" }
+          format.js { render 'layouts/update_action_menu' }
+      end
+    end
+  end
+
+  def unseen
+    if current_user
+      @season.episodes.each do |episode|
+        if current_user.watched.episodes.include?(episode)
+          current_user.watched.episodes.delete(episode)
+          current_user.score_update(nil)
+        end
+      end 
+      respond_to do |format|
+          format.html { redirect_to serial_season_url(@serial,@season), notice: "This whole season was marked as unseen!" }
+          format.js { render 'layouts/update_action_menu' }
+      end
     end
   end
 

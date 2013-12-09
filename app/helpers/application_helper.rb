@@ -73,7 +73,23 @@ module ApplicationHelper
 		else
 			link_to "Mark as seen", seen_movie_path, class: "seen-episode-button", remote: true, data: {disable_with: "Marking…"}
 		end
+	end
 
+	def seen_unseen_serial_link(serial)
+		all_episodes = serial.seasons.map{|s| s.episodes}.flatten
+		if current_user && all_episodes.any?{|e| current_user.watched.episodes.exclude?(e)}
+			link_to "Mark series as seen", seen_serial_path, class: "seen-episode-button", remote: true, data: {disable_with: "Marking all…", confirm: "This will mark every episode on this series as seen.\n\nDo you want to continue?"}
+		else
+			link_to "Mark series as unseen", unseen_serial_path, class: "unseen-episode-button", remote: true, data: {disable_with: "Marking all…", confirm: "This will mark every episode on this series as not seen.\n\nDo you want to continue?"}
+		end
+	end
+
+	def seen_unseen_season_link(season)
+		if current_user && season.episodes.any?{|e| current_user.watched.episodes.exclude?(e)}
+			link_to "Mark season as seen", seen_season_path, class: "seen-episode-button", remote: true, data: {disable_with: "Marking all…", confirm: "This will mark every episode on this season as seen.\n\nDo you want to continue?"}
+		else 
+			link_to "Mark season as unseen", unseen_season_path, class: "unseen-episode-button", remote: true, data: {disable_with: "Marking all…", confirm: "This will mark every episode on this season as not seen.\n\nDo you want to continue?"}
+		end
 	end
 
 	def tracking_details_season(ep,episode, episodes,season)

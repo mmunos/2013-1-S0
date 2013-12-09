@@ -1,7 +1,7 @@
 class SerialsController < ApplicationController
   include UserReviewsPosts
 
-  skip_before_filter :user_admin, only: [:show, :index, :add, :remove,:watch, :unwatch, :show_reviews, :show_posts]
+  skip_before_filter :user_admin, only: [:show, :index, :add, :remove,:watch, :unwatch, :show_reviews, :show_posts, :seen, :unseen]
   skip_before_filter :authorize, only: [:show, :index, :show_reviews, :show_posts]
   before_action :set_serial, except: [:index, :create, :new]
   before_action :set_reviews, only: [:show, :show_reviews]
@@ -127,6 +127,34 @@ class SerialsController < ApplicationController
         end
       else
         redirect_to @serial, notice: "You can't delete #{@serial.name} from watchlist, D'OH!!!"
+      end
+    end
+  end
+
+  def seen
+    if current_user
+      @serial.seasons.map{|s| s.episodes}.flatten.each do |e|
+        unless current_user.watched.episodes.include?(e)
+          current_user.watched.episodes << e
+        end
+      end
+      respond_to do |format|
+          format.html { redirect_to serial_url(@serial), notice: "This whole series was marked as seen!" }
+          format.js { render 'layouts/update_action_menu' }
+      end
+    end
+  end
+
+  def unseen
+    if current_user
+      @serial.seasons.map{|s| s.episodes}.flatten.each do |e|
+        if current_user.watched.episodes.include?(e)
+          current_user.watched.episodes.delete(e)
+        end
+      end
+      respond_to do |format|
+          format.html { redirect_to serial_url(@serial), notice: "This whole series was marked as seen!" }
+          format.js { render 'layouts/update_action_menu' }
       end
     end
   end

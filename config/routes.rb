@@ -68,11 +68,15 @@ S0::Application.routes.draw do
   get "/movies/:id/remove", to:"movies#remove", as: :remove_movie
   get "/series/:id/watch", to:"serials#watch", as: :watch_serial
   get "/series/:id/unwatch", to:"serials#unwatch", as: :unwatch_serial
+  get "/series/:id/seen", to:"serials#seen", as: :seen_serial
+  get "/series/:id/unseen", to:"serials#unseen", as: :unseen_serial
   get "/movies/:id/watch", to:"movies#watch", as: :watch_movie
   get "/movies/:id/unwatch", to:"movies#unwatch", as: :unwatch_movie
   get "/watchlist/:id/remove", to:"watchlist#remove", as: :remove_from_watchlist
   get "/movies/:id/seen", to:"movies#seen", as: :seen_movie
   get "/movies/:id/unseen", to:"movies#unseen", as: :unseen_movie
+  get "/series/:serial_id/seasons/:id/seen", to:"seasons#seen", as: :seen_season
+  get "/series/:serial_id/seasons/:id/unseen", to:"seasons#unseen", as: :unseen_season
   get "/series/:serial_id/seasons/:season_id/episodes/:id/seen", to:"episodes#seen", as: :seen_episode
   get "/series/:serial_id/seasons/:season_id/episodes/:id/unseen", to:"episodes#unseen", as: :unseen_episode
 

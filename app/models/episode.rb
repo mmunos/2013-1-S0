@@ -59,7 +59,7 @@ class Episode < ActiveRecord::Base
  
   end
 
-  def remove_user_tag(tag_name,episode,user)
+  def delete_user_tag(tag_name,episode,user)
     tag = Tag.find_by(name: tag_name.strip.downcase)
     remove_record = UserEpisodeTagging.where(episode: episode, tag:tag, user: user)
     remove_record.each do |o|

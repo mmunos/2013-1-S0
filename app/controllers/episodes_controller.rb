@@ -127,7 +127,7 @@ class EpisodesController < ApplicationController
   def remove_user_tag
     if current_user
       if @episode.user_user_tags(current_user).include?(Tag.find_by(name: params[:tag_id]))
-        @episode.remove_user_tag(params[:tag_id],@episode,current_user)
+        @episode.delete_user_tag(params[:tag_id],@episode,current_user)
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Your tag \"#{params[:tag_id]}\" has been removed"
       else
         redirect_to serial_season_episode_url(@serial,@season,@episode), notice: "Whoah, trying to get rid of something you don't have? Nope"

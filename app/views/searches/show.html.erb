@@ -2,47 +2,96 @@
 
 <% if @search.results.any? %>
   
-  <div class="results all-results">
-    <h2>All Matches</h2>
-    <% @search.results.each do |result| %>
-      <%= result.name %>
-    <% end %>
-  </div>
+ 
+  <div class="my_movies_stand" id="shows">
+    <div class="index_shows_panel">
+      <h2>All Matches</h2>
+      <% @search.results.each do |show| %>
+            <div class="index_shows_item">
+               <%if show.is_a?(Serial) %>
+                 <%=link_to image_tag("#{show.poster}"), serial_path(show) %>
+                  <p><%= link_to "#{show.name}", serial_path(show) %></p>
+
+                <%elsif show.is_a?(Movie)%>
+                  <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
+                  <p><%= link_to "#{show.name}", movie_path(show) %></p>
+                <%else %>
+                  <% season = @search.find_season(show.season_id) %>
+                 <% serial = @search.find_series(season.serial_id) %>
+
+                   <%=link_to image_tag("#{serial.poster}"), serial_season_episode_path(serial,season,show) %>
+                    <p><%= link_to "#{serial.name}, "+"S"+( "%02d" % season.number)+"E"+("%02d" % show.number)+": #{show.name}", serial_season_episode_path(serial,season,show) %></p>        
+              <%end%>
+            </div> 
+        <% end %>
+      </div>
+    </div>
+
 
   <% if @search.movies_by_name.any? %>
-    <div class="results movies-results">
-      <h2>Movies by name</h2>
-      <% @search.movies_by_name.each do |result| %>
-        <%= result.name %>
-      <% end %>
+    <div class="my_movies_stand" id="shows">
+       <div class="index_shows_panel">
+          <h2>Movies by name</h2>
+          <% @search.movies_by_name.each do |show| %>
+                <div class="index_shows_item">
+                      <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
+                      <p><%= link_to "#{show.name}", movie_path(show) %></p>
+               </div>
+          <% end %>
+        </div>
     </div>
   <% end %>
 
   <% if @search.serials_by_name.any? %>
-    <div class="results serial-results">
-      <h2>Series by name</h2>
-      <% @search.serials_by_name.each do |result| %>
-        <%= result.name %>
-      <% end %>
-   </div>
-  <% end %>
+      <div class="my_movies_stand" id="shows">
+       <div class="index_shows_panel">
+         <h2>Series by name</h2>
+        <% @search.serials_by_name.each do |show| %>
+                <div class="index_shows_item">
+                      <%=link_to image_tag("#{show.poster}"), serial_path(show) %>
+                      <p><%= link_to "#{show.name}", serial_path(show) %></p>
+               </div>
+          <% end %>
+        </div>
+    </div>
+  <%end%>
+
 
     <% if @search.episodes_by_name.any? %>
-    <div class="results episodes-results">
-      <h2>Episodes by name</h2>
-      <% @search.episodes_by_name.each do |result| %>
-        <%= result.name %>
-      <% end %>
-   </div>
+  <div class="my_movies_stand" id="episodes">
+          <div class="index_shows_panel">
+        <h2>Episodes by name</h2>
+        <% @search.episodes_by_name.each do |show| %>
+            <div class="index_shows_item">
+               <% season = @search.find_season(show.season_id) %>
+               <% serial = @search.find_series(season.serial_id) %>
+
+                 <%=link_to image_tag("#{serial.poster}"), serial_season_episode_path(serial,season,show) %>
+                  <p><%= link_to "#{serial.name}, "+"S"+( "%02d" % season.number)+"E"+("%02d" % show.number)+": #{show.name}", serial_season_episode_path(serial,season,show) %></p>
+            </div>
+        <% end %>
+        </div>
+    </div>
   <% end %> 
 
   <% if @search.shows_by_genre.any? %>
-    <div class="results genre-results">
+<div class="my_movies_stand" id="shows">
+    <div class="index_shows_panel">
       <h2>Shows by genre</h2>
-      <% @search.shows_by_genre.each do |result| %>
-        <%= result.name %>
-      <% end %>
-   </div>
+      <% @search.shows_by_genre.each do |show| %>
+            <div class="index_shows_item">
+               <%if show.is_a?(Serial) %>
+                 <%=link_to image_tag("#{show.poster}"), serial_path(show) %>
+                  <p><%= link_to "#{show.name}", serial_path(show) %></p>
+
+                <%else%>
+                  <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
+                  <p><%= link_to "#{show.name}", movie_path(show) %></p>
+              <%end%>
+            </div> 
+        <% end %>
+      </div>
+    </div>
   <% end %> 
 
 

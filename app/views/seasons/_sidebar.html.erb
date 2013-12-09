@@ -17,7 +17,7 @@
     <p>We're sorry, we don't have any episodes yet</p>
     <% else %>
       <ul>
-        <% @season.episodes.each do |e| %>
+        <% @season.episodes.sort_by{|e| e.number}.each do |e| %>
         <li><%= link_to "Episode #{e.number}", serial_season_episode_path(@serial,@season,e) %></li>
         <% end %>
       </ul>

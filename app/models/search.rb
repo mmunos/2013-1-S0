@@ -6,7 +6,7 @@ class Search < ActiveRecord::Base
 
   def self.find(input)
     Search.all.each do |s|
-      if s.keywords == input
+      if s.to_param == input
         return s
       end
     end
@@ -40,7 +40,7 @@ class Search < ActiveRecord::Base
   def episodes_by_name
     results = []
     Search.keywords_list(keywords).each do |keyword|
-      Episode.where("name LIKE ?", "#{keyword.downcase}").each do |episode|
+      Episode.where("lower(name) LIKE ?", "%#{keyword}%").each do |episode|
         results << episode if results.exclude?(episode)
       end
     end
@@ -75,14 +75,6 @@ class Search < ActiveRecord::Base
     keywords.split(",").flatten.join(" ").split(" ").join("+").split("+")
   end
 
-def find_season(e)
-        season = Season.find_by_id(e)
-end
-
-def find_series(e)
-        series = Serial.find_by_id(e)
-end
-
   private
 
   def find_shows
@@ -90,7 +82,7 @@ end
     movies = []
     serials = []
     Search.keywords_list(keywords).each do |keyword|
-      Show.where("name LIKE ?", "%#{keyword}%").each do |show|
+      Show.where("lower(name) LIKE ?", "%#{keyword.downcase}%").each do |show|
         results << show if results.exclude?(show)
         movies << show if show.is_a?(Movie) and movies.exclude?(show)
         serials << show if show.is_a?(Serial) and serials.exclude?(show)

@@ -11,7 +11,7 @@
 			<li><%= watch_unwatch_link(@serial) %></li>
 	</div>
 
-	<img src="@serial.image%>">
+	<img src="<%=@serial.poster%>">
 
 	<div class="show-detail-module show-details">
 		<h3>Serial Details</h3>
@@ -46,7 +46,6 @@
 
     <%if @series.include?(@serial)%>
     	<p class="center-warning">You have finished this series! Well done!</p>
-   		<p class="center-warning"><%= watch_unwatch_link(@serial) %></p>
     <%end%>
 
 	<div class="show-list show-season-list">

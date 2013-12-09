@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>
   <strong>Keywords searched:</strong>
@@ -6,16 +6,18 @@
 </h1>
 
 
-<div class="my_movies_stand">
+
    
     <% if @search.shows.any? or @search.tagging.any? or @search.details.any? %>
+
+    <div class="my_movies_stand" id="shows">
         
-        <%if @search.details.count==0%>
-       <h2>Movies & Series related</h2>
+       <div class="index_shows_panel">
+        <%unless @search.shows.count==0 %>
+        <h2>Movies & Series related</h2>
 
         <%end%>
-    <div id="shows">
-       <div class="index_shows_panel">
+
         <%@search.shows.each do |show| %>
 
 
@@ -36,7 +38,9 @@
       </div>
     </div>
 
-      <div id="genre">
+
+<div class="my_movies_stand" id="genre">
+
       <div class="index_shows_panel">
         <%unless @search.details.count==0%>
         <h2>Genre related</h2>
@@ -61,9 +65,12 @@
       </div>
     </div>
 
-        <div id="episodes">
+
+
+<div class="my_movies_stand" id="episodes">
+ 
           <div class="index_shows_panel">
-          <%unless @search.tagging.count==0%>
+          <%unless @search.tagging.count==0 and @search.episodes.count==0%>
           <h2>Episodes and tags related</h2>
           <%end%>
         <%@search.tagging.each do |show| %>
@@ -97,11 +104,12 @@
       </div>
     </div>
 
+
+
     <% else %>
       <p class="center-warning">Woah, there's nothing like that here, sorry =C.</p>
       <% end %>
  
-</div>
 
 
 

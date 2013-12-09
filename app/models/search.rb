@@ -16,6 +16,12 @@ end
 
 def episodes
   @episodes ||= find_episodes
+  @episodes.each do |e|
+    if(@tags.include?(e))
+      @episodes.delete(e)
+    end
+  end
+  @episodes
 end
 
 def details
@@ -68,7 +74,7 @@ def keyword_conditions
 end
 
 def keyword_episodes
-  ["episodes.name LIKE ?", "%Rose%"] unless keywords.blank?
+  ["episodes.name LIKE ?", "%#{keywords}%"] unless keywords.blank?
 end
 
 

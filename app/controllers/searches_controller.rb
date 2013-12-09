@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  skip_before_filter :user_admin, only: [:show, :create]
+  skip_before_filter :authorize, only: [:show, :create]
   before_action :set_search, only: [:show, :edit, :update, :destroy]
 
   # GET /searches

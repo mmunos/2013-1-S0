@@ -50,7 +50,8 @@
       <%= f.text_field :email, {validate: "", type: "email", required: ""}%>
     </div>
 
-  <h3> Change Password</h3>
+  <h3>Change Password</h3>
+  <small> or leave both inputs blank</small>
 
     <div class="field">
       <%= f.label :password %>
@@ -88,6 +89,6 @@
   -->
   </div>
   <div class="actions">
-    <%= f.submit "Update Profile" %>
+    <%= f.submit "Update Profile" %> or <%= link_to 'Cancel', @user %>
   </div>
 <% end %>

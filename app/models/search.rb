@@ -2,7 +2,7 @@ class Search < ActiveRecord::Base
 	belongs_to :user
 
 def to_param
-    [id,keywords.parameterize].join("+")
+    [keywords.parameterize]
 end
 
 def shows
@@ -14,10 +14,10 @@ def tagging
 	@tags ||= find_tags
 end
 
-def episodes
+def episodes(tags)
   @episodes ||= find_episodes
   @episodes.each do |e|
-    if(@tags.include?(e))
+    if(tags.include?(e))
       @episodes.delete(e)
     end
   end

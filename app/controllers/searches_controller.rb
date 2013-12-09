@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController
   skip_before_filter :user_admin, only: [:show, :create]
   skip_before_filter :authorize, only: [:show, :create]
-  before_action :set_search, only: [:show, :edit, :update, :destroy]
+  before_action :set_search, only: [:show,:edit, :update, :destroy]
 
   # GET /searches
   # GET /searches.json
@@ -26,17 +26,25 @@ class SearchesController < ApplicationController
   # POST /searches
   # POST /searches.json
   def create
-    @search = Search.new(search_params)
+   
+    keywords =  params[:keywords]
+    search = Search.where("searches.keywords LIKE #{keywords}")
+    if @search
+      render 'show'
+    else
 
+    @search = Search.new(search_params)
     respond_to do |format|
       if @search.save
-        format.html { redirect_to @search, notice: 'Search was successfully created.' }
+        format.html { redirect_to @search }
         format.json { render action: 'show', status: :created, location: @search }
       else
         format.html { render action: 'new' }
         format.json { render json: @search.errors, status: :unprocessable_entity }
       end
     end
+
+  end
   end
 
   # PATCH/PUT /searches/1
@@ -66,7 +74,7 @@ class SearchesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_search
-      @search = Search.find(params[:id])
+      @search = Search.where("searches.keywords LIKE #{params[:keywords]}")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

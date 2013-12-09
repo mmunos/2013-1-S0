@@ -75,6 +75,14 @@ class Search < ActiveRecord::Base
     keywords.split(",").flatten.join(" ").split(" ").join("+").split("+")
   end
 
+  def find_season(e)
+    season = Season.find_by_id(e)
+  end
+ 
+ def find_series(e)
+   series = Serial.find_by_id(e)
+ end
+
   private
 
   def find_shows

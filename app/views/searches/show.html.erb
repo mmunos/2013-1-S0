@@ -15,13 +15,7 @@
                 <%elsif show.is_a?(Movie)%>
                   <%=link_to image_tag("#{show.poster}"), movie_path(show) %>
                   <p><%= link_to "#{show.name}", movie_path(show) %></p>
-                <%else %>
-                  <% season = @search.find_season(show.season_id) %>
-                 <% serial = @search.find_series(season.serial_id) %>
-
-                   <%=link_to image_tag("#{serial.poster}"), serial_season_episode_path(serial,season,show) %>
-                    <p><%= link_to "#{serial.name}, "+"S"+( "%02d" % season.number)+"E"+("%02d" % show.number)+": #{show.name}", serial_season_episode_path(serial,season,show) %></p>        
-              <%end%>
+                <% end %>
             </div> 
         <% end %>
       </div>

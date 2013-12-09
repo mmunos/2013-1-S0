@@ -1,5 +1,4 @@
-
-
+<%@search = Search.new%>
 <h1>
   <strong>Keywords searched:</strong>
   <%= @search.keywords %>
@@ -22,7 +21,7 @@
 
 
             <div class="index_shows_item">
-               <%if Serial.where(:id => show.id) %>
+               <%if show.is_a?(Serial) %>
                  <%=link_to image_tag("#{show.poster}"), serial_path(show) %>
                   <p><%= link_to "#{show.name}", serial_path(show) %></p>
 
@@ -42,10 +41,10 @@
 <div class="my_movies_stand" id="genre">
 
       <div class="index_shows_panel">
-        <%unless @search.details.count==0%>
+        <%unless @search.shows.count==0%>
         <h2>Genre related</h2>
         <%end%>
-        <%@search.details.each do |show| %>
+        <%@search.shows.each do |show| %>
 
 
             <div class="index_shows_item">
@@ -73,7 +72,8 @@
           <%unless @search.tagging.count==0 and @search.episodes.count==0%>
           <h2>Episodes and tags related</h2>
           <%end%>
-        <%@search.tagging.each do |show| %>
+          <%s=@search.tagging%>
+        <%@s.each do |show| %>
 
 
             <div class="index_shows_item">
@@ -87,7 +87,7 @@
 
         <% end %>
 
-                <%@search.episodes.each do |show| %>
+                <%@search.episodes(s).each do |show| %>
 
 
             <div class="index_shows_item">
